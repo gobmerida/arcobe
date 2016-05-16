@@ -40,7 +40,7 @@ Correo: edg.sistemas@gmail.com
 			var dataString = 'mp='+mp;
 			$.ajax({
 				type: "POST",
-				url: "empleados.php",
+				url: "empleados_institutos.php",
 				data: dataString,
 				success: function(data) {
 					$('#suggestions').fadeIn(0).html(data);
