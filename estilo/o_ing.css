@@ -1,0 +1,20 @@
+input{
+	text-transform: uppercase;
+}
+input.subm{
+	text-transform: capitalize;
+}
+div.error{
+width:230px;
+display: inline;
+position:absolute;
+border:ridge 1px white;
+background:linear-gradient(#bb0000,Red);
+padding:2px;
+border-radius:6px;
+color:white;
+}
+.responsable{
+border:1px solid silver;
+border-radius:4px;
+}

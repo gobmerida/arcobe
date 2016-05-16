@@ -1,0 +1,61 @@
+/*Autor
+Edgar Carrizalez
+C.I. V-19.352.988
+Correo: edg.sistemas@gmail.com
+*/
+li{
+border:solid 1px white;
+width:220px;
+}
+li:hover{
+/*
+background:url("../media/bli.png");
+background-size: 100% 100%;
+*/
+background: linear-gradient(white, silver);
+border:outset 1px black;
+border-radius:8px;
+}
+li:active{
+background: linear-gradient(silver, white);
+border:inset 1px black;
+border-radius:8px;
+}
+img{
+border-radius:8px;
+}
+ul{
+list-style: none;
+margin-left:3px;
+padding-left: 1em;
+text-indent: 0em;
+}
+ul li:before{
+content: "\00BB \0020";
+}
+::selection{background: white;}
+::-moz-selection {background: white;}
+li {
+-webkit-user-select: none;
+-moz-user-select: none;
+user-select: none;
+}
+hr::after {
+    content: ".:Plan Vacacional:.";
+    display: inline-block;
+    position: relative;
+    top: -0.8em;
+    font-size: 1em;
+    padding: 0px 0.2em;
+    color: #FFF;
+/*
+    background: none repeat scroll 0% 0% #999;
+*/
+    background: none repeat scroll 0% 0% #bb0000;
+    border-radius: 2em;
+    line-height: 1.5;
+}
+hr{
+color:maroon;
+height:0;
+}

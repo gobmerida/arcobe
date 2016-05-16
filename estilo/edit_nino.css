@@ -1,0 +1,12 @@
+/*Autor
+Edgar Carrizalez
+C.I. V-19.352.988
+Correo: edg.sistemas@gmail.com
+*/
+input.nihnoe{
+border:inset 2px black;
+border-radius:0;
+}
+input.nihnoe:hover{
+border:inset 2px maroon;
+}

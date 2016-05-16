@@ -1,0 +1,11 @@
+table.ver_periodo{
+margin:0 auto;
+border:solid 1px silver;
+}
+table.ver_periodo td{
+border:solid 1px silver;
+}
+#tabs{
+margin:auto;
+width:85%;
+}

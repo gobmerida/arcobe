@@ -1,0 +1,80 @@
+		.suggest-element{
+		margin-left:5px;
+		margin-top:5px;
+		width:350px;
+		cursor:pointer;
+		}
+		.suggest-element2{
+		margin-left:5px;
+		margin-top:5px;
+		width:350px;
+		cursor:pointer;
+		}
+		#suggestions_nombre1 {
+		position:fixed;
+		margin: 0 auto;
+		width:300px;
+		height:150px;
+		border:ridge 2px;
+		border-radius: 3px;
+		overflow: auto;
+		background: white;
+		}
+		#suggestions_nombre2 {
+		position:fixed;
+		margin: 0 auto;
+		width:300px;
+		height:150px;
+		border:ridge 2px;
+		border-radius: 3px;
+		overflow: auto;
+		background: white;
+		}
+		#suggestions_apellido1 {
+		position:fixed;
+		margin: 0 auto;
+		width:300px;
+		height:150px;
+		border:ridge 2px;
+		border-radius: 3px;
+		overflow: auto;
+		background: white;
+		}
+		#suggestions_apellido2 {
+		position:fixed;
+		margin: 0 auto;
+		width:300px;
+		height:150px;
+		border:ridge 2px;
+		border-radius: 3px;
+		overflow: auto;
+		background: white;
+		}
+		#suggestions_madre {
+		position:fixed;
+		margin: -55px 180px;
+		width:500px;
+		height:70px;
+		overflow: auto;
+		background: white;
+		border:ridge 2px;
+		border-radius: 3px;
+		}
+		.suggest-element3{
+		margin-left:5px;
+		margin-top:5px;
+		width:350px;
+		cursor:pointer;
+		}
+		.suggest-element4{
+		margin-left:5px;
+		margin-top:5px;
+		width:350px;
+		cursor:pointer;
+		}
+		.suggest-element5{
+		margin-left:5px;
+		margin-top:5px;
+		width:350px;
+		cursor:pointer;
+		}

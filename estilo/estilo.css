@@ -1,0 +1,238 @@
+/*Autor
+Edgar Carrizalez
+C.I. V-19.352.988
+Correo: edg.sistemas@gmail.com
+*/
+
+body{
+background-color: Gainsboro;
+font-family:"Tahoma";
+font-size:14px;
+}
+
+#iniciar{
+	width:340px;
+	height:200px;
+	border: ridge 2px white;
+	margin:0 auto;
+	border-radius: 7px;
+	 background:linear-gradient(#bb0000,Red);
+/*
+	background-color: #dd1027;
+*/
+}
+#iniciar_d{
+	width:350px;
+	height:250px;
+	border: ridge 2px white;
+	margin:0 auto;
+	border-radius: 7px;
+	background:linear-gradient(#bb0000,Red);
+}
+h2{
+	color: white;
+}
+h2.enca{
+	color: red;
+	text-align:center;
+}
+h3{
+	color: Red;
+}
+.n{
+	margin: 20px 0 0 20px;
+	color: Red;
+	font-weight: bold;
+	text-decoration:none;
+}
+input.cls{
+	margin: 0 0 0 100px;
+}
+input{
+	border-radius:14px;
+}
+span.cen{
+	margin: 70px;
+	color:white;
+}
+
+#contenedor{
+	width:850px;
+	border-left: inset 2px silver;
+	border-right: outset 2px silver;
+	border-top: ridge 2px silver;
+	border-bottom: outset 2px silver;
+	margin:0 auto;
+	border-bottom-left-radius: 7px;
+	border-bottom-right-radius: 7px;
+	background-color: white;
+	color: black;
+}
+
+#principal{
+	width:850px;
+	border-bottom: outset 2px silver;
+	border-top: outset 2px silver;
+	border-right: outset 2px silver;
+	border-left: inset 2px silver;
+	margin:0 auto;
+	border-bottom-left-radius: 7px;
+	border-bottom-right-radius: 7px;
+	background-color: white;
+	color: black;
+}
+
+#hijos{
+	width:838px;
+	border: ridge 2px white;
+	margin:0 auto;
+	padding:7px;
+	border-radius: 7px;
+	border-top-right-radius: 0px;
+	border-top-left-radius: 0px;
+	background:linear-gradient(#bb0000,Red);
+	color:white;
+}
+
+table.ta_trabajador{
+	margin:0 auto;
+}
+table.nino{
+	margin:0 auto;
+}
+table.ta_trabajador td{
+	border:ridge 2px black;
+	width: 250px;
+	padding: 5px;
+}
+table.nino td{
+	border:ridge 2px black;
+	width: 350px;
+	padding: 5px;
+}
+
+span.menu{
+color:red;
+font-weight: bold;
+}
+span.ls{
+color:white;
+}
+
+tr.som{
+background:LightGrey;
+}
+
+#cabecera_ini{
+margin:0 auto;
+border-top: inset 2px silver;
+border-left: inset 2px silver;
+border-right: outset 2px silver;
+border-bottom: ridge 2px silver;
+/*
+border-top: inset 2px white;
+border-left: inset 2px white;
+border-right: outset 2px white;
+border-bottom: ridge 2px white;
+*/
+border-top-left-radius: 7px;
+border-top-right-radius: 7px;
+/*
+background: url("../media/logos.png") no-repeat, linear-gradient(Red, #bb0000);
+*/
+background: url("../media/logo.png") no-repeat,  url("../media/fondo_cabecera.png") no-repeat, linear-gradient(white, white);
+/*
+background-size:70% 100%, 100% 100%;
+*/
+background-size:100% 100%;
+width:850px;
+height:120px;
+}
+#cabecera{
+	width:850px;
+	border-top: outset 2px white;
+	border-left: outset 2px white;
+	border-right: outset 2px white;
+	border-bottom: ridge 2px white;
+	margin:0 auto;
+	border-radius: 7px;
+	background: linear-gradient(Red, #ffbbbb);
+}
+span.cll{
+font-size:28px;
+margin: 28px;
+}
+
+span a{
+color:red;
+text-decoration:none;
+}
+a.nino:before{
+content: "\00BB \0020";
+}
+span a:hover{
+color:black;
+}
+
+a.nino{
+	color:white;
+	text-decoration:none;
+}
+a.nino:hover{
+	color:White;
+	text-decoration:underline;
+}
+
+a.dat{
+	color:black;
+	text-decoration:none;
+}
+a.dat:hover{
+	color:DarkSlateGray;
+}
+
+table{
+border: ridge 1px silver;
+border-radius: 7px;
+margin: 0 35px;
+cursor:default;
+}
+table a{
+color:black;
+font-weight:bold;
+}
+table a:hover{
+color:Black;
+}
+a.beta{
+color:white;
+text-decoration:none;
+}
+a.beta:hover{
+color:black;
+}
+.suggest-element:hover{
+text-decoration:underline;
+}
+.planv{
+border:none;
+}
+#celda{
+border:none;
+}
+#rol{
+margin:-9px;
+position:fixed;
+background-color:white;
+border-right:outset 2px maroon;
+border-bottom:outset 2px maroon;
+border-radius:4px;
+padding:3px;
+cursor:default;
+}
+input.upp{
+text-transform: uppercase;
+}
+input.tamanio_le{
+text-transform: uppercase;
+}

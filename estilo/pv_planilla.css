@@ -1,0 +1,79 @@
+/*Autor
+Edgar Carrizalez
+C.I. V-19.352.988
+Correo: edg.sistemas@gmail.com
+*/
+body{
+font-family:"ARIAL";
+font-size:14px;
+}
+@media print {
+#panel {display:none;}
+}
+#panel{
+margin:150px 0 0 -7px;
+background-color:white;
+position:fixed;
+width:150px;
+height:330px;
+border-radius:4px;
+}
+#pv_planilla{
+width:840px;
+margin:0 auto;
+}
+#pv_planilla table{
+border:ridge 1px; /*Borrado posiblemente*/
+/*
+border-spacing: 0;
+*/
+
+}
+tr{
+}
+#pv_planilla td.planilla{
+border:ridge 1px;
+padding: 5px;
+width:400px;
+}
+#pv_planilla td.acomodar{
+height:0;
+padding: 0;
+width:400px;
+}
+#pv_planilla td.sub_titulo{
+text-align:center;
+background-color:gainsboro;
+}
+#pv_planilla td.titulo{
+/*
+background: linear-gradient(maroon, white);
+*/
+text-align:center;
+background-color:maroon;
+border-color:black;
+color:white;
+}
+#panel img{
+border:inset 2px white;
+border-radius:8px;
+}
+#panel img:hover{
+border:inset 2px maroon;
+}
+#panel img:active{
+border:outset 2px gainsboro;
+}
+.info-planilla{
+width:840px;
+font-size:110%;
+border:1px solid;
+}
+@media print {
+table{
+page-break-inside:avoid;
+}
+}
+.conforme-rep td{
+border:1px solid;
+}

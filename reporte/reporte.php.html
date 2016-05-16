@@ -1,0 +1,94 @@
+<!--Autor 
+Edgar Carrizalez
+C.I. V-19.3522.988
+Correo: edg.sistemas@gmail.com
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="es" lang="es">
+
+<head>
+	<title>Cesta Juguete</title>
+	<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+	<link rel="stylesheet" href="../estilo/estilo.css" type="text/css"/>
+</head>
+<?php
+include("../connect/conexion.php");
+include("../sesion/sesion.php");
+?>
+<body>
+	<div id="iniciar_d">
+		<h3 style='color:white'>&nbsp;&nbsp;&nbsp;Reporte</h3>
+		<form action="reporte.php" method="get">
+		<span class='ls'>&nbsp;&nbsp;&nbsp;Fecha</span> <input type="date" name="fecha" placeholder="  año/mes/día">
+		<input type="submit" value="Consultar">
+		</form><br>
+		<?php
+		if(array_key_exists("fecha",$_GET)){
+			$fecha=$_GET['fecha'];
+			$fecha2=$fecha." 23:00:00";
+			$fecha_r=$fecha;
+			$fecha=$fecha." 00:00:00";
+			
+			$c_reporte=mysql_query("SELECT count(*) FROM cj_hijos WHERE fecha_ingreso>'$fecha' and fecha_ingreso<'$fecha2'",$con) or die (mysql_error());
+			$row_reporte=mysql_fetch_array($c_reporte);
+			echo "<span class='ls'>&nbsp;&nbsp;&nbsp;A la fecha $fecha_r hay ".$row_reporte['count(*)']." niños(as) inscritos.<br>";
+			
+			$c_emreporte=mysql_query("SELECT count(*) FROM `cj_hijos` WHERE `id_ninho` like 'EM-%' and fecha_ingreso>'$fecha' and fecha_ingreso<'$fecha2' ",$con) or die (mysql_error());
+			$row_emreporte=mysql_fetch_array($c_emreporte);
+			
+			$c_ecreporte=mysql_query("SELECT count(*) FROM `cj_hijos` WHERE `id_ninho` like 'EC-%' and fecha_ingreso>'$fecha' and fecha_ingreso<'$fecha2' ",$con) or die (mysql_error());
+			$row_ecreporte=mysql_fetch_array($c_ecreporte);
+			
+			$c_poreporte=mysql_query("SELECT count(*) FROM `cj_hijos` WHERE `id_ninho` like 'PO-%' and fecha_ingreso>'$fecha' and fecha_ingreso<'$fecha2' ",$con) or die (mysql_error());
+			$row_poreporte=mysql_fetch_array($c_poreporte);
+			
+			$c_boreporte=mysql_query("SELECT count(*) FROM `cj_hijos` WHERE `id_ninho` like 'BO-%' and fecha_ingreso>'$fecha' and fecha_ingreso<'$fecha2' ",$con) or die (mysql_error());
+			$row_boreporte=mysql_fetch_array($c_boreporte);
+			
+			$c_efreporte=mysql_query("SELECT count(*) FROM `cj_hijos` WHERE `id_ninho` like 'EF-%' and fecha_ingreso>'$fecha' and fecha_ingreso<'$fecha2' ",$con) or die (mysql_error());
+			$row_efreporte=mysql_fetch_array($c_efreporte);
+			
+			$te_fijos=$row_emreporte['count(*)']+$row_ecreporte['count(*)']+$row_poreporte['count(*)']+$row_boreporte['count(*)']+$row_efreporte['count(*)'];
+			echo "&nbsp;&nbsp;&nbsp;Hijos de empleados fijos: $te_fijos<br>";
+			
+			$c_osreporte=mysql_query("SELECT count(*) FROM `cj_hijos` WHERE `id_ninho` like 'OS-%' and fecha_ingreso>'$fecha' and fecha_ingreso<'$fecha2' ",$con) or die (mysql_error());
+			$row_osreporte=mysql_fetch_array($c_osreporte);
+			
+			$c_ofreporte=mysql_query("SELECT count(*) FROM `cj_hijos` WHERE `id_ninho` like 'OF-%' and fecha_ingreso>'$fecha' and fecha_ingreso<'$fecha2' ",$con) or die (mysql_error());
+			$row_ofreporte=mysql_fetch_array($c_ofreporte);
+			
+			$c_opreporte=mysql_query("SELECT count(*) FROM `cj_hijos` WHERE `id_ninho` like 'OP-%' and fecha_ingreso>'$fecha' and fecha_ingreso<'$fecha2' ",$con) or die (mysql_error());
+			$row_opreporte=mysql_fetch_array($c_opreporte);
+			
+			$c_obreporte=mysql_query("SELECT count(*) FROM `cj_hijos` WHERE `id_ninho` like 'OB-%' and fecha_ingreso>'$fecha' and fecha_ingreso<'$fecha2' ",$con) or die (mysql_error());
+			$row_obreporte=mysql_fetch_array($c_obreporte);
+			
+			$c_ooreporte=mysql_query("SELECT count(*) FROM `cj_hijos` WHERE `id_ninho` like 'OO-%' and fecha_ingreso>'$fecha' and fecha_ingreso<'$fecha2' ",$con) or die (mysql_error());
+			$row_ooreporte=mysql_fetch_array($c_ooreporte);
+			
+			$to_fijos=$row_osreporte['count(*)']+$row_ofreporte['count(*)']+$row_opreporte['count(*)']+$row_obreporte['count(*)']+$row_ooreporte['count(*)'];
+			echo "&nbsp;&nbsp;&nbsp;Hijos de obreros fijos: $to_fijos<br>";
+			
+			$c_bereporte=mysql_query("SELECT count(*) FROM `cj_hijos` WHERE `id_ninho` like 'BE-%' and fecha_ingreso>'$fecha' and fecha_ingreso<'$fecha2' ",$con) or die (mysql_error());
+			$row_bereporte=mysql_fetch_array($c_bereporte);
+			
+			$to_contratados=$row_bereporte['count(*)'];
+			echo "&nbsp;&nbsp;&nbsp;Hijos de obreros contratados: $to_contratados<br>";
+			
+			$c_coreporte=mysql_query("SELECT count(*) FROM `cj_hijos` WHERE `id_ninho` like 'CO-%' and fecha_ingreso>'$fecha' and fecha_ingreso<'$fecha2' ",$con) or die (mysql_error());
+			$row_coreporte=mysql_fetch_array($c_coreporte);
+			
+			$c_cocreporte=mysql_query("SELECT count(*) FROM `cj_hijos` WHERE `id_ninho` like 'COC-%' and fecha_ingreso>'$fecha' and fecha_ingreso<'$fecha2' ",$con) or die (mysql_error());
+			$row_cocreporte=mysql_fetch_array($c_cocreporte);
+			
+			$te_contratados=$row_coreporte['count(*)']+$row_cocreporte['count(*)'];
+			echo "&nbsp;&nbsp;&nbsp;Hijos de empleados contratados: $te_contratados<br>";
+			
+			echo "</span><br>";
+		}
+		?>
+		<center><a href="../" class='beta'>Regresar</a></center>
+	</div>
+</body>
+</html>

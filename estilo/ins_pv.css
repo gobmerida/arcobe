@@ -1,0 +1,64 @@
+/*Autor
+Edgar Carrizalez
+C.I. V-19.352.988
+Correo: edg.sistemas@gmail.com
+*/
+#ins_pv{
+margin:0 auto;
+/*
+border:none;
+*/
+}
+.ins_pv{
+text-align:center;
+}
+#ins_pv td{
+border:solid 1px black;
+}
+input.tam{
+border:ridge 1px grey;
+border-radius:0;
+width:304px;
+}
+textarea{
+width:300px;
+}
+textarea:hover{
+border-color:maroon;
+border-radius:4px;
+}
+input:hover{
+border-color:maroon;
+}
+textarea{
+text-transform: uppercase;
+}
+input{
+text-transform: uppercase;
+/*
+La propiedad text-transform puede tener varios valores:
+text-transform: capitalize
+text-transform: uppercase
+text-transform: lowercase
+text-transform: none
+text-transform: full-width
+text-transform: inherit
+*/
+}
+.lol{
+margin:auto;
+}
+.lol td{
+border:solid 1px black;
+padding-left:3px;
+padding-right:3px;
+}
+.error{
+border:1px solid red;
+border-radius:5px;
+}
+.ErrorTam{
+border:1px solid red;
+border-radius:0;
+width:304px;
+}

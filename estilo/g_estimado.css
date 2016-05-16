@@ -1,0 +1,38 @@
+#resumen{
+margin:auto;
+border:solid 1px silver;
+border-radius:5px;
+}
+#resumen h3{
+text-align:center;
+}
+table.estimados{
+margin:auto;
+}
+table.estimados tr.somb{
+background-color:gainsboro;
+}
+table.estimados, table.estimados tr td{
+border:1px solid silver;
+}
+table.estimados tr td.totales{
+width:50px;
+text-align:center;
+}
+#gt_chaqueta, #gt_franela, #gt_mono, #gt_gorra, #gt_chaquetaNina, #gt_franelaNina, #gt_monoNina, #gt_gorraNina, #gt_chaquetaNino, #gt_franelaNino, #gt_monoNino, #gt_gorraNino{
+float:left;
+width:147.2px;
+/*
+border:dotted 1px silver;
+*/
+padding:10px;
+}
+#pie{
+clear:both;
+width:100%;
+}
+p.table_talla{
+text-align:center;
+color:#1C427C;
+font-weight:bold;
+}
