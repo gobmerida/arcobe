@@ -34,7 +34,7 @@ value(
 ";
 mysql_query($reg_peri);
 
-$reg_peri_ce = "INSERT INTO pv_periodo_ce(
+$reg_peri_ce = "INSERT INTO pv_periodo_ve(
 pv_añoperiodo, 
 pv_iniperiodo, 
 pv_finperiodo, 
@@ -54,5 +54,25 @@ value(
 )
 ";
 mysql_query($reg_peri_ce);
+$reg_peri_ins = "INSERT INTO pv_periodo_ce(
+pv_añoperiodo, 
+pv_iniperiodo, 
+pv_finperiodo, 
+pv_fecha_reque, 
+pv_fecha_limite,
+pv_decampovigui,
+cierre
+)
+value(
+'$pv_añoperiodo', 
+'$pv_iniperiodo', 
+'$pv_finperiodo', 
+'$pv_fecha_reque',
+'$pv_fecha_limite',
+'$pv_decampovigui',
+'0'
+)
+";
+mysql_query($reg_peri_ins);
 header("location:../consultas/pv_periodocst.php?msj=1");
 ?>
