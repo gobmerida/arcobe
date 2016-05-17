@@ -20,7 +20,10 @@ pv_finperiodo,
 pv_fecha_reque, 
 pv_fecha_limite,
 pv_decampovigui,
-cierre
+cierre,
+contador_per,
+ContadorAux,
+Aux
 )
 value(
 '$pv_añoperiodo', 
@@ -29,6 +32,9 @@ value(
 '$pv_fecha_reque',
 '$pv_fecha_limite',
 '$pv_decampovigui',
+'0',
+'0',
+'0',
 '0'
 )
 ";
@@ -41,7 +47,10 @@ pv_finperiodo,
 pv_fecha_reque, 
 pv_fecha_limite,
 pv_decampovigui,
-cierre
+cierre,
+contador_per,
+ContadorAux,
+Aux
 )
 value(
 '$pv_añoperiodo', 
@@ -50,6 +59,9 @@ value(
 '$pv_fecha_reque',
 '$pv_fecha_limite',
 '$pv_decampovigui',
+'0',
+'0',
+'0',
 '0'
 )
 ";
@@ -61,7 +73,10 @@ pv_finperiodo,
 pv_fecha_reque, 
 pv_fecha_limite,
 pv_decampovigui,
-cierre
+cierre,
+contador_per,
+ContadorAux,
+Aux
 )
 value(
 '$pv_añoperiodo', 
@@ -70,6 +85,9 @@ value(
 '$pv_fecha_reque',
 '$pv_fecha_limite',
 '$pv_decampovigui',
+'0',
+'0',
+'0',
 '0'
 )
 ";

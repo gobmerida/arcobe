@@ -1,6 +1,13 @@
 <?php
 include("../script_php/PHPExcel.php");
-include("../connect/conexion.php");
+header("Content-Type:text/html;charset=utf-8");
+$h="localhost";
+$u="root";
+$p="infor1234";
+$con=mysql_connect($h,$u,$p) or die (mysql_error());
+mysql_select_db("cj_pv",$con) or die (mysql_error());
+mysql_query("SET NAMES 'utf8'");
+$anp = $_GET["anp"];
 
 
 $today=date("d/m/Y");
@@ -101,7 +108,7 @@ $objPHPExcel->getActiveSheet()->getStyle("A1:AM1")->getFont()->getColor()->apply
 	'rgb' => 'FFFFFF'
 	)
 );
-$cj_hijosSQL = "SELECT * FROM pv_planilla ORDER BY pv_fechainscri";
+$cj_hijosSQL = "SELECT * FROM pv_planilla WHERE pv_añoperiodo='$anp' ORDER BY pv_fechainscri";
 $cj_hijosSQL = mysql_query($cj_hijosSQL);
 $conta=2;
 while($cj_hijos = mysql_fetch_array($cj_hijosSQL)){
@@ -197,6 +204,6 @@ $objPHPExcel->getActiveSheet()->getColumnDimension($columnID)->setAutoSize(true)
 }
 $objWriter = new PHPExcel_Writer_Excel2007($objPHPExcel); //Escribir archivo
 header('Content-type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-header('Content-Disposition: attachment; filename="PlanVacacional (Globales).xlsx"');
+header('Content-Disposition: attachment; filename="PlanVacacional (Planta).xlsx"');
 $objWriter->save('php://output');
 ?>
