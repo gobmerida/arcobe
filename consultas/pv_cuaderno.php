@@ -64,6 +64,7 @@ while( $DataROW00 = mysql_fetch_array($DataSQL00) ){
 	$i++;
 }
 echo "<li><hr></li><li>Total de trabajadores $i</li><li>Total de beneficiario $KidsNumberTotal</li></ol>";
+echo $data01
 ?>
 	
 </body>

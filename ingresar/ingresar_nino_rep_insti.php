@@ -54,29 +54,29 @@ include("../sesion/sesion.php");
 	<div id="cabecera_ini"></div>
 	<div id="contenedor" onclick='g();'>
 		
-		<h3 class="n">Datos de los padres</h3><br>
+		<h3 class="n">Datos del Representante</h3><br>
 		<?php
-		if(array_key_exists("mp",$_GET)){
-			$mp=$_GET['mp'];
-			$madpad=mysql_query("SELECT * FROM cj_trabajadores WHERE trb_cedula='$mp' and activo='1'",$con) or die (mysql_error());
-			$row_madpad=mysql_fetch_array($madpad);
-			$trb_c=$row_madpad['trb_codigo'];
-			echo "<table><tr><td>V.- ".$row_madpad['trb_cedula']."</td><td> - ".$row_madpad['trb_nombres']."</td><td>".$row_madpad['trb_apellidos']."</td></tr></table>";
+		if(array_key_exists("re",$_GET)){
+			$re=$_GET['re'];
+			$madpad=mysql_query("SELECT * FROM cj_trabajadores_institutos WHERE trb_cedula='$re'",$con) or die (mysql_error());
+			$row_madpad_re=mysql_fetch_array($madpad);
+			$trb_c=$row_madpad_re['trb_codigo'];
+			echo "<table><tr><td>V.- ".$row_madpad_re['trb_cedula']."</td><td> - ".$row_madpad_re['trb_nombres']."</td><td>".$row_madpad_re['trb_apellidos']."</td></tr></table>";
 		}
-		if(array_key_exists("pm",$_GET)){
-			$pm=$_GET['pm'];
-			$madpad=mysql_query("SELECT * FROM cj_trabajadores WHERE trb_cedula='$pm' and activo='1'",$con) or die (mysql_error());
+		if(array_key_exists("mp",$_GET)){
+			echo "<h3 class=\"n\">Datos de los padres</h3><br>";
+			$mp=$_GET['mp'];
+			$madpad=mysql_query("SELECT * FROM cj_trabajadores_institutos WHERE trb_cedula='$mp'",$con) or die (mysql_error());
 			$row_madpad=mysql_fetch_array($madpad);
 			if($row_madpad['trb_cedula']!=""){
-			echo "<table><tr><td>V.- ".$row_madpad['trb_cedula']."</td><td> - ".$row_madpad['trb_nombres']."</td><td>".$row_madpad['trb_apellidos']."</td></tr></table>";
+				echo "<table><tr><td>V.- ".$row_madpad['trb_cedula']."</td><td> - ".$row_madpad['trb_nombres']."</td><td>".$row_madpad['trb_apellidos']."</td></tr></table>";
 			}
-		}
-		if(array_key_exists("pm",$_GET)){
-			$pm=$_GET['pm'];
-			$madpad=mysql_query("SELECT * FROM cj_mp WHERE mp_cedula='$pm'",$con) or die (mysql_error());
-			$row_madpad=mysql_fetch_array($madpad);
-			if($row_madpad['mp_cedula']!=""){
-			echo "<table><tr><td>V.- ".$row_madpad['mp_cedula']."</td><td> - ".$row_madpad['mp_nombre']."</td><td>".$row_madpad['mp_apellido']."</td></tr></table>";
+			if($row_madpad['trb_cedula']==""){
+			$madpad=mysql_query("SELECT * FROM cj_mp WHERE mp_cedula='$mp'",$con) or die (mysql_error());
+			$row_madpad1=mysql_fetch_array($madpad);
+			if($row_madpad1['mp_cedula']!=""){
+			echo "<table><tr><td>V.- ".$row_madpad1['mp_cedula']."</td><td> - ".$row_madpad1['mp_nombre']."</td><td>".$row_madpad1['mp_apellido']."</td></tr></table>";
+			}
 			}
 		}
 		if(array_key_exists("pm0",$_GET)){
@@ -99,12 +99,47 @@ include("../sesion/sesion.php");
 				</script>";
 			}
 		}
+		if(array_key_exists("mp0",$_GET)){
+			if($_GET['mp0']!="" and $_GET['mp1']!=""){
+			$cedula_pm=$_GET['mp'];
+			$nombre_pm=$_GET['mp0'];
+			$apellido_pm=$_GET['mp1'];
+			$nombre_pm=mb_strtoupper($nombre_pm,'utf-8');
+			$apellido_pm=mb_strtoupper($apellido_pm,'utf-8');
+			echo "<table><tr><td>V.- $cedula_pm</td><td> - $nombre_pm</td><td>$apellido_pm</td></tr></table>";
+			}
+			if(array_key_exists("pm0",$_GET)){
+			if($_GET['pm0']=="" or $_GET['pm1']==""){
+			echo "<center><h2 style='color:red' >Error faltan datos</h2></center>";
+			echo "<center><a href='ing_ni.php?mp=$mp&&pm=$pm' style='color:SteelBlue;text-decoration:none;font-weight:bold'>Atras</a></center>";
+			echo "<script>
+					$(document).ready (function ocultarVentana()
+					{
+					$('#formu').fadeOut(1); 
+					});
+				</script>";
+			}}
+		}
+		if(array_key_exists("pm",$_GET)){
+			$pm=$_GET['pm'];
+			$madpad=mysql_query("SELECT * FROM cj_trabajadores_institutos WHERE trb_cedula='$pm'",$con) or die (mysql_error());
+			$row_madpad=mysql_fetch_array($madpad);
+			if($row_madpad['trb_cedula']!=""){
+			echo "<table><tr><td>V.- ".$row_madpad['trb_cedula']."</td><td> - ".$row_madpad['trb_nombres']."</td><td>".$row_madpad['trb_apellidos']."</td></tr></table>";
+			}
+			$madpad=mysql_query("SELECT * FROM cj_mp WHERE mp_cedula='$pm'",$con) or die (mysql_error());
+			$row_madpad=mysql_fetch_array($madpad);
+			if($row_madpad['mp_cedula']!=""){
+			echo "<table><tr><td>V.- ".$row_madpad['mp_cedula']."</td><td> - ".$row_madpad['mp_nombre']."</td><td>".$row_madpad['mp_apellido']."</td></tr></table>";
+			}
+		}
+		
 		?>
 		<br>
-		<h3 class="n">Ingresar datos del Niño(a)</h3>
+		<h3 class="n">Ingresar datos del Beneficiario(a)</h3>
 		<a href="../" class="n">Cancelar</a><a href='ing_mp.php' class="n">Volver a iniciar</a>
 		<br>
-		<form action="ingr_nin.php" method="post" id="formu">
+		<form action="ingr_ni_re_insti.php" method="post" id="formu">
 			<table class="ing_ninho" >
 			<tr><td>Cédula:</td> <td><input type="text" name="ninho" autocomplete=off onkeypress="return permite(event, 'num')"></td></tr>
 			
@@ -148,10 +183,16 @@ include("../sesion/sesion.php");
 					echo "<input type='hidden' name='nombre_mp' value='$nombre_mp'>";
 					echo "<input type='hidden' name='apellido_mp' value='$apellido_mp'>";
 				}
-				if(array_key_exists("mp",$_GET)){
-					
-					echo "<input type='hidden' name='mp' value='$mp'>";
+				if(array_key_exists("mp0",$_GET) and $_GET['mp0']!="" and $_GET['mp1']!=""){
+					echo "<input type='hidden' name='nombre_pm' value='$nombre_pm'>";
+					echo "<input type='hidden' name='apellido_pm' value='$apellido_pm'>";
+				}
+				if(array_key_exists("re",$_GET)){
+					echo "<input type='hidden' name='re' value='$re'>";
 					echo "<input type='hidden' name='trb_c' value='$trb_c'>";
+				}
+				if(array_key_exists("mp",$_GET)){
+					echo "<input type='hidden' name='mp' value='$mp'>";
 				}
 				if(array_key_exists("pm",$_GET)){
 					echo "<input type='hidden' name='pm' value='$pm'>";

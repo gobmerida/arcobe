@@ -138,7 +138,7 @@ include("../sesion/sesion.php");
 		if($row_nino['cedula_repr']!=''){
 		echo "<h3 class='n'style='color:black'>Representante legal</h3><br>";
 		
-		if($row_nino['cedula_mp']!=""){
+		if($row_nino['cedula_repr']!=""){
 			$mp=$row_nino['cedula_repr'];
 			$madpad=mysql_query("SELECT * FROM cj_trabajadores_institutos WHERE trb_cedula='$mp'",$con) or die (mysql_error());
 			$row_madpad=mysql_fetch_array($madpad);

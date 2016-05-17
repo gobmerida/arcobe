@@ -8,7 +8,7 @@ Correo: edg.sistemas@gmail.com
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="es" lang="es">
 
 <head>
-	<title>Ingresar Niño(a)</title>
+	<title>ARCOBE</title>
 	<meta http-equiv="content-type" content="text/html;charset=utf-8" />
 	<link rel="stylesheet" href="../estilo/estilo.css" type="text/css"/>
 	<style>
@@ -29,17 +29,28 @@ Correo: edg.sistemas@gmail.com
 		background: white;
 		}
 		table{
-			border: ridge 2px;
+			border: ridge 1px silver;
 			border-radius: 7px;
 			margin: 0 35px;
 		}
 	</style>
 	<script type="text/javascript" src="jquery.js"></script>
+	<script language="javascript" src="../js/delimitar.js"></script>
 	<script type="text/javascript">
-	$(document).ready(function() {	
-		$('#suggestions').fadeOut(0);
-		$('#mp').keypress(function(){
-			var mp = $(this).val();		
+		function validar(formulario){
+		if(formulario.mp.value.length==0){
+			document.getElementById("mp").style.border = "2px inset red";
+			formulario.mp.focus();
+			alert("¡Introduzca la cédula!");
+			return false;
+		}
+	return true;
+	}
+	function busc_ms(){
+		$('#suggestions').fadeIn(0);
+	}
+	function bus_h(){
+		var mp = document.getElementById('mp').value;		
 			var dataString = 'mp='+mp;
 			$.ajax({
 				type: "POST",
@@ -56,10 +67,9 @@ Correo: edg.sistemas@gmail.com
 					});              
 				}
 			});
-		});              
-	});    
+	}
 	function g(){
-		$('#suggestions').fadeOut(250);
+		$('#suggestions').fadeOut(300);
 	}
 	</script>
 </head>
@@ -70,25 +80,24 @@ include("../sesion/sesion.php");
 <body onclick='g();'>
 	<div id="cabecera_ini"></div>
 	<div id="contenedor">
-		<h3 class="n">Ingresar Niño(a)<br>Cédula de la madre o el padre</h3><br>
+		<h3 class="n">Ingreso del Beneficiario<br>Cédula de la madre o el padre</h3><br>
 		<?php
-		if(array_key_exists("mp",$_GET)){
-			$mp=$_GET['mp'];
-			$madpad=mysql_query("SELECT * FROM cj_trabajadores WHERE trb_cedula='$mp' and activo='1'",$con) or die (mysql_error());
+		if(array_key_exists("re",$_GET)){
+			$re=$_GET['re'];
+			$madpad=mysql_query("SELECT * FROM cj_trabajadores_institutos WHERE trb_cedula='$re'",$con) or die (mysql_error());
 			$row_madpad=mysql_fetch_array($madpad);
 			if($row_madpad['trb_cedula']==""){
-				header("location:ing_mp.php?error=1");
+				header("location:ing_rep_insti.php?error=1");
 			}
 			echo "<table><tr><td>V.- ".$row_madpad['trb_cedula']."</td><td> - ".$row_madpad['trb_nombres']."</td><td>".$row_madpad['trb_apellidos']."</td></tr></table>";
-					
-					$c_hijos=mysql_query("SELECT * FROM cj_hijos WHERE cedula_mp='$mp'",$con) or die (mysql_error());
-					$c2_hijos=mysql_query("SELECT * FROM cj_hijos WHERE cedula_pm='$mp'",$con) or die (mysql_error());
-					$c3_hijos=mysql_query("SELECT * FROM cj_hijos WHERE cedula_repr='$mp'",$con) or die (mysql_error());
+			$c_hijos=mysql_query("SELECT * FROM cj_hijos WHERE cedula_mp='$re'",$con) or die (mysql_error());
+					$c2_hijos=mysql_query("SELECT * FROM cj_hijos_institutos WHERE cedula_pm='$re'",$con) or die (mysql_error());
+					$c3_hijos=mysql_query("SELECT * FROM cj_hijos_institutos WHERE cedula_repr='$re'",$con) or die (mysql_error());
 					$i=0;
 					$ih=0;
 					while($row_hijos=mysql_fetch_array($c_hijos)){
 					if($ih==0){
-						echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Beneficiarios(as):<br>";
+						echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Hijos(as):<br>";
 						$ih=$ih+1;
 					}
 					if($row_hijos['id_ninho']!=""){
@@ -102,7 +111,7 @@ include("../sesion/sesion.php");
 				}
 				while($row2_hijos=mysql_fetch_array($c2_hijos)){
 					if($ih==0){
-						echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Beneficiarios(as):<br>";
+						echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Hijos(as):<br>";
 						$ih=$ih+1;
 					}
 					if($row2_hijos['id_ninho']!=""){
@@ -129,21 +138,23 @@ include("../sesion/sesion.php");
 					}
 				}
 				if($i==0){
-					echo "<span class='cen' style='color:black' >No hay Niños(as) registrados</span><br>";
+					echo "<span class='cen' style='color:black' >No hay Beneficiarios(as) registrados</span><br>";
 				}
-		
 		}
 		?>
 		<br>
-		<form action="ing_ni.php" method="get" id="ing_mp">
+		<form action="re_pm.php" method="get" id="ing_mp"  onsubmit='return validar(this)'>
 		<?php
-			echo "<input type='hidden' name='mp' value='".$mp."'>";
+			echo "<input type='hidden' name='re' value='".$re."'>";
 		?>
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cédula <input type="text" name="pm" id="mp" autocomplete=off><input type="submit" value="Enviar">
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cédula <input type="text" name="mp" id="mp" autocomplete=off onkeyup="busc_ms();bus_h()" onkeypress="return permite(event, 'num_car')"><input type="submit" value="Enviar">
 		<div id="suggestions"></div>
 		</form><br>
-		<center><span style='font-weight:bold'><a href="ingresar_nino.php?mp=<?php echo $mp;?>" >Omitir</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		<?php echo "<a href='ing_mp.php'>Atras</a>";
+		<script>
+		$('#suggestions').fadeOut(0);
+		</script>
+		<center><span style='font-weight:bold'><a href="ingresar_nino_rep_insti.php?re=<?php echo $re;?>" >Omitir</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		<?php echo "<a href='ing_rep_insti.php'>Atras</a>";
 		?>
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="../" >Cancelar</a></span></center><br>
 	</div>

@@ -48,7 +48,7 @@ Correo: edg.sistemas@gmail.com
 						var id = $(this).attr('id');
 						$('#mp').val($('#'+id).attr('data'));
 						$('#suggestions').fadeOut(1000);
-						$('#ing_mp').submit();
+						$('#ing_pm_insti').submit();
 						return false;
 					});              
 				}
@@ -70,7 +70,7 @@ include("../sesion/sesion.php");
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cédula <input type="text" name="mp" id="mp" autocomplete=off onkeyup="busc_ms();bus_h()" onkeypress="return permite(event, 'num')"><input type="submit" value="Enviar">
 		<div id="suggestions"></div>
 		</form><br>
-		<center><span><a href="../" >Cancelar</a></span></center><br>
+		<center><span><a href="../institutos/" >Cancelar</a></span></center><br>
 	</div>
 	<script>
 	$('#suggestions').fadeOut(0);

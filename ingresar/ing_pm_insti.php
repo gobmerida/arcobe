@@ -96,7 +96,7 @@ include("../sesion/sesion.php");
 						$nombre2=" ".$row_hijos['h_nombre2'];
 						$apellido2=" ".$row_hijos['h_apellido2'];
 						$e_nino=$row_hijos['h_nombre1'].$nombre2." ".$row_hijos['h_apellido1'].$apellido2;
-						echo "<span class='cen'><a href='../consultas/nino.php?nino=$cod_nino' class='nino' target='_blank' style='color:SteelBlue'>$e_nino</a></span><br>";
+						echo "<span class='cen'><a href='../institutos/nino.php?nino=$cod_nino' class='nino' target='_blank' style='color:SteelBlue'>$e_nino</a></span><br>";
 						$i=$i+1;
 					}
 				}
@@ -143,7 +143,7 @@ include("../sesion/sesion.php");
 		<div id="suggestions"></div>
 		</form><br>
 		<center><span style='font-weight:bold'><a href="ingresar_nino_insti.php?mp=<?php echo $mp;?>" >Omitir</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		<?php echo "<a href='ing_mp.php'>Atras</a>";
+		<?php echo "<a href='ing_mp_insti.php'>Atras</a>";
 		?>
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="../" >Cancelar</a></span></center><br>
 	</div>

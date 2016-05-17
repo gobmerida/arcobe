@@ -46,13 +46,13 @@ $mp="";
 if(array_key_exists("mp",$_POST)){
 	$mp=$_POST['mp'];
 }
-$conta=mysql_query("SELECT contador FROM contador WHERE con_i='0'",$con) or die (mysql_error());
+$conta=mysql_query("SELECT contador FROM contador_insti WHERE con_i='0'",$con) or die (mysql_error());
 $row_conta=mysql_fetch_array($conta);
 $contador=$row_conta['contador'];
 $id_ninho=$trb_c."-".$contador;
-mysql_query("INSERT INTO cj_beneficiados(id_ninho,h_cedula,h_nombre1,h_nombre2,h_apellido1,h_apellido2,h_fecha_naci,h_sexo,h_gsanguineo)
+mysql_query("INSERT INTO cj_beneficiados_institutos(id_ninho,h_cedula,h_nombre1,h_nombre2,h_apellido1,h_apellido2,h_fecha_naci,h_sexo,h_gsanguineo)
 			value('$id_ninho','$cedula_n','$nombre1_n','$nombre2_n','$apellido1_n','$apellido2_n','$fecha_n','$sexo_n','$gsanguineo_in')",$con) or die ("Error al ingresar niño: ".mysql_error());
-mysql_query("INSERT INTO cj_cp(id_ninho,cedula_mp,cedula_pm,cedula_repr) value('$id_ninho','$mp','$pm','$re')") or die (mysql_error());
+mysql_query("INSERT INTO cj_cp_institutos(id_ninho,cedula_mp,cedula_pm,cedula_repr) value('$id_ninho','$mp','$pm','$re')") or die (mysql_error());
 $contador=$contador+1;
 mysql_query("UPDATE contador SET contador='$contador' WHERE con_i='0'",$con) or die (mysql_error());
 //~ 
@@ -66,6 +66,6 @@ if(array_key_exists('nombre_pm',$_POST) and array_key_exists("pm",$_POST)){
 	$apellido_pm=$_POST['apellido_pm'];
 	mysql_query("INSERT INTO cj_mp(mp_cedula,mp_nombre,mp_apellido) value('$pm','$nombre_pm','$apellido_pm')",$con) or die (mysql_error());
 }
-header("location: ../consultas/nino.php?nino=$id_ninho&&msj=1");
+header("location: ../institutos/nino_repre.php?nino=$id_ninho&&msj=1");
 
 ?>

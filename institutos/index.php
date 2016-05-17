@@ -36,36 +36,13 @@ Correo: edg.sistemas@gmail.com
 				<li onclick="location.href='BuscarPlanilla.php'">Buscar Planilla</li>
 			</ul>
 		<?php
-			if($_SESSION['rol_ingreso']==1){
-		?>
-		<!--<li class='principal'>Registrar Beneficiario
-			<ul class="secundario">
-				<li onclick="location.href='ing_mp.php'">Por madre o padre</li>
-				<li onclick="location.href='ing_rep.php'">Por representante</li>
-				<li onclick="location.href='ingXotros.php'">Otros</li>
-			</ul>
-		</li>-->
-		<?php
-		}
 		?>
 		</li>
 			<li class='principal' >Registrar Beneficiarios
 			<ul class="secundario">
 				<li onclick="location.href='../ingresar/ing_mp_insti.php'">Por padres</li>
+				<li onclick="location.href='../ingresar/ing_rep_insti.php'">Por representante</li>
 			</ul>
-		<?php
-			if($_SESSION['rol_ingreso']==1){
-		?>
-		<!--<li class='principal'>Registrar Beneficiario
-			<ul class="secundario">
-				<li onclick="location.href='ing_mp.php'">Por madre o padre</li>
-				<li onclick="location.href='ing_rep.php'">Por representante</li>
-				<li onclick="location.href='ingXotros.php'">Otros</li>
-			</ul>
-		</li>-->
-		<?php
-		}
-		?>
 		</li>
 	</ul>
 	<h2 align="center" style="color:red">Plan Vacacional - Institutos</h2>
