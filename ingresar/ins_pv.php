@@ -339,9 +339,9 @@ include("../script_php/cal_edad.php");
 	//Traerse los datos si ya estaba inscrito en años anteriores
 	$sql_llenar_datos = "SELECT pv.*, h.id_ninho, b.h_gsanguineo  FROM pv_inscrip pv JOIN cj_hijos h ON pv.id_ninho_pv=h.id_ninho JOIN cj_beneficiados b ON pv.id_ninho_pv=b.id_ninho WHERE pv.id_ninho_pv='$nino' ORDER BY id_periodo DESC LIMIT 1";
 			$rs_llenar_datos = mysql_query($sql_llenar_datos);
-			$row= mysql_fetch_array($rs_llenar_datos);
 			$num=mysql_num_rows($rs_llenar_datos);
 			if ($num === 1) {
+				$row= mysql_fetch_array($rs_llenar_datos);
 				echo"<script>
 						(function(){
 							formulario.pv_habilidades.value='".$row["pv_habilidades"]."';
