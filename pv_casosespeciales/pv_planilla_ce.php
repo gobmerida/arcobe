@@ -168,7 +168,7 @@ include("../script_php/a_fe.php");
 							<td colspan="4" class='titulo'><center><b><?php echo "Plan Vacacional $pv_planilla_ce[pv_añoperiodo]";?></b></center></td>
 						</tr>
 						<tr>
-							<td colspan="4" style="padding:15px">
+							<td colspan="3" style="padding:15px">
 							<b>Datos del trabajador:</b><br>
 							<b>C.I. </b><?php echo "$pv_planilla_ce[trb_cedula]";?><br>
 							<b>Nombres: </b><?php echo "$pv_planilla_ce[trb_nombres] $pv_planilla_ce[trb_apellidos]";?><br>
