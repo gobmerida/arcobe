@@ -346,11 +346,6 @@ include("../script_php/cal_edad.php");
 						(function(){
 							formulario.pv_habilidades.value='".$row["pv_habilidades"]."';
 							formulario.pv_gustos.value='".$row["pv_gustos"]."';
-							formulario.pv_vacunas.value='".$row["pv_vacunas"]."';
-							formulario.pv_alergias.value='".$row["pv_alergias"]."';
-							formulario.pv_tratamiento.value='".$row["pv_tratamiento"]."';
-							formulario.pv_alimentosp.value='".$row["pv_alimentosp"]."';
-							formulario.pv_medicamentosp.value='".$row["pv_medicamentosp"]."';
 							formulario.pv_contacto_cedula.value='".$row["pv_contacto_cedula"]."';
 							formulario.pv_contacto_nombre.value='".$row["pv_contacto_nombre"]."';
 							formulario.pv_contacto_apellido.value='".$row["pv_contacto_apellido"]."';

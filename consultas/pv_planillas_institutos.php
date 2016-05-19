@@ -166,6 +166,16 @@ include("../script_php/a_fe.php");
 							<b>Nombres: </b><?php echo "$pv_planilla[trb_nombres] $pv_planilla[trb_apellidos]";?><br>
 							<b>Dependencia: </b><?php echo "$pv_planilla[trb_dependencia]";?>
 							</td>
+							<td>
+							<?php
+								$DataCJSQL01 = "select * from pv_cuaderno_institutos where ced_tbr='".$pv_planilla["trb_cedula"]."' ORDER BY Periodo DESC LIMIT 1";
+								$DataCJSQL01 = mysql_query($DataCJSQL01);
+								$DataCJROW01 = mysql_fetch_array($DataCJSQL01);
+							?>
+								<b>Cuaderno</b><br />
+								Pagina: <b><?php echo $DataCJROW01["Npagina"] ?></b><br />
+								Linea: <b><?php echo $DataCJROW01["Nlinea"] ?></b>
+							</td>
 						</tr>
 						<tr>
 							<td colspan="4"  style="padding:5px 5px 5px 15px">

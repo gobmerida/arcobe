@@ -129,12 +129,12 @@ value(
 )"
 ) or die ("Error: ".mysql_error());
 
-/*$DataQuery01 = "select * from pv_cuaderno where ced_tbr='$id_mp'";
+$DataQuery01 = "select * from pv_cuaderno_institutos where ced_tbr='$id_mp'";
 $DataQuery01 = mysql_query($DataQuery01);
 $DataROW01 = mysql_fetch_array($DataQuery01);
 
 if($DataROW01["ced_tbr"]==""){
-	$DataQuery02 = "select * from pv_periodo where id='2'";
+	$DataQuery02 = "select * from pv_periodo_ve where id='2'";
 	$DataQuery02 = mysql_query($DataQuery02);
 	$DataROW02 = mysql_fetch_array($DataQuery02);
 	$aux01 = $DataROW02["contador_per"];
@@ -146,10 +146,10 @@ if($DataROW01["ced_tbr"]==""){
 	}
 	$aux01++;
 	$aux02++;
-	$DataQuery03 = "insert into pv_cuaderno(ced_tbr,Npagina,Nlinea,Periodo) values('$id_mp','$aux03','$aux01','2')";
+	$DataQuery03 = "insert into pv_cuaderno_institutos(ced_tbr,Npagina,Nlinea,Periodo) values('$id_mp','$aux03','$aux01','2')";
 	mysql_query($DataQuery03) or die (mysql_error());
-	$DataSQL02 = "update pv_periodo set contador_per='$aux01',ContadorAux='$aux03',Aux='$aux02' where id_pvperiodo='2'";
+	$DataSQL02 = "update pv_periodo_ve set contador_per='$aux01',ContadorAux='$aux03',Aux='$aux02' where id_pvperiodo='2'";
 	$DataSQL02 = mysql_query($DataSQL02);
-}*/
+}
 header("location:../../consultas/pv_planillas_institutos.php?pn=$pv_planillanumero&&msj=1");
 ?>

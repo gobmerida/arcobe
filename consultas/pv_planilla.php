@@ -160,12 +160,24 @@ include("../script_php/a_fe.php");
 							<td colspan="4" class='titulo'><center><b><?php echo "Plan Vacacional $pv_planilla[pv_añoperiodo]";?></b></center></td>
 						</tr>
 						<tr>
-							<td colspan="4" style="padding:15px">
+							<td colspan="3" style="padding:15px">
 							<b>Datos del trabajador:</b><br>
 							<b>C.I. </b><?php echo "$pv_planilla[trb_cedula]";?><br>
 							<b>Nombres: </b><?php echo "$pv_planilla[trb_nombres] $pv_planilla[trb_apellidos]";?><br>
 							<b>Dependencia: </b><?php echo "$pv_planilla[trb_dependencia]";?>
 							</td>
+							<td>
+							<?php
+								$DataCJSQL01 = "select * from pv_cuaderno where ced_tbr='".$pv_planilla["trb_cedula"]."' ORDER BY Periodo DESC LIMIT 1";
+								$DataCJSQL01 = mysql_query($DataCJSQL01);
+								$DataCJROW01 = mysql_fetch_array($DataCJSQL01);
+							?>
+								<b>Cuaderno</b><br />
+								Pagina: <b><?php echo $DataCJROW01["Npagina"] ?></b><br />
+								Linea: <b><?php echo $DataCJROW01["Nlinea"] ?></b>
+							</td>
+
+
 						</tr>
 						<tr>
 							<td colspan="4"  style="padding:5px 5px 5px 15px">
