@@ -1,4 +1,4 @@
-<!--Autor 
+<!--Autor s
 Edgar Carrizalez
 C.I. V-19.352.988
 Correo: edg.sistemas@gmail.com
@@ -24,7 +24,6 @@ include("../script_php/cal_edad.php");
 ?>
 <body onload="tamanios()">
 	<div id='cabecera_ini'>
-		
 	</div>
 	<div id='contenedor'>
 		<h3 align='center'>.:Inscripción Plan Vacacional <?php echo date("Y");?>:.</h3>
@@ -35,6 +34,7 @@ include("../script_php/cal_edad.php");
 			$buscar_nino_c = mysql_query($buscar_nino_c);
 			$buc_nino = mysql_fetch_array($buscar_nino_c);
 			$cedulad_nino = "";
+
 			if($buc_nino['h_cedula']!=""){
 				$cedulad_nino ="$buc_nino[h_cedula] -";
 			}
@@ -123,7 +123,7 @@ include("../script_php/cal_edad.php");
 <!--
 		<form action="reg_pv.php" method="post">
 -->
-		<form action="reg_pv.php" method="post"  onsubmit='return validar_pv(this);'>
+		<form name="formulario" action="reg_pv.php" method="post"  onsubmit='return validar_pv(this);'>
 		<table id="ins_pv">
 			<?php
 			$id_nino = $buc_nino['id_ninho'];
@@ -335,3 +335,32 @@ include("../script_php/cal_edad.php");
 	</div>
 </body>
 </html>
+<?php
+	//Traerse los datos si ya estaba inscrito en años anteriores
+	$sql_llenar_datos = "SELECT pv.*, h.id_ninho, b.h_gsanguineo  FROM pv_inscrip pv JOIN cj_hijos h ON pv.id_ninho_pv=h.id_ninho JOIN cj_beneficiados b ON pv.id_ninho_pv=b.id_ninho WHERE pv.id_ninho_pv='$nino' ORDER BY id_periodo DESC LIMIT 1";
+			$rs_llenar_datos = mysql_query($sql_llenar_datos);
+			$row= mysql_fetch_array($rs_llenar_datos);
+			$num=mysql_num_rows($rs_llenar_datos);
+			if ($num === 1) {
+				echo"<script>
+						(function(){
+							formulario.pv_habilidades.value='".$row["pv_habilidades"]."';
+							formulario.pv_gustos.value='".$row["pv_gustos"]."';
+							formulario.pv_vacunas.value='".$row["pv_vacunas"]."';
+							formulario.pv_alergias.value='".$row["pv_alergias"]."';
+							formulario.pv_tratamiento.value='".$row["pv_tratamiento"]."';
+							formulario.pv_alimentosp.value='".$row["pv_alimentosp"]."';
+							formulario.pv_medicamentosp.value='".$row["pv_medicamentosp"]."';
+							formulario.pv_contacto_cedula.value='".$row["pv_contacto_cedula"]."';
+							formulario.pv_contacto_nombre.value='".$row["pv_contacto_nombre"]."';
+							formulario.pv_contacto_apellido.value='".$row["pv_contacto_apellido"]."';
+							formulario.pv_contacto_telefono.value='".$row["pv_contacto_telefono"]."';
+							formulario.pv_contacto_parentesco.selectedIndex=".$row["pv_contacto_parentesco"]." -1;
+							formulario.pv_observaciones.value='".$row["pv_observaciones"]."';
+							
+
+				
+						})();
+					</script>";
+			}
+?>
