@@ -33,7 +33,7 @@
 </head>
 
 <body>
-<a href="../consultas/exportar_cuadernoCE.php?periodo=<?php echo $_GET["periodo"];?>" class="exportar">Exportar Cuaderno</a>
+<a href="../consultas/exportar_pv.php?periodo=<?php echo $_GET["periodo"];?>" class="exportar">Exportar Cuaderno</a>
 <?php
 include("../connect/conexion.php");
 $data01 = $_GET["periodo"];
@@ -64,7 +64,6 @@ while( $DataROW00 = mysql_fetch_array($DataSQL00) ){
 	$i++;
 }
 echo "<li><hr></li><li>Total de trabajadores $i</li><li>Total de beneficiario $KidsNumberTotal</li></ol>";
-echo $data01
 ?>
 	
 </body>
