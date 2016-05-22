@@ -34,7 +34,6 @@ include("../script_php/cal_edad.php");
 			$buscar_nino_c = mysql_query($buscar_nino_c);
 			$buc_nino = mysql_fetch_array($buscar_nino_c);
 			$cedulad_nino = "";
-
 			if($buc_nino['h_cedula']!=""){
 				$cedulad_nino ="$buc_nino[h_cedula] -";
 			}
@@ -353,7 +352,6 @@ include("../script_php/cal_edad.php");
 							formulario.pv_contacto_parentesco.selectedIndex=".$row["pv_contacto_parentesco"]." -1;
 							formulario.pv_observaciones.value='".$row["pv_observaciones"]."';
 							
-
 				
 						})();
 					</script>";
