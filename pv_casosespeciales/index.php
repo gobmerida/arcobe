@@ -31,7 +31,7 @@ Correo: edg.sistemas@gmail.com
 		<li onclick="location.href='../'" class="principal">Volver</li>
 		<li class='principal' >Consultar
 			<ul class="secundario">
-				<li onclick="location.href='b_nino.php'">Beneficiario</li>
+				<li onclick="location.href='beneficiario.php'">Beneficiario</li>
 				<li onclick="location.href='persona.php'">Persona</li>
 			</ul>
 		<?php
@@ -39,15 +39,14 @@ Correo: edg.sistemas@gmail.com
 		?>
 		<li class='principal'>Registrar Beneficiario
 			<ul class="secundario">
-				<li onclick="location.href='ing_mp.php'">Por madre o padre</li>
-				<li onclick="location.href='ing_rep.php'">Por representante</li>
-				<li onclick="location.href='ingXotros.php'">Otros</li>
+				<li onclick="location.href='reg_beneficiario.php'">Por madre o padre</li>
 			</ul>
 		</li>
 		<?php
 		}
 		?>
 		</li>
+		<li onclick="location.href='ingresar/registrar_trabajador.php'" class="principal">Registrar trabajador</li>
 	</ul>
 	<h2 align="center" style="color:red">Plan Vacacional - Casos Especiales</h2>
 	</div>
