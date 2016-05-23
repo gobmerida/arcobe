@@ -130,7 +130,7 @@ Correo: edg.sistemas@gmail.com
 				
 				
 				
-				<li onclick="location.href='./consultas/editar_usuarios.php'">Editar Usuarios</li>
+				
 				<?php
 				}
 				

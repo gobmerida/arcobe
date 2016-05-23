@@ -18,12 +18,12 @@ include("../sesion/sesion.php");
 		<h3 class="n">Crear Usuarios</h3><br>
 		<br>
 		<form name="formulario" action="crear_usuarios.php" method="POST">
-			Usuario:<br> <input type="text" name="usuario_user" id="" autocomplete=off required><br>
+			Usuario:<br> <input type="text" name="usuario_user" id="" autocomplete=off required minlength="2"><br>
 			Contraseña:<br> <input type="password" name="usuario_clave" id="clave" autocomplete=off required><br>
 			Confirmar contraseña:<br> <input type="password" name="clave2" id="clave2" autocomplete=off required><br>
 			Cedula:<br> <input type="text" name="usuario_cedula" id="" autocomplete=off required><br>
-			Nombre:<br> <input type="text" name="usuario_nombre" id="" autocomplete=off required><br>
-			Apellido:<br> <input type="text" name="usuario_apellido" id="" autocomplete=off required><br>
+			Nombre:<br> <input type="text" name="usuario_nombre" id="" autocomplete=off placeholder="Solo letras" required pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚüÜ ]{2,}"><br>
+			Apellido:<br> <input type="text" name="usuario_apellido" id="" autocomplete=off placeholder="Solo letras" required pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚüÜ ]{2,}"><br>
 			Tipo de usuario:<br> <select name="usuario_rol" id="">
 				<option value="4">Suscriptor</option>
 				<option value="3">Director</option>
@@ -47,7 +47,14 @@ include("../sesion/sesion.php");
 				alert("las contraseñas no coinciden vuelva a introducirlas");
 				e.preventDefault()
 			}
+			largopass = formulario.usuario_user.value.length;
+        	 if(largopass < 5){
+                  alert("El usuario debe ser al menos de 5 caracteres.");
+                  formulario.usuario_user.focus();
+                  e.preventDefault()
+         	}
 		}
+
 		formulario.addEventListener("submit", validar);
 		})();
 	</script>
