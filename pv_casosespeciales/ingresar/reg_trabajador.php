@@ -4,8 +4,9 @@
 		
 		extract($_POST);
 
-		echo $sql  = "INSERT INTO `pv_trabajadores_ce`(`cod_trab`, `ci_trab`, `nombre_trab`, `apellido_trab`, `cargo`, `dependeencia`) VALUES ('$cod','$ci','$ape','$nom','$carg','$depe')";
+		$sql  = "INSERT INTO `pv_trabajadores_ce`(`trb_codigo`, `trb_cedula`, `trb_apellidos`, `trb_nombres`, `trb_cargo`, `trb_dependencia`) VALUES ('$cod','$ci','$ape','$nom','$carg','$depe')";
 		$query = mysql_query($sql);
+		echo "trabajador ingresado";
 	}else{
 		echo "no registraado";
 	}

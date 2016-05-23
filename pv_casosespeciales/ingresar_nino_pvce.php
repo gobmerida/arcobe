@@ -58,10 +58,10 @@ include("../sesion/sesion.php");
 		<?php
 		if(array_key_exists("mp",$_GET)){
 			$mp=$_GET['mp'];
-			$madpad=mysql_query("SELECT * FROM pv_trabajadores_ce WHERE ci_trab='$mp'",$con) or die (mysql_error());
+			$madpad=mysql_query("SELECT * FROM pv_trabajadores_ce WHERE trb_cedula='$mp'",$con) or die (mysql_error());
 			$row_madpad=mysql_fetch_array($madpad);
 			$trb_c=$row_madpad['trb_codigo'];
-			echo "<table><tr><td>V.- ".$row_madpad['ci_trab']."</td><td> - ".$row_madpad['nombre_trab']."</td><td>".$row_madpad['apellido_trab']."</td></tr></table>";
+			echo "<table><tr><td>V.- ".$row_madpad['trb_cedula']."</td><td> - ".$row_madpad['trb_nombres']."</td><td>".$row_madpad['trtb_apellidos']."</td></tr></table>";
 		}
 		?>
 		<br>

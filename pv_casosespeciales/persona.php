@@ -88,25 +88,25 @@ if(array_key_exists('cedula',$_GET)){
 	echo "<br><span class='cll'>Datos del trabajador <span style='color:red'>(Caso Especial)</span></span><br>";
 	$cedula=$_GET['cedula'];
 	//mysql_select_db("cj_pv",$con) or die (mysql_error());
-	$c_trabajador=mysql_query("SELECT * FROM pv_trabajadores_ce WHERE ci_trab='$cedula'",$con) or die (mysql_error());
+	$c_trabajador=mysql_query("SELECT * FROM pv_trabajadores_ce WHERE trb_cedula='$cedula'",$con) or die (mysql_error());
 	$row_trabajador=mysql_fetch_array($c_trabajador);
 
-	if($row_trabajador['ci_trab']!=''){
+	if($row_trabajador['trb_cedula']!=''){
 	
 		echo "<table class='ta_trabajador'>";
-		echo "<tr class='som'><td>Cedula: V-".$row_trabajador['ci_trab']."</td><td>Código trabajador: ".$row_trabajador['cod_trab']."</td></tr>";
-		$noms=$row_trabajador['nombre_trab'];
-		$aps=$row_trabajador['apellido_trab'];
+		echo "<tr class='som'><td>Cedula: V-".$row_trabajador['trb_cedula']."</td><td>Código trabajador: ".$row_trabajador['trb_codigo']."</td></tr>";
+		$noms=$row_trabajador['trb_nombres'];
+		$aps=$row_trabajador['trb_apellidos'];
 		
 		echo "<tr><td colspan='2'>Nombres: ".$noms."</td></tr>";
 		echo "<tr class='som'><td colspan='3'>Apellidos: ".$aps."</td><br></tr>";
-		echo "<tr><td colspan='2'>Cargo: ".$row_trabajador['cargo']."</td></tr>";
-		echo "<tr class='som'><td colspan='2'>Dependencia: ".$row_trabajador['dependencia']."</td></tr>";
+		echo "<tr><td colspan='2'>Cargo: ".$row_trabajador['trb_cargo']."</td></tr>";
+		echo "<tr class='som'><td colspan='2'>Dependencia: ".$row_trabajador['trb_dependencia']."</td></tr>";
 
 		echo "</table>";
 	}
 
-	if($row_trabajador['ci_trab']==''){
+	if($row_trabajador['trb_cedula']==''){
 		$c_trabajador=mysql_query("SELECT * FROM cj_trabajadores WHERE trb_cedula='$cedula'",$con) or die (mysql_error());
 		$row_trabajador=mysql_fetch_array($c_trabajador);
 		echo "<h3 style='color:red'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cédula no registrada en casos especiales</h3>";

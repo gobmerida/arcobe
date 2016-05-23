@@ -55,7 +55,7 @@ include("../sesion/sesion.php");
 			//~ return( date("md") < $m.$d ? date("Y")-$Y-1 : date("Y")-$Y );
 		//~ }
 		$nino=$_GET['nino'];
-			$sql2 = "SELECT * FROM pv_hijos_ce WHERE id_nino = '$nino'";
+			$sql2 = "SELECT * FROM pv_hijos_ce WHERE id_ninho = '$nino'";
 			$c_nino = mysql_query($sql2);
 			$row_nino=mysql_fetch_array($c_nino);
 			// - Conculta del periodo del Plan Vacacional
@@ -63,38 +63,38 @@ include("../sesion/sesion.php");
 			$pv_co = "SELECT * FROM pv_periodo_ce WHERE pv_añoperiodo='$anio_actual'";
 			$pv_co = mysql_query($pv_co);
 			$pv_periodo = mysql_fetch_array($pv_co);
-			if($row_nino['id_nino']==''){
+			if($row_nino['id_ninho']==''){
 				header("location:b_nino.php?error=1");
 			}
-			if($row_nino['sexo_nino']=='F'){
+			if($row_nino['h_sexo']=='F'){
 				$sexo="Femenino";
 				$ninho="de la Niña";
 			}
 			
-			if($row_nino['sexo_nino']=='M'){
+			if($row_nino['h_sexo']=='M'){
 				$sexo="Masculino";
 				$ninho="del Niño";
 			}
 			setlocale(LC_ALL, 'es_VE.utf8 ');
 			
-			$fecha_naci=$row_nino['fecha_naci'];
+			$fecha_naci=$row_nino['h_fecha_naci'];
 			$fecha_naci=strftime("%d %B %Y",strtotime($fecha_naci));
-			$gsan = $row_nino['Gsangueneo'];
+			$gsan = $row_nino['h_gsanguineo'];
 			$h_sanguineo_c = "SELECT * FROM cp_gsanguineos WHERE id_grupo_sanguineo='$gsan'";
 			$h_sanguineo_c = mysql_query($h_sanguineo_c);
 			$h_sanguineo = mysql_fetch_array($h_sanguineo_c);
 			
-			$edad=CalculaEdad($row_nino['fecha_naci']);
-			$edadCJ=CalculaEdadCJ($row_nino['fecha_naci']);
+			$edad=CalculaEdad($row_nino['h_fecha_naci']);
+			$edadCJ=CalculaEdadCJ($row_nino['h_fecha_naci']);
 			echo "<br><span class='cll'>Datos $ninho";
 			if($_SESSION['rol_editor']=="1"){
-				echo "<img src='../media/edit.png' width='30px' onclick='location.href=\"edit_nino.php?nino=$nino\"' title='Editar' style='cursor:pointer'>";
+				echo "<img src='../media/edit.png' width='30px' onclick='location.href=\"edit_ninopv.php?nino=$nino\"' title='Editar' style='cursor:pointer'>";
 			}
 			echo "</span><br>";
 			echo "<table class='nino'>";
-			echo "<tr><td>Cédula: ".$row_nino['cedula_nino']."</td><td>Registro: ".$row_nino['id_nino']."</td></tr>";
-			echo "<tr class='som'><td colspan='2'>Nombre(s): ".$row_nino['nombre1_nino']." ".$row_nino['nombre2_nino']."</td></tr>";
-			echo "<tr><td colspan='2'>Apellido(s): ".$row_nino['apellido1_nino']." ".$row_nino['apellido2_nino']."</td></tr>";
+			echo "<tr><td>Cédula: ".$row_nino['hcedula']."</td><td>Registro: ".$row_nino['id_nino']."</td></tr>";
+			echo "<tr class='som'><td colspan='2'>Nombre(s): ".$row_nino['h_nombre1']." ".$row_nino['h_nombre2']."</td></tr>";
+			echo "<tr><td colspan='2'>Apellido(s): ".$row_nino['h_apellido1']." ".$row_nino['h_apellido2']."</td></tr>";
 			echo "<tr class='som'><td>Fecha de N.: ".$fecha_naci."</td><td>Sexo: $sexo</td></tr>";
 			echo "<tr><td>Edad: $edad</td><td>";
 			echo "Grupo Sanguíneo: ".$h_sanguineo['nombre']."";
@@ -103,7 +103,7 @@ include("../sesion/sesion.php");
 			<center><hr></center>
 			<ul>";
 			$id_nino_c = $row_nino['id_nino'];
-			$periodos_inscrito_c = "SELECT * FROM pv_inscrip WHERE id_ninho_pv='$id_nino_c'";
+			$periodos_inscrito_c = "SELECT * FROM pv_inscrip_ce WHERE id_ninho_pv='$id_nino_c'";
 			$periodos_inscrito_c = mysql_query($periodos_inscrito_c);
 			while($periodos_inscrito = mysql_fetch_array($periodos_inscrito_c)){
 				$id_Per = $periodos_inscrito['id_periodo'];
@@ -149,7 +149,7 @@ include("../sesion/sesion.php");
 		
 		if($row_nino['cedula_mp']!=""){
 			$mp=$row_nino['cedula_repr'];
-			$madpad=mysql_query("SELECT * FROM cj_trabajadores WHERE trb_cedula='$mp'",$con) or die (mysql_error());
+			$madpad=mysql_query("SELECT * FROM pv_trabajadores_ce WHERE trb_cedula='$mp'",$con) or die (mysql_error());
 			$row_madpad=mysql_fetch_array($madpad);
 			if($row_madpad['trb_cedula']!=""){
 				echo "<table><tr><td><span><a href='trabajador.php?cedula=$mp' >V.- ".$row_madpad['trb_cedula']." - ".$row_madpad['trb_nombres']." ".$row_madpad['trb_apellidos']."</a></span></td></tr></table>";
@@ -169,32 +169,13 @@ include("../sesion/sesion.php");
 		echo "<h3 class='n'style='color:black'>Padres</h3><br>";
 		if($row_nino['cedula_padre']!=""){
 			$mp=$row_nino['cedula_padre'];
-			$madpad=mysql_query("SELECT * FROM pv_trabajadores_ce WHERE ci_trab='$mp'",$con) or die (mysql_error());
+			$madpad=mysql_query("SELECT * FROM pv_trabajadores_ce WHERE trb_cedula='$mp'",$con) or die (mysql_error());
 			$row_madpad=mysql_fetch_array($madpad);
-			if($row_madpad['ci_trab']!=""){
-				echo "<table><tr><td><span><a href='trabajador.php?cedula=$mp' >V.- ".$row_madpad['ci_trab']." - ".$row_madpad['nombre_trab']." ".$row_madpad['apellido_trab']."</a></span></td></tr></table>";
+			if($row_madpad['trb_cedula']!=""){
+				echo "<table><tr><td><span><a href='trabajador.php?cedula=$mp' >V.- ".$row_madpad['trb_cedula']." - ".$row_madpad['trb_nombres']." ".$row_madpad['trb_apellidos']."</a></span></td></tr></table>";
 			}
 			
 		}
-		if($row_nino['cedula_pm']!=""){
-			$pm=$row_nino['cedula_pm'];
-			$madpad=mysql_query("SELECT * FROM cj_trabajadores WHERE trb_cedula='$pm'",$con) or die (mysql_error());
-			$row_madpad=mysql_fetch_array($madpad);
-			if($row_madpad['trb_cedula']!=""){
-				echo "<table><tr><td><span><a href='trabajador.php?cedula=$pm' >V.- ".$row_madpad['trb_cedula']." - ".$row_madpad['trb_nombres']." ".$row_madpad['trb_apellidos']."</a></span></td></tr></table>";
-			}
-			if($row_madpad['trb_cedula']==""){
-				$madpad2=mysql_query("SELECT * FROM cj_mp WHERE mp_cedula='$pm'",$con) or die (mysql_error());
-				$row2=mysql_fetch_array($madpad2);
-				echo "<table><tr><td><span style='font-weight:bold'>V.- ".$row2['mp_cedula']." - ".$row2['mp_nombre']." ".$row2['mp_apellido']."</span>";
-				if($_SESSION['rol_editor']=="1"){
-					echo "<img src='../media/edit.png' width='20px' onclick='location.href=\"edit_persona.php?cedula=".$row2['mp_cedula']."&&nino=$nino\"' title='Editar' style='cursor:pointer'>";
-				}
-				echo "</td></tr></table>";
-				
-			}
-		}
-		
 		
 		?>
 		

@@ -68,7 +68,7 @@ include("../script_php/a_fe.php");
 			$id_nino = $row_nino['id_nino'];
 			// - Conculta del periodo del Plan Vacacional
 			$anio_actual = date("Y");
-			$pv_co = "SELECT * FROM pv_periodo WHERE pv_añoperiodo='$anio_actual'";
+			$pv_co = "SELECT * FROM pv_periodo_ce WHERE pv_añoperiodo='$anio_actual'";
 			$pv_co = mysql_query($pv_co);
 			$pv_periodo = mysql_fetch_array($pv_co);
 			if($row_nino['id_nino']==''){

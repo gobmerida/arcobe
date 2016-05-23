@@ -48,12 +48,12 @@ include("../sesion/sesion.php");
 		<?php
 		if(array_key_exists("mp",$_GET)){
 			$mp=$_GET['mp'];
-			$madpad=mysql_query("SELECT * FROM pv_trabajadores_ce WHERE ci_trab='$mp' ",$con) or die (mysql_error());
+			$madpad=mysql_query("SELECT * FROM pv_trabajadores_ce WHERE trb_cedula='$mp' ",$con) or die (mysql_error());
 			$row_madpad=mysql_fetch_array($madpad);
 			//if($row_madpad['trb_cedula']==""){
 				//header("location:ing_beneficiario.php?error=1");
 			//}
-			echo "<table><tr><td>V.- ".$row_madpad['ci_trab']."</td><td> - ".$row_madpad['nombre_trab']."</td><td>".$row_madpad['apellido_trtab']."</td></tr></table>";
+			echo "<table><tr><td>V.- ".$row_madpad['trb_cedula']."</td><td> - ".$row_madpad['trb_nombres']."</td><td>".$row_madpad['trb_apellidos']."</td></tr></table>";
 					
 					$c_hijos=mysql_query("SELECT * FROM pv_hijos_ce WHERE cedula_padre='$mp'",$con) or die (mysql_error());
 					$i=0;
@@ -63,11 +63,11 @@ include("../sesion/sesion.php");
 						echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Beneficiarios(as):<br>";
 						$ih=$ih+1;
 					}
-					if($row_hijos['id_nino']!=""){
-						$cod_nino=$row_hijos['id_nino'];
-						$nombre2=" ".$row_hijos['nombre2_nino'];
-						$apellido2=" ".$row_hijos['apellido2_nino'];
-						$e_nino=$row_hijos['nombre1_nino'].$nombre2." ".$row_hijos['apellido1_nino'].$apellido2;
+					if($row_hijos['id_ninho']!=""){
+						$cod_nino=$row_hijos['id_ninho'];
+						$nombre2=" ".$row_hijos['h_nombre2'];
+						$apellido2=" ".$row_hijos['h_apellido2'];
+						$e_nino=$row_hijos['h_nombre1'].$nombre2." ".$row_hijos['h_apellido1'].$apellido2;
 						echo "<span class='cen'><a href='nino_pv_ce.php?nino=$cod_nino' class='nino' target='_blank' style='color:SteelBlue'>$e_nino</a></span><br>";
 						$i=$i+1;
 					}

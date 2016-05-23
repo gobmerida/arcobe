@@ -2,10 +2,10 @@
 include("../connect/conexion.php");
 
 $search = $_POST['mp'];
-$query_services = mysql_query("SELECT * FROM pv_trabajadores_ce WHERE ci_trab like '" . $search . "%' ORDER BY ci_trab DESC");
+$query_services = mysql_query("SELECT * FROM pv_trabajadores_ce WHERE trb_cedula like '" . $search . "%' ORDER BY trb_cedula DESC");
 while($row_services=mysql_fetch_array($query_services)){
-	$cedula=$row_services['ci_trab'];
-	$persona=$row_services['ci_trab']." ".$row_services['nomre_trab']." ".$row_services['apellido_trab'];
+	$cedula=$row_services['trb_cedula'];
+	$persona=$row_services['trb_cedula']." ".$row_services['trb_nombres']." ".$row_services['trb_apellidos'];
 	echo "<div class='suggest-element'><a data='$cedula' id='$cedula'>$persona</a></div>";
 }
 ?>
