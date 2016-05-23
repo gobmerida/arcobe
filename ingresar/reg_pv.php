@@ -143,6 +143,7 @@ if($DataROW01["ced_tbr"]==""){
 	$aux03 = $DataROW02["contador_per"];
 	if($aux01>=10){
 		$aux01=0;
+		//$aux03 = $aux03 - 10;
 		$aux02++;
 	}
 	$aux01++;
