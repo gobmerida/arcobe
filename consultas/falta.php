@@ -139,8 +139,14 @@ Correo: edg.sistemas@gmail.com
 		";
 
 		//casos especiales
+		$sql_periodo_c="SELECT id_pvperiodo FROM pv_periodo_ce ORDER BY id_pvperiodo DESC LIMIT 1";
+		$rs_c= mysql_query($sql_periodo_c) or die(mysql_error());
+		$row_c=mysql_fetch_array($rs_c);
 
-		$consulta_reg3 = "SELECT * FROM pv_planillace WHERE id_periodo='$periodo'";
+
+		$periodo_c=$row_c["id_pvperiodo"];
+
+		$consulta_reg3 = "SELECT * FROM pv_planillace WHERE id_periodo='$periodo_c'";
 		$consulta_reg3 = mysql_query($consulta_reg3) or die (mysql_error());
 		echo "
 		<h3 style='text-align:center'>Falta de documentos Casos Especiales:</h3>
@@ -217,11 +223,20 @@ Correo: edg.sistemas@gmail.com
 		
 
 		//institutos
+		$sql_periodo_i="SELECT id_pvperiodo FROM pv_periodo_ve ORDER BY id_pvperiodo DESC LIMIT 1";
+		$rs_i= mysql_query($sql_periodo_i) or die(mysql_error());
+		$row_i=mysql_fetch_array($rs_i);
+
+
+		$periodo_i=$row_i["id_pvperiodo"];
+
+		$consulta_reg3 = "SELECT * FROM pv_planillace WHERE id_periodo='$periodo_i'";
+		$consulta_reg3 = mysql_query($consulta_reg3) or die (mysql_error());
 
 		$consulta_reg2 = "SELECT * FROM pv_inscrip_institutos
 							JOIN cj_beneficiados_institutos
 							ON pv_inscrip_institutos.id_ninho_pv=cj_beneficiados_institutos.id_ninho
-							WHERE id_periodo='$periodo'";
+							WHERE id_periodo='$periodo_i'";
 		$consulta_reg2 = mysql_query($consulta_reg2) or die (mysql_error());
 		echo "
 		<h3 style='text-align:center'>Falta de documentos Institutos:</h3>
