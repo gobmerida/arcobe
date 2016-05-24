@@ -617,8 +617,8 @@
 		$total_emp=$empfijo+$empcont;
 		$total_obr=$obrfijo+$obrcont;
 		$total=$empfijo+$empcont+$obrfijo+$obrcont+$contador_ce+$fundpe;
-		echo "<script>console.log($anio_periodo);</script>";
-		echo "<script>console.log($periodo);</script>";
+		//echo "<script>console.log($anio_periodo);</script>";
+		//echo "<script>console.log($periodo);</script>";
 			echo "
 			<a href='ConsulaPV.php?anp=$anio_periodo'>Exportar (Total Planta)</a><br>
 			<a href='ConsultaTotal.php?anp=$anio_periodo&peri=$periodo' style='color:red'>Exportar (Total Globales)</a>

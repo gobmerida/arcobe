@@ -22,6 +22,7 @@
 	$cperido_sql = "SELECT * FROM pv_periodo WHERE id_pvperiodo='$periodo'";
 	$cperido_sql = mysql_query($cperido_sql) or die ("Error no se encontró periodo");
 	$cperiodo = mysql_fetch_array($cperido_sql);
+	$anio_periodo=$cperiodo["pv_añoperiodo"];
 	
 	//Consulta de los niños registrados
 	$consulta_reg = "SELECT * FROM pv_inscrip
@@ -425,7 +426,8 @@
 		$total_emp=$empfijo+$empcont;
 		$total_obr=$obrfijo+$obrcont;
 		$total=$empfijo+$empcont+$obrfijo+$obrcont;
-			echo "<a href='ConsultaNinosPV.php?tipo=VISITA GUIADA'>Exportar</a>
+		
+			echo "<a href='ConsultaNinosPV.php?tipo=VISITA GUIADA&anp=$anio_periodo'>Exportar</a>
 			<table class='estimados'>
 			<tr><td>Total Beneficiados:</td><td class='totales'>$contador</td></tr>
 			<tr><td>Total Beneficiados con recaudos pendientes:</td><td class='totales'>$recaudos</td></tr>

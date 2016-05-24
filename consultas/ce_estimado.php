@@ -462,7 +462,7 @@
 		$todalDOtros=$todalDOtros+$casoes;
 		$total=$empfijo+$empcont+$obrfijo+$obrcont+$todalDOtros;
 			echo "
-			<a href='ConsultaPVCE.php'>Exportar</a>
+			<a href='ConsultaPVCE.php?peri=$periodo'>Exportar</a>
 			<table class='estimados'>
 			<tr><td>Total Beneficiados:</td><td class='totales'>$contador</td></tr>
 			<tr><td>Total Beneficiados con recaudos pendientes:</td><td class='totales'>$recaudos</td></tr>

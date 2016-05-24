@@ -3,10 +3,11 @@ include("../script_php/PHPExcel.php");
 header("Content-Type:text/html;charset=utf-8");
 $h="localhost";
 $u="root";
-$p="infor123456su";
+$p="infor1234";
 $con=mysql_connect($h,$u,$p) or die (mysql_error());
 mysql_select_db("cj_pv",$con) or die (mysql_error());
 mysql_query("SET NAMES 'utf8'");
+$peri= $_GET["peri"];
 
 
 $today=date("d/m/Y");
@@ -157,6 +158,7 @@ JOIN `pv_tmono`
 ON pv_planillace.`pv_tmono`=`pv_tmono`.id_talla
 JOIN `pv_tgorra`
 ON pv_planillace.`pv_tgorra`=`pv_tgorra`.id_talla
+WHERE pv_planillace.`id_periodo`='$peri'
 ORDER BY pv_fechainscri";
 $cj_hijosSQL = mysql_query($cj_hijosSQL);
 $conta=2;
