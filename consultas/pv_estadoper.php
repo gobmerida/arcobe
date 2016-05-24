@@ -46,6 +46,7 @@ while($r_periodo = mysql_fetch_array($c_periodo)){
 $periodo_sql = "SELECT * FROM pv_periodo WHERE id_pvperiodo='$periodo'";
 $periodo_sql = mysql_query($periodo_sql) or die ("Error: ".mysql_error());
 $periodo_row = mysql_fetch_array($periodo_sql);
+
 ?>
 <body>
 	<div id="cabecera_ini"></div>

@@ -19,7 +19,7 @@
 	$periodo = $_GET['periodo']; // Periodo a consultar
 	
 	//Consulta de periodo
-	$cperido_sql = "SELECT * FROM pv_periodo WHERE id_pvperiodo='$periodo'";
+	$cperido_sql = "SELECT * FROM pv_periodo_ce WHERE id_pvperiodo='$periodo'";
 	$cperido_sql = mysql_query($cperido_sql) or die ("Error no se encontró periodo");
 	$cperiodo = mysql_fetch_array($cperido_sql);
 	

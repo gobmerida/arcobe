@@ -1,10 +1,10 @@
 <?php
 include("../script_php/PHPExcel.php");
-
+date_default_timezone_set('UTC');
 header("Content-Type:text/html;charset=utf-8");
 $h="localhost";
 $u="root";
-$p="s!stemas12345";
+$p="infor1234";
 $con=mysql_connect($h,$u,$p) or die (mysql_error());
 mysql_select_db("cj_pv",$con) or die (mysql_error());
 mysql_query("SET NAMES 'utf8'");
@@ -65,19 +65,21 @@ $objPHPExcel->getActiveSheet()->getStyle("A1:AM1")->getFont()->getColor()->apply
 
 $data01 = $_GET["periodo"];
 $DataSQL00 = "select *
-			  from cj_cuaderno_ce
-			  join cj_trabajadores
-			  on cj_cuaderno_ce.ced_tbr=cj_trabajadores.trb_cedula
-			  where activo='1' and Periodo='$data01'";
+			  from pv_cuaderno_ce
+			  join pv_trabajadores_ce
+			  on pv_cuaderno_ce.ced_tbr=pv_trabajadores_ce.trb_cedula
+			  where  Periodo='$data01'";
 $DataSQL00 = mysql_query($DataSQL00);
 
 $i=0;
 $conta=2;
 $KidsNumberTotal=0;
 while( $DataROW00 = mysql_fetch_array($DataSQL00) ){
-	$DataSQL01 = "select cj_hijos_ce.*
-				  from cj_hijos_ce
-				  where id_periodo='$data01' and cedula_mp='$DataROW00[trb_cedula]' or cedula_repr='$DataROW00[trb_cedula]'";
+	$DataSQL01 = "select pv_hijos_ce.*
+				  from pv_hijos_ce
+				  join pv_inscrip_ce
+				  on pv_hijos_ce.id_ninho = pv_inscrip_ce.id_ninho_pv
+				  where pv_inscrip_ce.id_periodo='$data01' and pv_inscrip_ce.id_mp='$DataROW00[trb_cedula]' ";
 	$DataSQL01 = mysql_query($DataSQL01);
 	$KidsNumber=0;
 	
@@ -99,6 +101,6 @@ $objPHPExcel->getActiveSheet()->getColumnDimension($columnID)->setAutoSize(true)
 }
 $objWriter = new PHPExcel_Writer_Excel2007($objPHPExcel); //Escribir archivo
 header('Content-type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-header('Content-Disposition: attachment; filename="CuadernoCestaJuguete.xlsx"');
+header('Content-Disposition: attachment; filename="CuadernoCestaJuguete.xls"');
 $objWriter->save('php://output');
 ?>

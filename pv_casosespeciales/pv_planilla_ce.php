@@ -42,8 +42,14 @@ include("../script_php/condicion.php");
 				$ctrb_sql = "SELECT codigo_trb FROM pv_inscrip_ce WHERE pv_planillanumero='$n_planilla'";
 				$ctrb_sql = mysql_query($ctrb_sql) or die ("No se halló el código");
 				$ctrb = mysql_fetch_array($ctrb_sql);
-				$c_trb = $ctrb['codigo_trb'];
+				$c_trb = $ctrb['codigo_trb'];	
+
+				$sql  = "SELECT * FROM pv_trabajadores_ce WHERE trb_codigo ='$c_trb'";
+				$query  = mysql_query($sql);
+				$trb  =mysql_fetch_array($query);
+
 				$condicion = tipo_c($c_trb);
+
 			}
 ?>
 <body>
@@ -72,10 +78,10 @@ include("../script_php/condicion.php");
 				<img src='../media/logo.png' width='75%' class='top_i'><img src='../media/consumo.png' width='50px'></td></tr>
 				<tr><td colspan=4 class='planilla titulo' align=center><b>Plan Vacacional $pv_planilla[pv_añoperiodo]</b></td></tr>
 				<tr><td colspan=4 class='planilla sub_titulo'><b><u>DATOS DEL TRABAJADOR</u></b></td></tr>
-				<tr><td colspan=4 class='planilla'><b>Cédula: </b>$pv_planilla[trb_cedula]</td></tr>
-				<tr><td colspan=4 class='planilla'><b>Nombres: </b>$pv_planilla[trb_nombres]</td></tr>
-				<tr><td colspan=4 class='planilla'><b>Apellidos: </b>$pv_planilla[trb_apellidos]</td></tr>
-				<tr><td colspan=3 class='planilla'><b>Dependencia: </b>$pv_planilla[trb_dependencia]</td><td class='planilla'><b>Estatus/Condición:</b><br>$condicion</td></tr>
+				<tr><td colspan=4 class='planilla'><b>Cédula: </b>$trb[trb_cedula]</td></tr>
+				<tr><td colspan=4 class='planilla'><b>Nombres: </b>$trb[trb_nombres]</td></tr>
+				<tr><td colspan=4 class='planilla'><b>Apellidos: </b>$trb[trb_apellidos]</td></tr>
+				<tr><td colspan=3 class='planilla'><b>Dependencia: </b>$trb[trb_dependencia]</td><td class='planilla'><b>Estatus/Condición:</b><br>$condicion</td></tr>
 				<tr><td colspan=4 class='planilla sub_titulo'><b><u>DATOS $ninho</u></b></td></tr>
 				<tr><td colspan=4 class='planilla'><b>Nombres: </b>$pv_planilla[h_nombre1] $pv_planilla[h_nombre2]</td></tr>
 				<tr><td colspan=4 class='planilla'><b>Apellidos: </b>$pv_planilla[h_apellido1] $pv_planilla[h_apellido2]</td></tr>
@@ -111,9 +117,9 @@ include("../script_php/condicion.php");
 			<tr>
 				<td class='info-planilla'>
 					<h4 align="center"><u>TRABAJADOR/REPRESENTANTE DEL EJECUTIVO REGIONAL</u></h4>
-					<p style="text-align:justify; margin:20px">&nbsp;&nbsp;&nbsp;&nbsp; Yo, <b><?php echo "$pv_planilla[trb_nombres] $pv_planilla[trb_apellidos]";?></b>, 
-					portador de la Cédula de Identidad número: <b><?php echo "$pv_planilla[trb_cedula]";?></b>, funcionario adscrito a: <?php echo "$pv_planilla[trb_dependencia]";?>
-					y en calidad de representante de el (la) menor: <b><?php echo "$pv_planilla[h_nombre1] $pv_planilla[h_nombre2] $pv_planilla[h_apellido1] $pv_planilla[h_apellido2]";?></b>, declaro
+					<p style="text-align:justify; margin:20px">&nbsp;&nbsp;&nbsp;&nbsp; Yo, <b><?php echo "$trb[trb_nombres] $trb[trb_apellidos]";?></b>, 
+					portador de la Cédula de Identidad número: <b><?php echo "$trb[trb_cedula]";?></b>, funcionario adscrito a: <?php echo "$trb[trb_dependencia]";?>
+					y en calidad de representante de el (la) menor: <b><?php echo "$trb[h_nombre1] $trb[h_nombre2] $trb[h_apellido1] $trb[h_apellido2]";?></b>, declaro
 					que los datos suministrados por mi son fehacientes.<br>
 						<center><b>Así mismo, acepto la normativa que se menciona a continuación:</b></center>
 						<ol style="text-align:justify; margin:20px">
@@ -162,15 +168,16 @@ include("../script_php/condicion.php");
 						<tr>
 							<td colspan="3" style="padding:15px">
 							<b>Datos del trabajador:</b><br>
-							<b>C.I. </b><?php echo "$pv_planilla_ce[trb_cedula]";?><br>
-							<b>Nombres: </b><?php echo "$pv_planilla_ce[trb_nombres] $pv_planilla_ce[trb_apellidos]";?><br>
-							<b>Dependencia: </b><?php echo "$pv_planilla_ce[trb_dependencia]";?>
+							<b>C.I. </b><?php echo "$trb[trb_cedula]";?><br>
+							<b>Nombres: </b><?php echo "$trb[trb_nombres] $trb[trb_apellidos]";?><br>
+							<b>Dependencia: </b><?php echo "$trb[trb_dependencia]";?>
 							</td>
 							<?php
-								$DataCJSQL01 = "select * from pv_cuaderno_ce where ced_tbr='".$pv_planilla["trb_cedula"]."' ORDER BY Periodo DESC LIMIT 1";
+								$DataCJSQL01 = "select * from pv_cuaderno_ce where ced_tbr='".$trb["trb_cedula"]."' ORDER BY Periodo DESC LIMIT 1";
 								$DataCJSQL01 = mysql_query($DataCJSQL01);
 								$DataCJROW01 = mysql_fetch_array($DataCJSQL01);
 							?>
+							<td>
 								<b>Cuaderno</b><br />
 								Pagina: <b><?php echo $DataCJROW01["Npagina"] ?></b><br />
 								Linea: <b><?php echo $DataCJROW01["Nlinea"] ?></b>

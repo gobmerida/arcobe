@@ -32,13 +32,13 @@ include("../../script_php/cal_edad.php");
 		if(array_key_exists('nino',$_GET)){
 
 			$nino=$_GET['nino'];
-			$buscar_nino_c = "SELECT * FROM pv_hijos_ce WHERE id_nino='$nino'";
+			$buscar_nino_c = "SELECT * FROM pv_hijos_ce WHERE id_ninho='$nino'";
 			$buscar_nino_c = mysql_query($buscar_nino_c);
 			$buc_nino = mysql_fetch_array($buscar_nino_c);
 			$cedulad_nino = "";
 
-			if($buc_nino['ci_nino']!=""){
-				$cedulad_nino ="$buc_nino[ci_nino] -";
+			if($buc_nino['h_cedula']!=""){
+				$cedulad_nino ="$buc_nino[h_cedula] -";
 			}
 			if($buc_nino['sexo_nino']=='F'){
 				$sexo="Femenino";
@@ -52,19 +52,19 @@ include("../../script_php/cal_edad.php");
 				echo "<script>ninoa='del niño';</script>";
 			}
 			//~ $edad_c=CalculaEdad($buc_nino['h_fecha_naci']);
-			$edad_c=a_fecha($buc_nino['fecha_naci']);
+			$edad_c=a_fecha($buc_nino['h_fecha_naci']);
 			$fecha_control=date("d/m/Y");
 			$edad_cal = CalculaEdadMeses($edad_c, $fecha_control);
 			$edad = "$edad_cal[0] años con $edad_cal[1] meses";
 			
-			$gsan = $buc_nino['Gsangueneo'];
+			$gsan = $buc_nino['h_gsanguineo'];
 			$h_sanguineo_c = "SELECT * FROM cp_gsanguineos WHERE id_grupo_sanguineo='$gsan'";
 			$h_sanguineo_c = mysql_query($h_sanguineo_c);
 			$h_sanguineo = mysql_fetch_array($h_sanguineo_c);
 			$gs = $h_sanguineo['nombre'];
 			
 			$ced_mp=$buc_nino['cedula_padre'];
-			$mp_dninosql = "SELECT * FROM pv_trabajadores_ce WHERE ci_trab='$ced_mp'";
+			$mp_dninosql = "SELECT * FROM pv_trabajadores_ce WHERE trb_cedula='$ced_mp'";
 			$mp_dninosql = mysql_query($mp_dninosql);
 			$mp_dnino = mysql_fetch_array($mp_dninosql);
 			
@@ -72,14 +72,14 @@ include("../../script_php/cal_edad.php");
 			echo "
 			<table>
 			<tr><td><a href='javascript:history.back(1)'>Volver</a></td></tr>
-			<tr><td>$buc_nino[id_nino]</td></tr>
-			<tr><td>$cedulad_nino $buc_nino[nombre1_nino] $buc_nino[nombre2_nino] $buc_nino[apellido1_nino] $buc_nino[apellido2_nino]</td></tr>
-			<tr><td>Fecha de nacimiento: ".a_fecha($buc_nino['fecha_naci'])."</td></tr>
+			<tr><td>$buc_nino[id_ninho]</td></tr>
+			<tr><td>$cedulad_nino $buc_nino[h_nombre1] $buc_nino[h_nombre2] $buc_nino[h_apellido1] $buc_nino[h_apellido2]</td></tr>
+			<tr><td>Fecha de nacimiento: ".a_fecha($buc_nino['h_fecha_naci'])."</td></tr>
 			<tr><td>Género: $sexo</td></tr>
 			<tr><td>Edad: $edad - Grupo Sanguíneo: $gs</td></tr>
-			<tr><td><b>Padres:</b></td></tr>";
-			if($mp_dnino['ci_trab']!=""){
-			echo "<tr style='cursor:pointer' onmouseover='style.backgroundColor = \"gainsboro\"' onmouseout='style.backgroundColor = \"white\"'><td onclick=\"location.href='../../consultas/trabajador.php?cedula=$mp_dnino[ci_trab]'\">C.I. $mp_dnino[ci_trab] - $mp_dnino[nombre_trab] $mp_dnino[apellido_trab]</td></tr>";
+			<tr><td><b>cedula:</b></td></tr>";
+			if($mp_dnino['trb_cedula']!=""){
+			echo "<tr style='cursor:pointer' onmouseover='style.backgroundColor = \"gainsboro\"' onmouseout='style.backgroundColor = \"white\"'><td onclick=\"location.href='../../consultas/trabajador.php?cedula=$mp_dnino[trb_cedula]'\">C.I. $mp_dnino[trb_cedula] - $mp_dnino[trb_nombres] $mp_dnino[aptrb_ellidos]</td></tr>";
 			}
 			echo "</table>
 			<br>
@@ -95,15 +95,15 @@ include("../../script_php/cal_edad.php");
 		<form name="formulario" action="reg_pv_ce.php" method="post"  onsubmit='return validar_pv(this);'>
 		<table id="ins_pv">
 			<?php
-			$id_nino = $buc_nino['id_nino'];
+			$id_nino = $buc_nino['id_ninho'];
 				echo "
 				<input type='hidden' name='id_ninho_pv' id='id_ninho_pv' value='$id_nino'>
 				<input type='hidden' name='pv_edadmeses' id='pv_edadmeses' value='$edad'>
 					<tr>
 						<td class='ins_pv'>Trabajador que inscribe</td>
 						<td><select name='id_mp' id='id_mp'>";
-							if($mp_dnino['ci_trab']!=""){
-							echo "<option value='$mp_dnino[ci_trab]'>$mp_dnino[nombre_trab] $mp_dnino[apellido_trab]</option>";
+							if($mp_dnino['trb_cedula']!=""){
+							echo "<option value='$mp_dnino[trb_cedula]'>$mp_dnino[trb_nombres] $mp_dnino[trb_apellidos]</option>";
 							}
 						echo "</select></td>
 					</tr>

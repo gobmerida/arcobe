@@ -39,8 +39,8 @@ include("../connect/conexion.php");
 $data01 = $_GET["periodo"];
 $DataSQL00 = "select *
 			  from pv_cuaderno_ce
-			  join cj_trabajadores_ce
-			  on pv_cuaderno_ce.ced_tbr=cj_trabajadores_ce.trb_cedula
+			  join pv_trabajadores_ce
+			  on pv_cuaderno_ce.ced_tbr=pv_trabajadores_ce.trb_cedula
 			  where Periodo='$data01'";
 $DataSQL00 = mysql_query($DataSQL00);
 
@@ -48,14 +48,13 @@ $i=0;
 echo '<h2 style="color:#c00">Listado de trabajadores</h2><ol id="selectable2">';
 $KidsNumberTotal=0;
 while( $DataROW00 = mysql_fetch_array($DataSQL00) ){
-	$DataSQL01 = "select cj_hijos_ce.*
-				  from cj_hijos_ce
-				  join pv_inscrip
-				  on cj_hijos_ce.id_ninho = pv_inscrip.id_ninho_pv
-				  where id_periodo='$data01' and cedula_mp='$DataROW00[trb_cedula]' or cedula_repr='$DataROW00[trb_cedula]'";
+	$DataSQL01 = "select pv_hijos_ce.*
+				  from pv_hijos_ce
+				  join pv_inscrip_ce
+				  on pv_hijos_ce.id_ninho = pv_inscrip_ce.id_ninho_pv
+				  where pv_inscrip_ce.id_periodo='$data01' and pv_inscrip_ce.id_mp='$DataROW00[trb_cedula]'";
 	$DataSQL01 = mysql_query($DataSQL01);
 	$KidsNumber=0;
-	
 	while($DataROW01 = mysql_fetch_array($DataSQL01)){
 		$KidsNumber++;
 		$KidsNumberTotal++;

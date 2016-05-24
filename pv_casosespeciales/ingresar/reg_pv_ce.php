@@ -35,11 +35,10 @@ mysql_query("UPDATE pv_hijos_ce SET Gsanguineo='$h_gsanguineo' WHERE id_nino='$i
 }
 
 $id_mp = $_POST['id_mp'];
-$ctrb_sql = "SELECT cod_trab FROM pv_trabajadores_ce WHERE ci_trab='$id_mp'";
+$ctrb_sql = "SELECT trb_codigo FROM pv_trabajadores_ce WHERE trb_cedula='$id_mp'";
 $ctrb_sql = mysql_query($ctrb_sql) or die ("No se halló el código");
 $ctrb = mysql_fetch_array($ctrb_sql);
-$c_trb = $ctrb['cod_trab'];
-echo $pv_planillanumero;
+$c_trb = $ctrb['trb_codigo'];
 $pv_destino = $_POST['pv_destino'];
 $pv_fotos="";
 if(array_key_exists('pv_fotos',$_POST)){
