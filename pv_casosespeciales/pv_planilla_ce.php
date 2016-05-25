@@ -25,20 +25,10 @@ include("../script_php/condicion.php");
 				$pv_planillaConsulta = "SELECT * FROM pv_inscrip_ce WHERE pv_planillanumero='$n_planilla'";
 				$pv_planillaConsulta1 = mysql_query($pv_planillaConsulta);
 				$pv_planilla = mysql_fetch_array($pv_planillaConsulta1);
+
+				$idnihno = $pv_planilla[3];
 				
-				if($pv_planilla['h_sexo']=='F'){
-					$genero="Femenino";
-					$ninho="DE LA NIÑA";
-					$confornin="de la niña";
-				}
-				/*if($pv_planilla['id_ninho_pv']==""){
-					header("location: BuscarPlanilla.php?error=1");
-				}*/
-				if($pv_planilla['h_sexo']=='M'){
-					$genero="Masculino";
-					$ninho="DEL NIÑO";
-					$confornin="del niño";
-				}
+				
 				$ctrb_sql = "SELECT codigo_trb FROM pv_inscrip_ce WHERE pv_planillanumero='$n_planilla'";
 				$ctrb_sql = mysql_query($ctrb_sql) or die ("No se halló el código");
 				$ctrb = mysql_fetch_array($ctrb_sql);
@@ -49,6 +39,24 @@ include("../script_php/condicion.php");
 				$trb  =mysql_fetch_array($query);
 
 				$condicion = tipo_c($c_trb);
+
+				$sqlN = "SELECT H.* FROM pv_inscrip_ce I inner join pv_hijos_ce H on I.id_ninho_pv=H.id_ninho WHERE I.id_ninho_pv=$idnihno ";
+				$queryN = mysql_query($sqlN);
+				$resN = mysql_fetch_array($queryN);
+
+				if($resN['h_sexo']=='F'){
+					$genero="Femenino";
+					$ninho="DE LA NIÑA";
+					$confornin="de la niña";
+				}
+				/*if($pv_planilla['id_ninho_pv']==""){
+					header("location: BuscarPlanilla.php?error=1");
+				}*/
+				if($resN['h_sexo']=='M'){
+					$genero="Masculino";
+					$ninho="DEL NIÑO";
+					$confornin="del niño";
+				}
 
 			}
 ?>
@@ -83,10 +91,10 @@ include("../script_php/condicion.php");
 				<tr><td colspan=4 class='planilla'><b>Apellidos: </b>$trb[trb_apellidos]</td></tr>
 				<tr><td colspan=3 class='planilla'><b>Dependencia: </b>$trb[trb_dependencia]</td><td class='planilla'><b>Estatus/Condición:</b><br>$condicion</td></tr>
 				<tr><td colspan=4 class='planilla sub_titulo'><b><u>DATOS $ninho</u></b></td></tr>
-				<tr><td colspan=4 class='planilla'><b>Nombres: </b>$pv_planilla[h_nombre1] $pv_planilla[h_nombre2]</td></tr>
-				<tr><td colspan=4 class='planilla'><b>Apellidos: </b>$pv_planilla[h_apellido1] $pv_planilla[h_apellido2]</td></tr>
-				<tr><td class='planilla'><b>Cédula: </b>$pv_planilla[h_cedula]</td><td class='planilla'><b>Edad: </b>$pv_planilla[pv_edadmeses]</td><td class='planilla'><b>Grupo Sanguíneo: </b>$pv_planilla[nombre]</td><td class='planilla'><b>Género: </b>$genero</td></tr>
-				<tr><td colspan=2 class='planilla'><b>Fecha de nacimiento: </b>".a_fecha($pv_planilla['h_fecha_naci'])."</td><td colspan=2 class='planilla'><b>Plan Correspondiente: </b>$pv_planilla[pv_destino]</td></tr>
+				<tr><td colspan=4 class='planilla'><b>Nombres: </b>$resN[h_nombre1] $resN[h_nombre2]</td></tr>
+				<tr><td colspan=4 class='planilla'><b>Apellidos: </b>$resN[h_apellido1] $resN[h_apellido2]</td></tr>
+				<tr><td class='planilla'><b>Cédula: </b>$resN[h_cedula]</td><td class='planilla'><b>Edad: </b>$resN[pv_edadmeses]</td><td class='planilla'><b>Grupo Sanguíneo: </b>$resN[h_gsanguineo]</td><td class='planilla'><b>Género: </b>$genero</td></tr>
+				<tr><td colspan=2 class='planilla'><b>Fecha de nacimiento: </b>".a_fecha($resN['h_fecha_naci'])."</td><td colspan=2 class='planilla'><b>Plan Correspondiente: </b>$pv_planilla[pv_destino]</td></tr>
 				
 				<tr><td colspan=4 class='planilla sub_titulo'><b><u>CUIDADOS ESPECIALES</u></b></td></tr>
 				<tr><td colspan=2 class='planilla'><b>Alérgias: </b>$pv_planilla[pv_alergias]</td><td colspan=2 class='planilla'><b>Tratamiento en sumnistro: </b>$pv_planilla[pv_tratamiento]</td></tr>
@@ -178,14 +186,14 @@ include("../script_php/condicion.php");
 								$DataCJROW01 = mysql_fetch_array($DataCJSQL01);
 							?>
 							<td>
-								<b>Cuaderno</b><br />
+								<b>Cuaderno CE</b><br />
 								Pagina: <b><?php echo $DataCJROW01["Npagina"] ?></b><br />
 								Linea: <b><?php echo $DataCJROW01["Nlinea"] ?></b>
 							</td>
 						</tr>
 						<tr>
 							<td colspan="4"  style="padding:5px 5px 5px 15px">
-							<b>Datos <?php echo "$confornin";?>: </b><?php echo "$pv_planilla[h_nombre1] $pv_planilla[h_nombre2] $pv_planilla[h_apellido1] $pv_planilla[h_apellido2]";?>
+							<b>Datos <?php echo "$confornin";?>: </b><?php echo "$resN[h_nombre1] $resN[h_nombre2] $resN[h_apellido1] $resN[h_apellido2]";?>
 							</td>
 						</tr>
 						<tr>

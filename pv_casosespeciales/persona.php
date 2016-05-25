@@ -116,7 +116,19 @@ if(array_key_exists('cedula',$_GET)){
 				Registrar trabajador:
 			      <a style='text-decoration:none;color:red' href='ingresar/registrar_trabajador.php?cedula=$cedula'/>$row_trabajador[trb_cedula] - $row_trabajador[trb_nombres] $row_trabajador[trb_apellidos] </a> <br>";
 		}
+		
+	}
 
+	if($row_trabajador['trb_cedula']==''){
+		$c_trabajador=mysql_query("SELECT * FROM cj_trabajadores_institutos WHERE trb_cedula='$cedula'",$con) or die (mysql_error());
+		$row_trabajador=mysql_fetch_array($c_trabajador);
+
+		if($row_trabajador["trb_cedula"]!=""){
+			echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				Registrar trabajador:
+			      <a style='text-decoration:none;color:red' href='ingresar/registrar_trabajador.php?cedula=$cedula'/>$row_trabajador[trb_cedula] - $row_trabajador[trb_nombres] $row_trabajador[trb_apellidos] </a> <br>";
+		}
+			
 	}
 
 	echo "<br><span class='dll'><center><a href='../'>Inicio</a> ";
@@ -125,9 +137,7 @@ if(array_key_exists('cedula',$_GET)){
 	echo "</div>";
 	echo "<div id='hijos'>";
 
-	$c_hijos=mysql_query("SELECT * FROM cj_hijos_ce JOIN cj_cesta_juguete_periodo ON cj_hijos_ce.id_periodo=cj_cesta_juguete_periodo.id WHERE cedula_mp='$cedula'",$con) or die (mysql_error());
-	$c2_hijos=mysql_query("SELECT * FROM cj_hijos_ce JOIN cj_cesta_juguete_periodo ON cj_hijos_ce.id_periodo=cj_cesta_juguete_periodo.id WHERE cedula_pm='$cedula'",$con) or die (mysql_error());
-	$c3_hijos=mysql_query("SELECT * FROM cj_hijos_ce JOIN cj_cesta_juguete_periodo ON cj_hijos_ce.id_periodo=cj_cesta_juguete_periodo.id WHERE cedula_repr='$cedula'",$con) or die (mysql_error());
+	$c_hijos=mysql_query("SELECT * FROM pv_hijos_ce JOIN pv_periodo_ce ON pv_hijos_ce.id_periodo=pv_periodo_ce.id_pvperiodo WHERE cedula_padre='$cedula'",$con) or die (mysql_error());
 	$i=0;
 	while($row_hijos=mysql_fetch_array($c_hijos)){
 		if($row_hijos['id_ninho']!=""){
@@ -136,26 +146,6 @@ if(array_key_exists('cedula',$_GET)){
 			$apellido2=" ".$row_hijos['h_apellido2'];
 			$e_nino=$row_hijos['h_nombre1'].$nombre2." ".$row_hijos['h_apellido1'].$apellido2;
 			echo "<span class='cen'><a href='nino_ce.php?nino=$cod_nino' class='nino'><span style='color:darkgrey'>(CE/CJ/$row_hijos[año_periodo])</span> $e_nino</a></span><br>";
-			$i=$i+1;
-		}
-	}
-	while($row2_hijos=mysql_fetch_array($c2_hijos)){
-		if($row2_hijos['id_ninho']!=""){
-			$cod_nino=$row2_hijos['id_ninho'];
-			$nombre2=" ".$row2_hijos['h_nombre2'];
-			$apellido2=" ".$row2_hijos['h_apellido2'];
-			$e_nino=$row2_hijos['h_nombre1'].$nombre2." ".$row2_hijos['h_apellido1'].$apellido2;
-			echo "<span class='cen'><a href='nino_ce.php?nino=$cod_nino' class='nino'><span style='color:darkgrey'>(CE/CJ/$row2_hijos[año_periodo])</span> $e_nino</a></span><br>";
-			$i=$i+1;
-		}
-	}
-	while($row3_hijos=mysql_fetch_array($c3_hijos)){
-		if($row3_hijos['id_ninho']!=""){
-			$cod_nino=$row3_hijos['id_ninho'];
-			$nombre2=" ".$row3_hijos['h_nombre2'];
-			$apellido2=" ".$row3_hijos['h_apellido2'];
-			$e_nino=$row3_hijos['h_nombre1'].$nombre2." ".$row3_hijos['h_apellido1'].$apellido2;
-			echo "<span class='cen'><a href='nino_ce.php?nino=$cod_nino' class='nino'><span style='color:darkgrey'>(CE/CJ/$row3_hijos[año_periodo])</span> $e_nino</a></span><br>";
 			$i=$i+1;
 		}
 	}

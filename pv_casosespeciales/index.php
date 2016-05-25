@@ -31,7 +31,7 @@ Correo: edg.sistemas@gmail.com
 		<li onclick="location.href='../'" class="principal">Volver</li>
 		<li class='principal' >Consultar
 			<ul class="secundario">
-				<li onclick="location.href='beneficiario.php'">Beneficiario</li>
+				<li onclick="location.href='reg_beneficiario.php'">Beneficiario</li>
 				<li onclick="location.href='persona.php'">Persona</li>
 			</ul>
 		<?php

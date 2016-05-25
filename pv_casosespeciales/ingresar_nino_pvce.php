@@ -106,7 +106,7 @@ include("../sesion/sesion.php");
 			</td></tr>
 			<tr><td>Género:</td><td>F <input type="radio" name="ninho3" value="F" onclick = 'validar(this.form)'> M <input type="radio" name="ninho3" value="M" onclick = 'validar(this.form)'></td></tr>
 			</table>
-			<br>{
+			<br>
 			<input type='hidden' name='mp' value="<?php echo $mp; ?>">
 			<center><input type="submit" value="Registrar" name='sub' disabled='disabled' onclick="this.disabled=true;this.value='Registrando...';this.form.submit()"></center>
 			<br>

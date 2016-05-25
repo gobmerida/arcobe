@@ -127,19 +127,30 @@ include("../sesion/sesion.php");
 					$periodos_sql = "SELECT * FROM pv_periodo WHERE pv_añoperiodo='$pv_anioperiodo'";
 					$periodos_sql = mysql_query($periodos_sql);
 					$periodos_act = mysql_fetch_array($periodos_sql);
-					if($row_nino['h_fecha_naci']>$periodos_act['pv_fecha_reque']){
+
+
+					list($YN,$mN,$dN) = explode("-",$row_nino['h_fecha_naci']);
+					list($YL,$mL,$dL) = explode("-",$periodos_act['pv_fecha_limite']);
+					list($YR,$mR,$dR) = explode("-",$periodos_act['pv_fecha_reque']);
+					
+					if($YN>$YR){
 						echo "<li>$anio_actual - No cumple la Edad Requerida</li>";
 					}
-					if($row_nino['h_fecha_naci']<=$periodos_act['pv_fecha_reque']){
-						if($row_nino['h_fecha_naci']>$periodos_act['pv_fecha_limite']){
+
+					if($YN<=$YR){
+
+						if($YN<$YL){
 							echo "<li>$anio_actual - Supera el límite de Edad</li>";
 						}
-						if($row_nino['h_fecha_naci']<=$periodos_act['pv_fecha_limite']){
+
+						if($YN>=$YL){
 							echo "<li onclick=\"location.href='../ingresar/ins_pv.php?nino=$nino'\">$anio_actual - Inscribir</li>";
 						}
 					}
 				}
 			}
+			
+
 			if($pv_periodo['pv_añoperiodo']!=$anio_actual){
 				echo "<li>Plan Vacacional $anio_actual aun sin cronograma</li>";
 			}

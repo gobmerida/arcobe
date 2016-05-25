@@ -47,6 +47,12 @@ Correo: edg.sistemas@gmail.com
 		$query = mysql_query($sql);
 		$res   = mysql_fetch_array($query);
 
+		if ($res[0]=="") {
+			$sql   = "SELECT * FROM cj_trabajadores_institutos WHERE trb_cedula=$cedula";
+			$query = mysql_query($sql);
+			$res   = mysql_fetch_array($query);
+			}
+
 	?>
 
 	<div id='contenedor'>
@@ -76,12 +82,12 @@ Correo: edg.sistemas@gmail.com
 				</tr>
 				<tr>
 					<td>
-						<label for="carg">Cargo</label><input type="text" name="carg" required/>
+						<label for="carg">Cargo</label><input type="text" name="carg" value="<?php echo $res[4]; ?>" readonlyrequired/>
 					</td>
 				</tr>
 				<tr>
 					<td>
-						<label for="depe">Dependencia</label><input type="text" name="depe" required/>
+						<label for="depe">Dependencia</label><input type="text" name="depe" value="<?php echo $res[5]; ?>" readonlyrequired/>
 					</td>
 				</tr>
 				<input type="hidden" name="submit" value="1" />		
