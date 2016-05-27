@@ -117,11 +117,11 @@ include("../sesion/sesion.php");
 						echo "<li>$anio_actual - No cumple la Edad Requerida</li>";
 					}
 					if($row_nino['h_fecha_naci']<=$periodos_act['pv_fecha_reque']){
-						if($row_nino['h_fecha_naci']>=$periodos_act['pv_fecha_limite']){
+						if($row_nino['h_fecha_naci']<=$periodos_act['pv_fecha_limite']){
 							echo "<li>$anio_actual - Supera el límite de Edad</li>";
 						}
-						if($row_nino['h_fecha_naci']>=$periodos_act['pv_fecha_limite']){
-							echo "<li onclick=\"location.href='ingresar_pv/ins_pv.php?nino=$nino'\">$anio_actual - Inscribir</li>";
+						if($row_nino['h_fecha_naci']>$periodos_act['pv_fecha_limite']){
+							echo "<li onclick=\"location.href='../ingresar/ins_pv.php?nino=$nino'\">$anio_actual - Inscribir</li>";
 						}
 					}
 				}
