@@ -1,4 +1,4 @@
-<!--Autor 
+<!--Autor
 Edgar Carrizalez
 C.I. V-19.3522.988
 Correo: edg.sistemas@gmail.com
@@ -27,12 +27,12 @@ include("../script_php/condicion.php");
 				$pv_planilla = mysql_fetch_array($pv_planillaConsulta1);
 
 				$idnihno = $pv_planilla[3];
-				
-				
+
+
 				$ctrb_sql = "SELECT codigo_trb FROM pv_inscrip_ce WHERE pv_planillanumero='$n_planilla'";
 				$ctrb_sql = mysql_query($ctrb_sql) or die ("No se halló el código");
 				$ctrb = mysql_fetch_array($ctrb_sql);
-				$c_trb = $ctrb['codigo_trb'];	
+				$c_trb = $ctrb['codigo_trb'];
 
 				$sql  = "SELECT * FROM pv_trabajadores_ce WHERE trb_codigo ='$c_trb'";
 				$query  = mysql_query($sql);
@@ -40,9 +40,41 @@ include("../script_php/condicion.php");
 
 				$condicion = tipo_c($c_trb);
 
-				$sqlN = "SELECT H.* FROM pv_inscrip_ce I inner join pv_hijos_ce H on I.id_ninho_pv=H.id_ninho WHERE I.id_ninho_pv=$idnihno ";
+				$sqlN = "SELECT * FROM pv_inscrip_ce I inner join pv_hijos_ce H on I.id_ninho_pv=H.id_ninho WHERE I.id_ninho_pv=$idnihno ";
 				$queryN = mysql_query($sqlN);
 				$resN = mysql_fetch_array($queryN);
+        $g = $resN['h_gsanguineo'];
+        $d = $resN['pv_destino'];
+        $t = $resN['pv_tchaqueta'];
+
+        $sqlGS = "SELECT S.* FROM pv_hijos_ce I inner join cp_gsanguineos S on I.h_gsanguineo=S.id_grupo_sanguineo WHERE S.id_grupo_sanguineo=$g ";
+				$queryGS = mysql_query($sqlGS);
+				$gs = mysql_fetch_array($queryGS);
+
+        $sqlD = "SELECT D.pv_destino FROM pv_inscrip_ce I inner join pv_destinos D on I.pv_destino=D.id_destino WHERE D.id_destino=$d ";
+				$queryD = mysql_query($sqlD);
+				$DS = mysql_fetch_array($queryD);
+        $ds = $DS[0];
+
+        $sqlTC = "SELECT D.pv_tchaqueta FROM pv_inscrip_ce I inner join pv_tachaqueta D on I.pv_tchaqueta=D.id_talla WHERE D.id_talla=$t ";
+				$queryTC = mysql_query($sqlTC);
+				$TC = mysql_fetch_array($queryTC);
+        $tc = $TC[0];
+
+        $sqlTF = "SELECT D.pv_tfranela FROM pv_inscrip_ce I inner join pv_tallafranela D on I.pv_tfranela=D.id_talla WHERE D.id_talla=$t ";
+        $queryTF = mysql_query($sqlTF);
+        $TF = mysql_fetch_array($queryTF);
+        $tf = $TF[0];
+
+        $sqlTM = "SELECT D.pv_tmono FROM pv_inscrip_ce I inner join pv_tmono D on I.pv_tmono=D.id_talla WHERE D.id_talla=$t ";
+        $queryTM = mysql_query($sqlTM);
+        $TM = mysql_fetch_array($queryTM);
+        $tm = $TM[0];
+
+        $sqlTG = "SELECT D.pv_tgorra FROM pv_inscrip_ce I inner join pv_tgorra D on I.pv_tgorra=D.id_talla WHERE D.id_talla=$t ";
+        $queryTG = mysql_query($sqlTG);
+        $TG = mysql_fetch_array($queryTG);
+        $tg = $TG[0];
 
 				if($resN['h_sexo']=='F'){
 					$genero="Femenino";
@@ -93,9 +125,9 @@ include("../script_php/condicion.php");
 				<tr><td colspan=4 class='planilla sub_titulo'><b><u>DATOS $ninho</u></b></td></tr>
 				<tr><td colspan=4 class='planilla'><b>Nombres: </b>$resN[h_nombre1] $resN[h_nombre2]</td></tr>
 				<tr><td colspan=4 class='planilla'><b>Apellidos: </b>$resN[h_apellido1] $resN[h_apellido2]</td></tr>
-				<tr><td class='planilla'><b>Cédula: </b>$resN[h_cedula]</td><td class='planilla'><b>Edad: </b>$resN[pv_edadmeses]</td><td class='planilla'><b>Grupo Sanguíneo: </b>$resN[h_gsanguineo]</td><td class='planilla'><b>Género: </b>$genero</td></tr>
-				<tr><td colspan=2 class='planilla'><b>Fecha de nacimiento: </b>".a_fecha($resN['h_fecha_naci'])."</td><td colspan=2 class='planilla'><b>Plan Correspondiente: </b>$pv_planilla[pv_destino]</td></tr>
-				
+				<tr><td class='planilla'><b>Cédula: </b>$resN[h_cedula]</td><td class='planilla'><b>Edad: </b>$pv_planilla[pv_edadmeses]</td><td class='planilla'><b>Grupo Sanguíneo: </b>$gs[nombre]</td><td class='planilla'><b>Género: </b>$genero</td></tr>
+				<tr><td colspan=2 class='planilla'><b>Fecha de nacimiento: </b>".a_fecha($resN['h_fecha_naci'])."</td><td colspan=2 class='planilla'><b>Plan Correspondiente: </b>$ds</td></tr>
+
 				<tr><td colspan=4 class='planilla sub_titulo'><b><u>CUIDADOS ESPECIALES</u></b></td></tr>
 				<tr><td colspan=2 class='planilla'><b>Alérgias: </b>$pv_planilla[pv_alergias]</td><td colspan=2 class='planilla'><b>Tratamiento en sumnistro: </b>$pv_planilla[pv_tratamiento]</td></tr>
 				<tr><td colspan=2 class='planilla'><b>Alimentos Prohibidos: </b>$pv_planilla[pv_alimentosp]</td><td colspan=2 class='planilla'><b>Medicamentos Prohibidos: </b>$pv_planilla[pv_medicamentosp]</td></tr>
@@ -107,16 +139,16 @@ include("../script_php/condicion.php");
 				Cédula de Identidad: $pv_planilla[pv_contacto_cedula]<br>
 				Teléfono: $pv_planilla[pv_contacto_telefono]<br>
 				Parentesco:  $pv_planilla[pv_parentesco]
-				
+
 				</td></tr>
 				<tr><td colspan=4 class='planilla sub_titulo'><b><u>OBSERVACIONES GENERALES: </u></b></td></tr>
 				<tr><td colspan=2 class='planilla'><b>Habilidades: </b>$pv_planilla[pv_habilidades]</td><td colspan=2 class='planilla'><b>Actividades favoritas: </b>$pv_planilla[pv_gustos]</td></tr>
 				<tr><td colspan=4 class='planilla sub_titulo'><b><u>TALLAS PARA EL UNIFORME: </u></b></td></tr>
-				<tr><td colspan=4 class='planilla'><b>Franela: </b>$pv_planilla[pv_tfranela] - <b>Chaqueta: </b>$pv_planilla[pv_tchaqueta] - <b>Mono: </b>$pv_planilla[pv_tmono] - <b>Gorra: </b>$pv_planilla[pv_tgorra]</td></tr>
+				<tr><td colspan=4 class='planilla'><b>Franela: </b>$tf - <b>Chaqueta: </b>$tc - <b>Mono: </b>$tm - <b>Gorra: </b>$tg</td></tr>
 				<tr><td colspan=4 class='planilla sub_titulo'><b><center><u>DOCUMENTOS CONSIGNADOS</u></center></b></td></tr>
 				<tr><td colspan=2 class='planilla'><b>1.- Fotos $ninho: </b></td><td colspan=2 class='planilla'>$pv_planilla[pv_fotos]</td></tr>
 				<tr><td colspan=2 class='planilla'><b>2.- Certificado de Niño sano: </b></td><td colspan=2 class='planilla'>$pv_planilla[pv_certificado]</td></tr>
-				
+
 				";
 			?>
 		</table>
@@ -125,7 +157,7 @@ include("../script_php/condicion.php");
 			<tr>
 				<td class='info-planilla'>
 					<h4 align="center"><u>TRABAJADOR/REPRESENTANTE DEL EJECUTIVO REGIONAL</u></h4>
-					<p style="text-align:justify; margin:20px">&nbsp;&nbsp;&nbsp;&nbsp; Yo, <b><?php echo "$trb[trb_nombres] $trb[trb_apellidos]";?></b>, 
+					<p style="text-align:justify; margin:20px">&nbsp;&nbsp;&nbsp;&nbsp; Yo, <b><?php echo "$trb[trb_nombres] $trb[trb_apellidos]";?></b>,
 					portador de la Cédula de Identidad número: <b><?php echo "$trb[trb_cedula]";?></b>, funcionario adscrito a: <?php echo "$trb[trb_dependencia]";?>
 					y en calidad de representante de el (la) menor: <b><?php echo "$trb[h_nombre1] $trb[h_nombre2] $trb[h_apellido1] $trb[h_apellido2]";?></b>, declaro
 					que los datos suministrados por mi son fehacientes.<br>
@@ -197,7 +229,7 @@ include("../script_php/condicion.php");
 							</td>
 						</tr>
 						<tr>
-							<td>Talla Chaqueta: <?php echo "$pv_planilla[pv_tchaqueta]";?></td><td>Talla Mono: <?php echo "$pv_planilla[pv_tmono]";?></td><td>Talla Franela: <?php echo "$pv_planilla[pv_tfranela]";?></td><td>Talla Gorra: <?php echo "$pv_planilla[pv_tgorra]";?></td>
+							<td>Talla Chaqueta: <?php echo "$tc";?></td><td>Talla Mono: <?php echo "$tm";?></td><td>Talla Franela: <?php echo "$tf";?></td><td>Talla Gorra: <?php echo "$tg";?></td>
 						</tr>
 					</table>
 				</td>
