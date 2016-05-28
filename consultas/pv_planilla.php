@@ -140,15 +140,38 @@ include("../script_php/a_fe.php");
 				</td>
 			</tr>
 			<tr><td>&nbsp;</td></tr>
+			<td><hr></td>
+			<table tyle="width:100%;border" class="conforme-rep" align="center">
+				<tr>
+					<td colspan="2" align="center"><b>Planilla: </b> <?php echo "$pv_planilla[pv_planillanumero]";?></td>
+				</tr>
+				<tr>
+					<td style="padding:15px"><b>Datos del Trabajador:</b><br>
+						<b>Nombre: </b><?php echo "$pv_planilla[trb_nombres] $pv_planilla[trb_apellidos]";?><br>
+						<b>Cedula: </b><?php echo "$pv_planilla[trb_cedula]";?>
+					</td>
+					<td style="padding:15px"><b>Nombre <?php echo "$confornin";?>:</b><br /> </b><?php echo "$pv_planilla[h_nombre1] $pv_planilla[h_nombre2] $pv_planilla[h_apellido1] $pv_planilla[h_apellido2]";?><br><br />
+						<b>Talla Chaqueta: </b><?php echo "$pv_planilla[pv_tchaqueta]";?><br>
+						<b>Talla Mono: </b><?php echo "$pv_planilla[pv_tmono]";?><br>
+						<b>Talla Franela: </b><?php echo "$pv_planilla[pv_tfranela]";?><br>
+						<b>Talla Gorra: </b><?php echo "$pv_planilla[pv_tgorra]";?>
+					</td>
+					
+				</tr>
+
+				
+			</table>
 			<tr><td>&nbsp;</td></tr>
 			<tr><td>&nbsp;</td></tr>
 			<tr><td>&nbsp;</td></tr>
+
 			<tr>
 			<td><hr></td>
 			</tr>
 			<tr><td>&nbsp;</td></tr>
 			<tr>
 				<td>
+
 					<table style="width:100%;border" class="conforme-rep">
 						<tr>
 							<td colspan="2"><b>Código del trabajador: </b><?php echo "$c_trb";?></td><td colspan="2"><b>Número de Planilla: </b><?php echo "$pv_planilla[pv_planillanumero]";?></td>
