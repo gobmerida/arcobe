@@ -193,7 +193,7 @@ include("../script_php/a_fe.php");
 								$DataCJSQL01 = mysql_query($DataCJSQL01);
 								$DataCJROW01 = mysql_fetch_array($DataCJSQL01);
 							?>
-								<b>Cuaderno</b><br />
+								<b>Cuaderno Institutos</b><br />
 								Pagina: <b><?php echo $DataCJROW01["Npagina"] ?></b><br />
 								Linea: <b><?php echo $DataCJROW01["Nlinea"] ?></b>
 							</td>
