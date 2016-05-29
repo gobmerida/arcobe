@@ -1,4 +1,4 @@
-<!--Autor 
+<!--Autor
 Edgar Carrizalez
 C.I. V-19.352.988
 Correo: edg.sistemas@gmail.com
@@ -36,7 +36,7 @@ Correo: edg.sistemas@gmail.com
 		#AsistenciaConfirmar:hover{background-color:#c00;color:white}
 	</style>
 	<script type="text/javascript" src="jquery.js"></script>
-	
+
 	<script type="text/javascript">
 	function validar(formulario){
 		if(formulario.cedula.value.length==0){
@@ -51,7 +51,7 @@ Correo: edg.sistemas@gmail.com
 		$('#suggestions').fadeIn(0);
 	}
 	function bus_h(){
-		var cedula = document.getElementById('cedula').value;		
+		var cedula = document.getElementById('cedula').value;
 			var dataString = 'cedula='+cedula;
 			$.ajax({
 				type: "POST",
@@ -65,11 +65,11 @@ Correo: edg.sistemas@gmail.com
 						$('#suggestions').fadeOut(1000);
 						$('#trb_cedula').submit();
 						return false;
-					});              
+					});
 				}
 			});
 	}
-	  
+
 	</script>
 </head>
 
@@ -95,15 +95,15 @@ if(!array_key_exists('cedula',$_GET)){
 	$('#suggestions').fadeOut(0);
 	</script>
 		</table>
-		
+
 	</form><br>
 	<center><a href="../" style='color:red;text-decoration:none'>Regresar</a></center>
-	
+
 	<span class="cen">Cédula</span><br>
 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	
-	
-	
+
+
+
 	</div>
 <?php
 }
@@ -116,7 +116,7 @@ if(array_key_exists('cedula',$_GET)){
 	<script type="text/javascript" src="../js/funcion.js"></script>
 <?php
 	echo "<div id='cabecera_ini'>
-	
+
 	</div>";
 	echo "<div id='contenedor' style='border-radius:0'>";
 	$cedula=$_GET['cedula'];
@@ -135,12 +135,12 @@ if(array_key_exists('cedula',$_GET)){
 	if($row_trabajador['activo']=="0"){
 		$activo="<b style='color:red'>Inactivo</b>";
 	}
-	
+
 	echo "<table class='ta_trabajador'>";
 	echo "<tr class='som'><td><b>Cédula:</b> V-".$row_trabajador['trb_cedula']."</td><td><b>Código trabajador:</b> ".$row_trabajador['trb_codigo']."</td></tr>";
 	$noms=$row_trabajador['trb_nombres'];
 	$aps=$row_trabajador['trb_apellidos'];
-	
+
 	echo "<tr><td colspan='2'><b>Nombres:</b> ".$noms."</td></tr>";
 	echo "<tr class='som'><td colspan='2'><b>Apellidos:</b> ".$aps."</td><br></tr>";
 	echo "<tr><td colspan='2'><b>Cargo:</b> ".$row_trabajador['trb_cargo']."</td></tr>";
@@ -149,7 +149,7 @@ if(array_key_exists('cedula',$_GET)){
 	echo "<tr class='som'><td colspan='2'><b>Dirección de habitación:</b> ".mb_strtoupper($row_trabajador['trb_direccionh'],'utf-8')."</td></tr>";
 	echo "<tr><td colspan='2'><b>Correo:</b> ".$row_trabajador['trb_correo']."</td></tr>";
 	echo "<tr class='som'><td colspan='2' style='text-align:center'><b>Trabajador: </b>$activo</td></tr>";
-	
+
 	echo "<tr id='Asistencia'></tr>";
 	$DataSQuery00 = "select * from cj_cuaderno_ce where ced_tbr='$row_trabajador[trb_cedula]' and Periodo='2'";
 	$DataSQuery00 = mysql_query($DataSQuery00);
@@ -254,11 +254,11 @@ if(array_key_exists('cedula',$_GET)){
 			$i=$i+1;
 		}
 	}
-	
+
 	$PV_beneficiario_slq1=mysql_query("SELECT * FROM pv_planillace JOIN pv_periodo_ce ON pv_planillace.id_periodo=pv_periodo_ce.id_pvperiodo WHERE cedula_mp='$cedula'",$con) or die (mysql_error());
 	$PV_beneficiario_slq2=mysql_query("SELECT * FROM pv_planillace JOIN pv_periodo_ce ON pv_planillace.id_periodo=pv_periodo_ce.id_pvperiodo WHERE cedula_pm='$cedula'",$con) or die (mysql_error());
 	$PV_beneficiario_slq3=mysql_query("SELECT * FROM pv_planillace JOIN pv_periodo_ce ON pv_planillace.id_periodo=pv_periodo_ce.id_pvperiodo WHERE cedula_regis='$cedula'",$con) or die (mysql_error());
-	
+
 	while($PV_beneficiario_row1=mysql_fetch_array($PV_beneficiario_slq1)){
 		if($PV_beneficiario_row1['id_nino']!=""){
 			$cod_nino=$PV_beneficiario_row1['id_nino'];

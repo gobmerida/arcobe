@@ -1,4 +1,4 @@
-<!--Autor 
+<!--Autor
 Edgar Carrizalez
 C.I. V-19.352.988
 Correo: edg.sistemas@gmail.com
@@ -16,7 +16,7 @@ Correo: edg.sistemas@gmail.com
 </head>
 <?php
 	session_start();
-	if(!isset($_SESSION['usuario_user'])){ 
+	if(!isset($_SESSION['usuario_user'])){
 	header("location: ../index.php");
 	}
 ?>
@@ -26,12 +26,12 @@ Correo: edg.sistemas@gmail.com
 	</div>
 	<div id="cabecera_ini"></div>
 	<div id='principal'>
-		
+
 	<ul id="nav">
 		<li onclick="location.href='../'" class="principal">Volver</li>
 		<li class='principal' >Consultar
 			<ul class="secundario">
-				<li onclick="location.href='reg_beneficiario.php'">Beneficiario</li>
+				<li onclick="location.href='b_nino.php'">Beneficiario</li>
 				<li onclick="location.href='persona.php'">Persona</li>
 			</ul>
 		<?php

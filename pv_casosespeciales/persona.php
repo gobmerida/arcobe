@@ -1,4 +1,4 @@
-<!--Autor 
+<!--Autor
 Edgar Carrizalez
 C.I. V-19.3522.988
 Correo: edg.sistemas@gmail.com
@@ -42,6 +42,26 @@ Correo: edg.sistemas@gmail.com
 			}
 	      	 return true;
 		}
+
+    function bus_h(){
+  		var cedula = document.getElementById('cedula').value;
+  			var dataString = 'cedula='+cedula;
+  			$.ajax({
+  				type: "POST",
+  				url: "empleados_ce.php",
+  				data: dataString,
+  				success: function(data) {
+  					$('#suggestions').fadeIn(1000).html(data);
+  					$('.suggest-element a').live('click', function(){
+  						var id = $(this).attr('id');
+  						$('#cedula').val($('#'+id).attr('data'));
+  						$('#suggestions').fadeOut(1000);
+  						$('#trb_cedula').submit();
+  						return false;
+  					});
+  				}
+  			});
+  	}
 	</script>
 </head>
 
@@ -67,15 +87,15 @@ if(!array_key_exists('cedula',$_GET)){
 	$('#suggestions').fadeOut(0);
 	</script>
 		</table>
-		
+
 	</form><br>
 	<center><a href="./" style='color:red;text-decoration:none'>Regresar</a></center>
-	
+
 	<span class="cen">Cédula</span><br>
 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	
-	
-	
+
+
+
 	</div>
 
 <?php
@@ -92,12 +112,12 @@ if(array_key_exists('cedula',$_GET)){
 	$row_trabajador=mysql_fetch_array($c_trabajador);
 
 	if($row_trabajador['trb_cedula']!=''){
-	
+
 		echo "<table class='ta_trabajador'>";
 		echo "<tr class='som'><td>Cedula: V-".$row_trabajador['trb_cedula']."</td><td>Código trabajador: ".$row_trabajador['trb_codigo']."</td></tr>";
 		$noms=$row_trabajador['trb_nombres'];
 		$aps=$row_trabajador['trb_apellidos'];
-		
+
 		echo "<tr><td colspan='2'>Nombres: ".$noms."</td></tr>";
 		echo "<tr class='som'><td colspan='3'>Apellidos: ".$aps."</td><br></tr>";
 		echo "<tr><td colspan='2'>Cargo: ".$row_trabajador['trb_cargo']."</td></tr>";
@@ -116,7 +136,7 @@ if(array_key_exists('cedula',$_GET)){
 				Registrar trabajador:
 			      <a style='text-decoration:none;color:red' href='ingresar/registrar_trabajador.php?cedula=$cedula'/>$row_trabajador[trb_cedula] - $row_trabajador[trb_nombres] $row_trabajador[trb_apellidos] </a> <br>";
 		}
-		
+
 	}
 
 	if($row_trabajador['trb_cedula']==''){
@@ -128,7 +148,7 @@ if(array_key_exists('cedula',$_GET)){
 				Registrar trabajador:
 			      <a style='text-decoration:none;color:red' href='ingresar/registrar_trabajador.php?cedula=$cedula'/>$row_trabajador[trb_cedula] - $row_trabajador[trb_nombres] $row_trabajador[trb_apellidos] </a> <br>";
 		}
-			
+
 	}
 
 	echo "<br><span class='dll'><center><a href='../'>Inicio</a> ";
@@ -149,12 +169,12 @@ if(array_key_exists('cedula',$_GET)){
 			$i=$i+1;
 		}
 	}
-	
+
 	if($i==0){
 		echo "<span class='cen'>No hay Niños(as) registrados</span><br>";
 	}
 	echo "</div>";
-	
+
 }
 ?>
 </body>
