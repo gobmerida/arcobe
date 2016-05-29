@@ -140,15 +140,15 @@ if($DataROW01["ced_tbr"]==""){
 	$aux01 = $DataROW02["contador_per"];
 	$aux02 = $DataROW02["Aux"];
 	$aux03 = $DataROW02["ContadorAux"];
-	if($aux02>=10){
-		$aux02 = 0;
-		$aux03++;
+	if($aux01>=10){
+		$aux01=0;
+		$aux02++;
 	}
 	$aux01++;
 	$aux03++;
-	$DataQuery03 = "insert into pv_cuaderno_ce(ced_tbr,Npagina,Nlinea,Periodo) values('$id_mp','$aux03','$aux01','$idpv')";
+	$DataQuery03 = "insert into pv_cuaderno_ce(ced_tbr,Npagina,Nlinea,Periodo) values('$id_mp','$aux02','$aux03','$idpv')";
 	mysql_query($DataQuery03) or die (mysql_error());
-	$DataSQL02 = "update pv_periodo_ce set contador_per='$aux01',ContadorAux='$aux03',Aux='$aux02' where id_pvperiodo='$id_periodo'";
+	$DataSQL02 = "update pv_periodo_ce set contador_per='$aux03',ContadorAux='$aux02',Aux='$aux01' where id_pvperiodo='$id_periodo'";
 	$DataSQL02 = mysql_query($DataSQL02);
 }
 header("location:../pv_planilla_ce.php?pn=$pv_planillanumero&&msj=1");

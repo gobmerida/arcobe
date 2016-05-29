@@ -31,8 +31,7 @@ Correo: edg.sistemas@gmail.com
 		background: white;
 		}
 	</style>
-	<script type="text/javascript" src="jquery.js"></script>
-	<script type="text/javascript">
+	<script type="text/javascript" src="jquery.js">
 		function validar(formulario){
 			if(formulario.cedula.value.length==0){
 				document.getElementById("cedula").style.border = "2px inset red";
@@ -43,25 +42,6 @@ Correo: edg.sistemas@gmail.com
 	      	 return true;
 		}
 
-    function bus_h(){
-  		var cedula = document.getElementById('cedula').value;
-  			var dataString = 'cedula='+cedula;
-  			$.ajax({
-  				type: "POST",
-  				url: "empleados_ce.php",
-  				data: dataString,
-  				success: function(data) {
-  					$('#suggestions').fadeIn(1000).html(data);
-  					$('.suggest-element a').live('click', function(){
-  						var id = $(this).attr('id');
-  						$('#cedula').val($('#'+id).attr('data'));
-  						$('#suggestions').fadeOut(1000);
-  						$('#trb_cedula').submit();
-  						return false;
-  					});
-  				}
-  			});
-  	}
 	</script>
 </head>
 
@@ -69,7 +49,7 @@ Correo: edg.sistemas@gmail.com
 <?php
 include("../connect/conexion.php");
 include("../sesion/sesion.php");
-if(!array_key_exists('cedula',$_GET)){
+if(!array_key_exists('pn',$_GET)){
 ?>
 <div id='cabecera_ini'>
 	</div>
@@ -80,12 +60,12 @@ if(!array_key_exists('cedula',$_GET)){
 			<thead>
 				<tr><td>Cédula</td></tr>
 			</thead>
-			<tr><td><span class="ls">V-</span><input type="text" id="cedula" name="cedula" autocomplete="off" onkeyup="busc_ms();bus_h()"><div id="suggestions"></div></td></tr>
+			<tr><td><span class="ls">V-</span><input type="text" id="cedula" name="pn" autocomplete="off" onkeyup="bus_h()"><div id="suggestions"></div></td></tr>
 			<tr><td><input type="submit" value="Enviar">
 			</td></tr>
 			<script>
-	$('#suggestions').fadeOut(0);
-	</script>
+    	   $('#suggestions').fadeOut(0);
+    	</script>
 		</table>
 
 	</form><br>
@@ -101,12 +81,12 @@ if(!array_key_exists('cedula',$_GET)){
 <?php
 }
 
-if(array_key_exists('cedula',$_GET)){
+if(array_key_exists('pn',$_GET)){
 	echo "<div id='cabecera_ini'>
 	</div>";
 	echo "<div id='contenedor'>";
 	echo "<br><span class='cll'>Datos del trabajador <span style='color:red'>(Caso Especial)</span></span><br>";
-	$cedula=$_GET['cedula'];
+	$cedula=$_GET['pn'];
 	//mysql_select_db("cj_pv",$con) or die (mysql_error());
 	$c_trabajador=mysql_query("SELECT * FROM pv_trabajadores_ce WHERE trb_cedula='$cedula'",$con) or die (mysql_error());
 	$row_trabajador=mysql_fetch_array($c_trabajador);

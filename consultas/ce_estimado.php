@@ -17,15 +17,14 @@
 	}
 	if(array_key_exists('periodo',$_GET)){
 	$periodo = $_GET['periodo']; // Periodo a consultar
-	
+
 	//Consulta de periodo
 	$cperido_sql = "SELECT * FROM pv_periodo_ce WHERE id_pvperiodo='$periodo'";
 	$cperido_sql = mysql_query($cperido_sql) or die ("Error no se encontró periodo");
 	$cperiodo = mysql_fetch_array($cperido_sql);
-	
+
 	//Consulta de los niños registrados
-	$consulta_reg = "SELECT * FROM pv_planilla_ce
-					WHERE id_periodo='$periodo'";
+	$consulta_reg = "SELECT * FROM pv_planilla_ce WHERE id_periodo='$periodo'";
 	$consulta_reg = mysql_query($consulta_reg) or die (mysql_error());
 	// Consulta de los niños registrados (Otros)
 	$consulta_regOtro = "SELECT * FROM pv_planillace
@@ -76,9 +75,9 @@
 		$iterGorr=$tallasGorr['id_talla'];
 		$a_tallaGorr[$iterGorr]=0;
 	}
-	
+
 	// Niñas
-	
+
 	//Consulta contadores para totalizar tallas de chaquetas Niñas
 	$c_tallasChaNina="SELECT * FROM pv_tachaqueta WHERE id_talla!='1'";
 	$c_tallasChaNina=mysql_query($c_tallasChaNina) or die ("No se halló ninguna talla");
@@ -111,9 +110,9 @@
 		$iterGorrNina=$tallasGorrNina['id_talla'];
 		$a_tallaGorrNina[$iterGorrNina]=0;
 	}
-	
+
 	// Niños
-	
+
 	//Consulta contadores para totalizar tallas de chaquetas Niños
 	$c_tallasChaNino="SELECT * FROM pv_tachaqueta WHERE id_talla!='1'";
 	$c_tallasChaNino=mysql_query($c_tallasChaNino) or die ("No se halló ninguna talla");
@@ -148,7 +147,7 @@
 	}
 	//Un repita para totalizar los estimados/reportes
 	while($registrados = mysql_fetch_array($consulta_reg)){
-		
+
 		if($registrados['pv_fotos']!="" and $registrados['pv_certificado']!="" and $registrados['pv_habilidades']!="" and $registrados['pv_gustos']!="" and $registrados['pv_vacunas']!="" and $registrados['pv_alergias']!="" and $registrados['pv_tratamiento']!="" and $registrados['pv_alimentosp']!="" and $registrados['pv_medicamentosp']!="" and $registrados['pv_tchaqueta']!="1" and $registrados['pv_tfranela']!="1" and $registrados['pv_tmono']!="1" and $registrados['pv_tgorra']!="1" and $registrados['pv_contacto_cedula']!="" and $registrados['pv_contacto_nombre']!="" and $registrados['pv_contacto_apellido']!="" and $registrados['pv_contacto_telefono']!="" and $registrados['pv_contacto_parentesco']!="1"){
 			$cond_t = tipo_c($registrados['codigo_trb']);
 			if($cond_t=="EMPLEADO FIJO"){
@@ -180,47 +179,47 @@
 			if($registrados['h_sexo']=="F"){
 				//Chaquetas
 				$a_tallaChaNina[$t_chaq]=$a_tallaChaNina[$t_chaq]+1;
-				
+
 				//Franelas
 				$a_tallaFraNina[$t_fra]=$a_tallaFraNina[$t_fra]+1;
-				
+
 				//Monos
 				$a_tallaMonNina[$t_mon]=$a_tallaMonNina[$t_mon]+1;
-				
+
 				//Gorras
 				$a_tallaGorrNina[$t_gorr]=$a_tallaGorrNina[$t_gorr]+1;
 			}
 			if($registrados['h_sexo']=="M"){
 				//Chaquetas
 				$a_tallaChaNino[$t_chaq]=$a_tallaChaNino[$t_chaq]+1;
-				
+
 				//Franelas
 				$a_tallaFraNino[$t_fra]=$a_tallaFraNino[$t_fra]+1;
-				
+
 				//Monos
 				$a_tallaMonNino[$t_mon]=$a_tallaMonNino[$t_mon]+1;
-				
+
 				//Gorras
 				$a_tallaGorrNino[$t_gorr]=$a_tallaGorrNino[$t_gorr]+1;
 			}
 			//Chaquetas
 			$a_tallaCha[$t_chaq]=$a_tallaCha[$t_chaq]+1;
-			
+
 			//Franelas
 			$a_tallaFra[$t_fra]=$a_tallaFra[$t_fra]+1;
-			
+
 			//Monos
 			$a_tallaMon[$t_mon]=$a_tallaMon[$t_mon]+1;
-			
+
 			//Gorras
 			$a_tallaGorr[$t_gorr]=$a_tallaGorr[$t_gorr]+1;
-			
+
 			$contador=$contador+1;
 		}
 		else $recaudos=$recaudos+1;
 	}
 	while($registradosOtr = mysql_fetch_array($consulta_regOtro)){
-		
+
 		if($registradosOtr['pv_fotos']!="" and $registradosOtr['pv_certificado']!="" and $registradosOtr['pv_habilidades']!="" and $registradosOtr['pv_gustos']!="" and $registradosOtr['pv_vacunas']!="" and $registradosOtr['pv_alergias']!="" and $registradosOtr['pv_tratamiento']!="" and $registradosOtr['pv_alimentosp']!="" and $registradosOtr['pv_medicamentosp']!="" and $registradosOtr['pv_tchaqueta']!="1" and $registradosOtr['pv_tfranela']!="1" and $registradosOtr['pv_tmono']!="1" and $registradosOtr['pv_tgorra']!="1" and $registradosOtr['pv_contacto_cedula']!="" and $registradosOtr['pv_contacto_nombre']!="" and $registradosOtr['pv_contacto_apellido']!="" and $registradosOtr['pv_contacto_telefono']!="" and $registradosOtr['pv_contacto_parentesco']!="1"){
 			if($registradosOtr['pv_destino']=="2"){
 				$to_vg=$to_vg+1;
@@ -228,7 +227,7 @@
 			if($registradosOtr['pv_destino']=="1"){
 				$to_camp=$to_camp+1;
 			}
-			
+
 			$t_chaq = $registradosOtr['pv_tchaqueta'];
 			$t_fra = $registradosOtr['pv_tfranela'];
 			$t_mon = $registradosOtr['pv_tmono'];
@@ -237,43 +236,43 @@
 			if($registradosOtr['h_sexo']=="F"){
 				//Chaquetas
 				$a_tallaChaNina[$t_chaq]=$a_tallaChaNina[$t_chaq]+1;
-				
+
 				//Franelas
 				$a_tallaFraNina[$t_fra]=$a_tallaFraNina[$t_fra]+1;
-				
+
 				//Monos
 				$a_tallaMonNina[$t_mon]=$a_tallaMonNina[$t_mon]+1;
-				
+
 				//Gorras
 				$a_tallaGorrNina[$t_gorr]=$a_tallaGorrNina[$t_gorr]+1;
 			}
 			if($registradosOtr['h_sexo']=="M"){
 				//Chaquetas
 				$a_tallaChaNino[$t_chaq]=$a_tallaChaNino[$t_chaq]+1;
-				
+
 				//Franelas
 				$a_tallaFraNino[$t_fra]=$a_tallaFraNino[$t_fra]+1;
-				
+
 				//Monos
 				$a_tallaMonNino[$t_mon]=$a_tallaMonNino[$t_mon]+1;
-				
+
 				//Gorras
 				$a_tallaGorrNino[$t_gorr]=$a_tallaGorrNino[$t_gorr]+1;
 			}
 			//Chaquetas
 			$a_tallaCha[$t_chaq]=$a_tallaCha[$t_chaq]+1;
-			
+
 			//Franelas
 			$a_tallaFra[$t_fra]=$a_tallaFra[$t_fra]+1;
-			
+
 			//Monos
 			$a_tallaMon[$t_mon]=$a_tallaMon[$t_mon]+1;
-			
+
 			//Gorras
 			$a_tallaGorr[$t_gorr]=$a_tallaGorr[$t_gorr]+1;
-			
+
 			$todalDOtros=$todalDOtros+1;
-			
+
 			$contador=$contador+1;
 		}
 		else $recaudos=$recaudos+1;
@@ -281,7 +280,7 @@
 	?>
 	<div id="resumen">
 		<?php
-		
+
 		//Totales talla chaqueta
 		$co_tallasCha="SELECT * FROM pv_tachaqueta WHERE id_talla!='1'";
 		$co_tallasCha=mysql_query($co_tallasCha) or die ("No se halló ninguna talla");
@@ -295,7 +294,7 @@
 		}
 		$table_chaq.="<tr class='som'><td style='border:none;background-color:white'>Totales</td><td>$chaq_tot</td></tr>";
 		$table_chaq.="</table>";
-		
+
 		//Totales talla franela
 		$co_tallasFra="SELECT * FROM pv_tallafranela WHERE id_talla!='1'";
 		$co_tallasFra=mysql_query($co_tallasFra) or die ("No se halló ninguna talla");
@@ -309,7 +308,7 @@
 		}
 		$table_Fran.="<tr class='som'><td style='border:none;background-color:white'>Totales</td><td>$fran_tot</td></tr>";
 		$table_Fran.="</table>";
-		
+
 		//Totales talla mono
 		$co_tallasMon="SELECT * FROM pv_tmono WHERE id_talla!='1'";
 		$co_tallasMon=mysql_query($co_tallasMon) or die ("No se halló ninguna talla");
@@ -323,7 +322,7 @@
 		}
 		$table_Mono.="<tr class='som'><td style='border:none;background-color:white'>Totales</td><td>$mono_tot</td></tr>";
 		$table_Mono.="</table>";
-		
+
 		//Totales talla gorra
 		$co_tallasGorr="SELECT * FROM pv_tgorra WHERE id_talla!='1'";
 		$co_tallasGorr=mysql_query($co_tallasGorr) or die ("No se halló ninguna talla");
@@ -337,7 +336,7 @@
 		}
 		$table_Gorra.="<tr class='som'><td style='border:none;background-color:white'>Totales</td><td>$gorr_tot</td></tr>";
 		$table_Gorra.="</table>";
-		
+
 		//Totales talla chaqueta Niña
 		$co_tallasChaNina="SELECT * FROM pv_tachaqueta WHERE id_talla!='1'";
 		$co_tallasChaNina=mysql_query($co_tallasChaNina) or die ("No se halló ninguna talla");
@@ -351,7 +350,7 @@
 		}
 		$table_chaqNina.="<tr class='som'><td style='border:none;background-color:white'>Totales</td><td>$chaq_totNina</td></tr>";
 		$table_chaqNina.="</table>";
-		
+
 		//Totales talla franela Niña
 		$co_tallasFraNina="SELECT * FROM pv_tallafranela WHERE id_talla!='1'";
 		$co_tallasFraNina=mysql_query($co_tallasFraNina) or die ("No se halló ninguna talla");
@@ -365,7 +364,7 @@
 		}
 		$table_FranNina.="<tr class='som'><td style='border:none;background-color:white'>Totales</td><td>$fran_totNina</td></tr>";
 		$table_FranNina.="</table>";
-		
+
 		//Totales talla mono Niña
 		$co_tallasMonNina="SELECT * FROM pv_tmono WHERE id_talla!='1'";
 		$co_tallasMonNina=mysql_query($co_tallasMonNina) or die ("No se halló ninguna talla");
@@ -379,7 +378,7 @@
 		}
 		$table_MonoNina.="<tr class='som'><td style='border:none;background-color:white'>Totales</td><td>$mono_totNina</td></tr>";
 		$table_MonoNina.="</table>";
-		
+
 		//Totales talla gorra Niña
 		$co_tallasGorrNina="SELECT * FROM pv_tgorra WHERE id_talla!='1'";
 		$co_tallasGorrNina=mysql_query($co_tallasGorrNina) or die ("No se halló ninguna talla");
@@ -393,7 +392,7 @@
 		}
 		$table_GorraNina.="<tr class='som'><td style='border:none;background-color:white'>Totales</td><td>$gorr_totNina</td></tr>";
 		$table_GorraNina.="</table>";
-		
+
 		//Totales talla chaqueta Niño
 		$co_tallasChaNino="SELECT * FROM pv_tachaqueta WHERE id_talla!='1'";
 		$co_tallasChaNino=mysql_query($co_tallasChaNino) or die ("No se halló ninguna talla");
@@ -407,7 +406,7 @@
 		}
 		$table_chaqNino.="<tr class='som'><td style='border:none;background-color:white'>Totales</td><td>$chaq_totNino</td></tr>";
 		$table_chaqNino.="</table>";
-		
+
 		//Totales talla franela Niño
 		$co_tallasFraNino="SELECT * FROM pv_tallafranela WHERE id_talla!='1'";
 		$co_tallasFraNino=mysql_query($co_tallasFraNino) or die ("No se halló ninguna talla");
@@ -421,7 +420,7 @@
 		}
 		$table_FranNino.="<tr class='som'><td style='border:none;background-color:white'>Totales</td><td>$fran_totNino</td></tr>";
 		$table_FranNino.="</table>";
-		
+
 		//Totales talla mono Niño
 		$co_tallasMonNino="SELECT * FROM pv_tmono WHERE id_talla!='1'";
 		$co_tallasMonNino=mysql_query($co_tallasMonNino) or die ("No se halló ninguna talla");
@@ -435,7 +434,7 @@
 		}
 		$table_MonoNino.="<tr class='som'><td style='border:none;background-color:white'>Totales</td><td>$mono_totNino</td></tr>";
 		$table_MonoNino.="</table>";
-		
+
 		//Totales talla gorra Niño
 		$co_tallasGorrNino="SELECT * FROM pv_tgorra WHERE id_talla!='1'";
 		$co_tallasGorrNino=mysql_query($co_tallasGorrNino) or die ("No se halló ninguna talla");
@@ -449,7 +448,7 @@
 		}
 		$table_GorraNino.="<tr class='som'><td style='border:none;background-color:white'>Totales</td><td>$gorr_totNino</td></tr>";
 		$table_GorraNino.="</table>";
-		
+
 		//Cierre de periodo (Estimados/Reportes)
 		if($cperiodo['cierre']=="0"){
 			echo "<h3>Estimados Casos Especiales</h3>";
