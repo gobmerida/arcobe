@@ -54,7 +54,7 @@ $objPHPExcel->getActiveSheet()->SetCellValue("B1", "Posición Línea");
 $objPHPExcel->getActiveSheet()->SetCellValue("C1", "Código de Trabajador");
 $objPHPExcel->getActiveSheet()->SetCellValue("D1", "Cédula");
 $objPHPExcel->getActiveSheet()->SetCellValue("E1", "Nombre y Apellido");
-$objPHPExcel->getActiveSheet()->SetCellValue("F1", "Beneficiarios/Tickeras");
+$objPHPExcel->getActiveSheet()->SetCellValue("F1", "Beneficiarios");
 
 $objPHPExcel->getActiveSheet()->setSharedStyle($estilo1, "A1:AM1");
 $objPHPExcel->getActiveSheet()->getStyle("A1:AM1")->getFont()->getColor()->applyFromArray(
@@ -101,6 +101,6 @@ $objPHPExcel->getActiveSheet()->getColumnDimension($columnID)->setAutoSize(true)
 }
 $objWriter = new PHPExcel_Writer_Excel2007($objPHPExcel); //Escribir archivo
 header('Content-type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-header('Content-Disposition: attachment; filename="CuadernoCestaJuguete.xls"');
+header('Content-Disposition: attachment; filename="CuadernoPlanVacacional(c/e).xls"');
 $objWriter->save('php://output');
 ?>

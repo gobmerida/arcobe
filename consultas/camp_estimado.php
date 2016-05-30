@@ -431,7 +431,7 @@
 			echo "
 			<a href='ConsultaNinosPV.php?tipo=CAMPAMENTO&anp=$anio_periodo'>Exportar</a>
 			<table class='estimados'>
-			<tr><td>Total Beneficiados:</td><td class='totales'>$contador</td></tr>
+			<tr><td>Total Beneficiados:</td><td class='totales'>$total</td></tr>
 			<tr><td>Total Beneficiados con recaudos pendientes:</td><td class='totales'>$recaudos</td></tr>
 			</table>
 			<br>
