@@ -30,8 +30,9 @@ Correo: edg.sistemas@gmail.com
 		overflow: auto;
 		background: white;
 		}
-	</style>
-	<script type="text/javascript" src="jquery.js">
+	</style>	
+	<script type="text/javascript" src="jquery.js"></script>
+	<script>
 		function validar(formulario){
 			if(formulario.cedula.value.length==0){
 				document.getElementById("cedula").style.border = "2px inset red";
@@ -40,6 +41,29 @@ Correo: edg.sistemas@gmail.com
 				return false;
 			}
 	      	 return true;
+		}
+
+		function busc_ms(){
+		$('#suggestions').fadeIn(0);
+		}
+		function bus_h(){
+			var mp = document.getElementById('pn').value;		
+				var dataString = 'pn='+mp;
+				$.ajax({
+					type: "POST",
+					url: "empleados_ce.php",
+					data: dataString,
+					success: function(data) {
+						$('#suggestions').fadeIn(0).html(data);
+						$('.suggest-element a').live('click', function(){
+							var id = $(this).attr('id');
+							$('#pn').val($('#'+id).attr('data'));
+							$('#suggestions').fadeOut(1000);
+							$('#ing_beneficiario').submit();
+							return false;
+						});              
+					}
+				});
 		}
 
 	</script>
@@ -60,7 +84,7 @@ if(!array_key_exists('pn',$_GET)){
 			<thead>
 				<tr><td>Cédula</td></tr>
 			</thead>
-			<tr><td><span class="ls">V-</span><input type="text" id="cedula" name="pn" autocomplete="off" onkeyup="bus_h()"><div id="suggestions"></div></td></tr>
+			<tr><td><span class="ls">V-</span><input type="text" id="pn" name="pn" autocomplete="off" onkeyup="bus_h();busc_ms();"><div id="suggestions"></div></td></tr>
 			<tr><td><input type="submit" value="Enviar">
 			</td></tr>
 			<script>

@@ -45,7 +45,7 @@ include("../sesion/sesion.php");
 			$pv_co = "SELECT * FROM pv_periodo WHERE pv_añoperiodo='$anio_actual'";
 			$pv_co = mysql_query($pv_co);
 			$pv_periodo = mysql_fetch_array($pv_co);
-			if($row_nino['id_ninho_pv']==''){
+			if($row_nino['id_ninho']==''){
 				header("location:b_nino.php?error=1");
 			}
 			if($row_nino['h_sexo']=='F'){
@@ -100,9 +100,9 @@ include("../sesion/sesion.php");
 			$madpad=mysql_query("SELECT * FROM pv_trabajadores_ce WHERE trb_cedula='$mp'",$con) or die (mysql_error());
 			$row_madpad=mysql_fetch_array($madpad);
 			if($row_madpad['trb_cedula']!=""){
-				echo "<table><tr><td><span><a href='../consultas/trabajador.php?cedula=$mp' >V.- ".$row_madpad['trb_cedula']." - ".$row_madpad['trb_nombres']." ".$row_madpad['trb_apellidos']."</a></span></td></tr></table>";
+				echo "<table><tr><td><span><a href='persona.php?pn=$mp' >V.- ".$row_madpad['trb_cedula']." - ".$row_madpad['trb_nombres']." ".$row_madpad['trb_apellidos']."</a></span></td></tr></table>";
 			}
-			if($row_madpad['trb_cedula']==""){
+			/*if($row_madpad['trb_cedula']==""){
 				$madpad2=mysql_query("SELECT * FROM cj_mp WHERE mp_cedula='$mp'",$con) or die (mysql_error());
 				$row2=mysql_fetch_array($madpad2);
 				if($row2['mp_cedula']!="") echo "<table><tr><td><span style='font-weight:bold'>V.- ".$row2['mp_cedula']." - ".$row2['mp_nombre']." ".$row2['mp_apellido']."</span></td></tr></table>";
@@ -111,9 +111,9 @@ include("../sesion/sesion.php");
 					$mprROW=mysql_fetch_array($mprSQL);
 					if($mprROW['mpr_cedula']!="") echo "<table><tr><td><span style='font-weight:bold;cursor:pointer' onclick='location.href=\"persona.php?cedula=".$mprROW['mpr_cedula']."\"'>V.- ".$mprROW['mpr_cedula']." - ".$mprROW['mpr_nombres']." ".$mprROW['mpr_apellidos']."<b style='color:red'> (CE OTROS)</b></span></td></tr></table>";
 				}
-			}
+			}*/
 		}
-		if($row_nino['cedula_pm']!=""){
+		/*if($row_nino['cedula_pm']!=""){
 			$pm=$row_nino['cedula_pm'];
 			$madpad=mysql_query("SELECT * FROM cj_trabajadores WHERE trb_cedula='$pm'",$con) or die (mysql_error());
 			$row_madpad=mysql_fetch_array($madpad);
@@ -131,7 +131,7 @@ include("../sesion/sesion.php");
 				}
 
 			}
-		}
+		}*/
 
 
 		?>

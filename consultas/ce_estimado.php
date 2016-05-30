@@ -480,7 +480,7 @@
 			<tr><td>Total niños(as) de obreros contratados:</td><td class='totales'>$obrcont</td></tr>
 			<tr class='somb'><td>Total niños(as) de obreros:</td><td class='totales'>$total_obr</td></tr>
 			<tr class='somb'><td>Total niños(as) (Otros casos):</td><td class='totales'>$todalDOtros</td></tr>
-			<tr><td style='text-align:right'>Total:</td><td class='totales'>$total</td></tr>
+			<tr><td style='text-align:right'>Total:</td><td class='totales'>$contador</td></tr>
 			</table>
 			<br>
 			<h3 style='center'>Total tallas</h3>

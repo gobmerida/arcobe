@@ -29,7 +29,7 @@ while($row_b_apellido=mysql_fetch_array($b_apellido)){
 	$ni=$ni+1;
 }
 if($ni==0){
-$b_apellido_nombre = mysql_query("SELECT * FROM pv_inscrip_ce WHERE CONCAT(h_nombre1,' ',h_apellido1) like '" . $search . "%' ORDER BY id_nino DESC", $con);
+$b_apellido_nombre = mysql_query("SELECT * FROM pv_inscrip_ce WHERE CONCAT(h_nombre1,' ',h_apellido1) like '" . $search . "%' ORDER BY id_nino DESC", $con) or die('');
 $ne=0;
 while($row_b_apellido_nombre=mysql_fetch_array($b_apellido_nombre)){
 	$id_ninho=$row_b_apellido_nombre['id_nino'];

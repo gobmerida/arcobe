@@ -109,56 +109,56 @@ $objPHPExcel->getActiveSheet()->getStyle("A1:AM1")->getFont()->getColor()->apply
 	)
 );
 $cj_hijosSQL = "SELECT
-pv_planillace.`pv_planillanumero`,
-pv_planillace.`id_nino` as `id_ninho_pv`,
-pv_planillace.`h_cedula`,
-pv_planillace.`h_nombre1`,
-pv_planillace.`h_nombre2`,
-pv_planillace.`h_apellido1`,
-pv_planillace.`h_apellido2`,
-pv_planillace.`h_fecha_naci`,
-pv_planillace.`h_sexo`,
+pv_planilla_ce.`pv_planillanumero`,
+pv_planilla_ce.`id_nino` as `id_ninho_pv`,
+pv_planilla_ce.`h_cedula`,
+pv_planilla_ce.`h_nombre1`,
+pv_planilla_ce.`h_nombre2`,
+pv_planilla_ce.`h_apellido1`,
+pv_planilla_ce.`h_apellido2`,
+pv_planilla_ce.`h_fecha_naci`,
+pv_planilla_ce.`h_sexo`,
 cp_gsanguineos.nombre,
-pv_planillace.`fecha_ingreso`,
-pv_planillace.`pv_fotos`,
-pv_planillace.`pv_certificado`,
-pv_planillace.`pv_habilidades`,
-pv_planillace.`pv_gustos`,
-pv_planillace.`pv_vacunas`,
-pv_planillace.`pv_alergias`,
-pv_planillace.`pv_tratamiento`,
-pv_planillace.`pv_alimentosp`,
-pv_planillace.`pv_medicamentosp`,
-pv_planillace.`pv_contacto_cedula`,
-pv_planillace.`pv_contacto_nombre`,
-pv_planillace.`pv_contacto_apellido`,
-pv_planillace.`pv_contacto_telefono`,
+pv_planilla_ce.`fecha_ingreso`,
+pv_planilla_ce.`pv_fotos`,
+pv_planilla_ce.`pv_certificado`,
+pv_planilla_ce.`pv_habilidades`,
+pv_planilla_ce.`pv_gustos`,
+pv_planilla_ce.`pv_vacunas`,
+pv_planilla_ce.`pv_alergias`,
+pv_planilla_ce.`pv_tratamiento`,
+pv_planilla_ce.`pv_alimentosp`,
+pv_planilla_ce.`pv_medicamentosp`,
+pv_planilla_ce.`pv_contacto_cedula`,
+pv_planilla_ce.`pv_contacto_nombre`,
+pv_planilla_ce.`pv_contacto_apellido`,
+pv_planilla_ce.`pv_contacto_telefono`,
 pv_parentesco.`pv_parentesco`,
-pv_planillace.`pv_observaciones`,
-pv_planillace.`fecha_ingreso` as `pv_fechainscri`,
-pv_planillace.`pv_edadmeses`,
-pv_planillace.`cedula_trb`,
+pv_planilla_ce.`pv_observaciones`,
+pv_planilla_ce.`fecha_ingreso` as `pv_fechainscri`,
+pv_planilla_ce.`pv_edadmeses`,
+pv_planilla_ce.`trb_cedula`,
 pv_destinos.`pv_destino`,
 `pv_tachaqueta`.`pv_tchaqueta`,
 `pv_tallafranela`.`pv_tfranela`,
 `pv_tmono`.`pv_tmono`,
 `pv_tgorra`.`pv_tgorra`
-FROM `pv_planillace`
+FROM `pv_planilla_ce`
 JOIN cp_gsanguineos
-ON pv_planillace.`h_gsanguineo`=cp_gsanguineos.id_grupo_sanguineo
+ON pv_planilla_ce.`h_gsanguineo`=cp_gsanguineos.id_grupo_sanguineo
 JOIN pv_parentesco
-ON pv_planillace.`pv_contacto_parentesco`=pv_parentesco.id_parentesco
+ON pv_planilla_ce.`pv_contacto_parentesco`=pv_parentesco.id_parentesco
 JOIN pv_destinos
-ON pv_planillace.`pv_destino`=pv_destinos.`id_destino`
+ON pv_planilla_ce.`pv_destino`=pv_destinos.`id_destino`
 JOIN `pv_tachaqueta`
-ON pv_planillace.`pv_tchaqueta`=`pv_tachaqueta`.id_talla
+ON pv_planilla_ce.`pv_tchaqueta`=`pv_tachaqueta`.id_talla
 JOIN `pv_tallafranela`
-ON pv_planillace.`pv_tfranela`=`pv_tallafranela`.id_talla
+ON pv_planilla_ce.`pv_tfranela`=`pv_tallafranela`.id_talla
 JOIN `pv_tmono`
-ON pv_planillace.`pv_tmono`=`pv_tmono`.id_talla
+ON pv_planilla_ce.`pv_tmono`=`pv_tmono`.id_talla
 JOIN `pv_tgorra`
-ON pv_planillace.`pv_tgorra`=`pv_tgorra`.id_talla
-WHERE pv_planillace.`id_periodo`='$peri'
+ON pv_planilla_ce.`pv_tgorra`=`pv_tgorra`.id_talla
+WHERE pv_planilla_ce.`id_periodo`='$peri'
 ORDER BY pv_fechainscri";
 $cj_hijosSQL = mysql_query($cj_hijosSQL);
 $conta=2;
@@ -191,7 +191,7 @@ $pv_parentesco = $cj_hijos['pv_parentesco'];
 $pv_observaciones = $cj_hijos['pv_observaciones'];
 $pv_fechainscri = $cj_hijos['pv_fechainscri'];
 $pv_edadmeses = $cj_hijos['pv_edadmeses'];
-$cedula_trb = $cj_hijos['cedula_trb'];
+$cedula_trb = $cj_hijos['trb_cedula'];
 $sqltrb = "SELECT * FROM cj_trabajadores WHERE trb_cedula='$cedula_trb'";
 $sqltrb = mysql_query($sqltrb);
 $rowtrb = mysql_fetch_array($sqltrb);

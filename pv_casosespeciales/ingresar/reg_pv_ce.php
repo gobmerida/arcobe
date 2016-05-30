@@ -18,7 +18,7 @@ $idpv      	= $periodo['id_pvperiodo'];
 $pv_contador = $periodo['pv_contador'];
 $pv_contador = $pv_contador+1;
 $pv_añoperiodo = $periodo['pv_añoperiodo'];
-$pv_planillanumero = $pv_añoperiodo."-".$pv_contador;
+$pv_planillanumero = $pv_añoperiodo."-CE-".$pv_contador;
 
 $update_contador = "UPDATE pv_periodo_ce SET pv_contador='$pv_contador' WHERE pv_añoperiodo='$anio_actual'";
 mysql_query($update_contador);

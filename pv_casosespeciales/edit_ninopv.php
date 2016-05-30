@@ -60,9 +60,9 @@ include("../script_php/a_fe.php");
 		}
 		$nino=$_GET['nino'];
 			$c_nino=mysql_query("SELECT *
-								 FROM pv_planillace
+								 FROM pv_planilla_ce
 								 JOIN pv_periodo_ce
-								 ON pv_planillace.id_periodo=pv_periodo_ce.id_pvperiodo
+								 ON pv_planilla_ce.id_periodo=pv_periodo_ce.id_pvperiodo
 								 WHERE id_nino='$nino'",$con) or die (mysql_error());
 			$row_nino=mysql_fetch_array($c_nino);
 			$id_nino = $row_nino['id_nino'];

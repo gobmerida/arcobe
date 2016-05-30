@@ -3,7 +3,7 @@ include("../connect/conexion.php");
 
 $search = $_POST['cedula'];
 if($search!=""){
-$query_services = mysql_query("SELECT * FROM pvce_mpr WHERE mpr_cedula like '" . $search . "%' ORDER BY mpr_cedula DESC", $con);
+$query_services = mysql_query("SELECT * FROM pv_trabajadores_ce WHERE trb_cedula like '" . $search . "%' ORDER BY mpr_cedula DESC", $con);
 while($row_services=mysql_fetch_array($query_services)){
 	$cedula=$row_services['mpr_cedula'];
 	$persona="V.- ".$row_services['mpr_cedula']." ".$row_services['mpr_nombres']." ".$row_services['mpr_apellidos'];
