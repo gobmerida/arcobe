@@ -25,6 +25,8 @@ include("../script_php/a_fe.php");
 				$pv_planillaConsulta = "SELECT * FROM pv_planilla WHERE pv_planillanumero='$n_planilla'";
 				$pv_planillaConsulta = mysql_query($pv_planillaConsulta);
 				$pv_planilla = mysql_fetch_array($pv_planillaConsulta);
+
+				
 				
 				if($pv_planilla['h_sexo']=='F'){
 					$genero="Femenino";

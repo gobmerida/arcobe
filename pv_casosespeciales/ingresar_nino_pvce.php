@@ -61,7 +61,7 @@ include("../sesion/sesion.php");
 			$madpad=mysql_query("SELECT * FROM pv_trabajadores_ce WHERE trb_cedula='$mp'",$con) or die (mysql_error());
 			$row_madpad=mysql_fetch_array($madpad);
 			$trb_c=$row_madpad['trb_codigo'];
-			echo "<table><tr><td>V.- ".$row_madpad['trb_cedula']."</td><td> - ".$row_madpad['trb_nombres']."</td><td>".$row_madpad['trtb_apellidos']."</td></tr></table>";
+			echo "<table><tr><td>V.- ".$row_madpad['trb_cedula']."</td><td> - ".$row_madpad['trb_nombres']."</td><td>".$row_madpad['trb_apellidos']."</td></tr></table>";
 		}
 		?>
 		<br>

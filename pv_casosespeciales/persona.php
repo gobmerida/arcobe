@@ -145,7 +145,7 @@ if(array_key_exists('pn',$_GET)){
 			$nombre2=" ".$row_hijos['h_nombre2'];
 			$apellido2=" ".$row_hijos['h_apellido2'];
 			$e_nino=$row_hijos['h_nombre1'].$nombre2." ".$row_hijos['h_apellido1'].$apellido2;
-			echo "<span class='cen'><a href='nino_ce.php?nino=$cod_nino' class='nino'><span style='color:darkgrey'>(CE/CJ/$row_hijos[año_periodo])</span> $e_nino</a></span><br>";
+			echo "<span class='cen'><a href='nino_pv_ce.php?nino=$cod_nino' class='nino'><span style='color:darkgrey'>(CE/CJ/$row_hijos[pv_añoperiodo])</span> $e_nino</a></span><br>";
 			$i=$i+1;
 		}
 	}

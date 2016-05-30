@@ -40,13 +40,13 @@ include("../../script_php/cal_edad.php");
 			if($buc_nino['h_cedula']!=""){
 				$cedulad_nino ="$buc_nino[h_cedula] -";
 			}
-			if($buc_nino['sexo_nino']=='F'){
+			if($buc_nino['h_sexo']=='F'){
 				$sexo="Femenino";
 				$ninho="de la Niña";
 				echo "<script>ninoa='de la niña';</script>";
 			}
 			
-			if($buc_nino['sexo_nino']=='M'){
+			if($buc_nino['h_sexo']=='M'){
 				$sexo="Masculino";
 				$ninho="del Niño";
 				echo "<script>ninoa='del niño';</script>";
@@ -79,7 +79,7 @@ include("../../script_php/cal_edad.php");
 			<tr><td>Edad: $edad - Grupo Sanguíneo: $gs</td></tr>
 			<tr><td><b>cedula:</b></td></tr>";
 			if($mp_dnino['trb_cedula']!=""){
-			echo "<tr style='cursor:pointer' onmouseover='style.backgroundColor = \"gainsboro\"' onmouseout='style.backgroundColor = \"white\"'><td onclick=\"location.href='../../consultas/trabajador.php?cedula=$mp_dnino[trb_cedula]'\">C.I. $mp_dnino[trb_cedula] - $mp_dnino[trb_nombres] $mp_dnino[aptrb_ellidos]</td></tr>";
+			echo "<tr style='cursor:pointer' onmouseover='style.backgroundColor = \"gainsboro\"' onmouseout='style.backgroundColor = \"white\"'><td onclick=\"location.href='../../consultas/trabajador.php?cedula=$mp_dnino[trb_cedula]'\">C.I. $mp_dnino[trb_cedula] - $mp_dnino[trb_nombres] $mp_dnino[trb_apellidos]</td></tr>";
 			}
 			echo "</table>
 			<br>

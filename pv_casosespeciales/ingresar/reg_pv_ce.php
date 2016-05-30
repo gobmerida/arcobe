@@ -134,22 +134,23 @@ $DataQuery01 = mysql_query($DataQuery01);
 $DataROW01 = mysql_fetch_array($DataQuery01);
 
 if($DataROW01["ced_tbr"]==""){
-	$DataQuery02 = "select * from pv_periodo_ce where id='$id_periodo'";
+	$DataQuery02 = "select * from pv_periodo_ce where id_pvperiodo='$id_periodo'";
 	$DataQuery02 = mysql_query($DataQuery02);
 	$DataROW02 = mysql_fetch_array($DataQuery02);
-	$aux01 = $DataROW02["contador_per"];
-	$aux02 = $DataROW02["Aux"];
-	$aux03 = $DataROW02["ContadorAux"];
+	$peri = $DataROW02["id_pvperiodo"];
+	$aux01 = $DataROW02["Aux"];
+	$aux02 = $DataROW02["ContadorAux"];
+	$aux03 = $DataROW02["contador_per"];
 	if($aux01>=10){
 		$aux01=0;
 		$aux02++;
 	}
 	$aux01++;
 	$aux03++;
-	$DataQuery03 = "insert into pv_cuaderno_ce(ced_tbr,Npagina,Nlinea,Periodo) values('$id_mp','$aux02','$aux03','$idpv')";
+	$DataQuery03 = "insert into pv_cuaderno_ce(ced_tbr,Npagina,Nlinea,Periodo) values('$id_mp','$aux02','$aux03','$peri')";
 	mysql_query($DataQuery03) or die (mysql_error());
-	$DataSQL02 = "update pv_periodo_ce set contador_per='$aux03',ContadorAux='$aux02',Aux='$aux01' where id_pvperiodo='$id_periodo'";
+	$DataSQL02 = "update pv_periodo_ce set contador_per='$aux03',ContadorAux='$aux02',Aux='$aux01' where id_pvperiodo='$peri'";
 	$DataSQL02 = mysql_query($DataSQL02);
 }
-header("location:../pv_planilla_ce.php?pn=$pv_planillanumero&&msj=1");
+header("location:../../consultas/pv_planillas_institutos.php?pn=$pv_planillanumero&&msj=1");
 ?>

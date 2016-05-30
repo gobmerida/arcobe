@@ -1,4 +1,4 @@
-<!--Autor
+<!--Autor 
 Edgar Carrizalez
 C.I. V-19.3522.988
 Correo: edg.sistemas@gmail.com
@@ -19,76 +19,38 @@ Correo: edg.sistemas@gmail.com
 include("../connect/conexion.php");
 include("../sesion/sesion.php");
 include("../script_php/a_fe.php");
-include("../script_php/condicion.php");
+		include("../script_php/condicion.php");
 			if(array_key_exists('pn',$_GET)){
 				$n_planilla = $_GET['pn'];
-				$pv_planillaConsulta = "SELECT * FROM pv_inscrip_ce WHERE pv_planillanumero='$n_planilla'";
-				$pv_planillaConsulta1 = mysql_query($pv_planillaConsulta);
-				$pv_planilla = mysql_fetch_array($pv_planillaConsulta1);
+				$pv_planillaConsulta = "SELECT * FROM pv_planilla_ce WHERE pv_planillanumero='$n_planilla'";
+				$pv_planillaConsulta = mysql_query($pv_planillaConsulta);
+				$pv_planilla = mysql_fetch_array($pv_planillaConsulta);
 
-				$idnihno = $pv_planilla[3];
+				$sql_san = "SELECT nombre FROM cp_gsanguineos WHERE id_grupo_sanguineo='$pv_planilla[h_gsanguineo]'";
+				$rs_san = mysql_query($sql_san) or die ("No se halló el código");
+				$row = mysql_fetch_array($rs_san);
 
-
-				$ctrb_sql = "SELECT codigo_trb FROM pv_inscrip_ce WHERE pv_planillanumero='$n_planilla'";
-				$ctrb_sql = mysql_query($ctrb_sql) or die ("No se halló el código");
-				$ctrb = mysql_fetch_array($ctrb_sql);
-				$c_trb = $ctrb['codigo_trb'];
-
-				$sql  = "SELECT * FROM pv_trabajadores_ce WHERE trb_codigo ='$c_trb'";
-				$query  = mysql_query($sql);
-				$trb  =mysql_fetch_array($query);
-
-				$condicion = tipo_c($c_trb);
-
-				$sqlN = "SELECT * FROM pv_inscrip_ce I inner join pv_hijos_ce H on I.id_ninho_pv=H.id_ninho WHERE I.id_ninho_pv=$idnihno ";
-				$queryN = mysql_query($sqlN);
-				$resN = mysql_fetch_array($queryN);
-        $g = $resN['h_gsanguineo'];
-        $d = $resN['pv_destino'];
-        $t = $resN['pv_tchaqueta'];
-
-        $sqlGS = "SELECT S.* FROM pv_hijos_ce I inner join cp_gsanguineos S on I.h_gsanguineo=S.id_grupo_sanguineo WHERE S.id_grupo_sanguineo=$g ";
-				$queryGS = mysql_query($sqlGS);
-				$gs = mysql_fetch_array($queryGS);
-
-        $sqlD = "SELECT D.pv_destino FROM pv_inscrip_ce I inner join pv_destinos D on I.pv_destino=D.id_destino WHERE D.id_destino=$d ";
-				$queryD = mysql_query($sqlD);
-				$DS = mysql_fetch_array($queryD);
-        $ds = $DS[0];
-
-        $sqlTC = "SELECT D.pv_tchaqueta FROM pv_inscrip_ce I inner join pv_tachaqueta D on I.pv_tchaqueta=D.id_talla WHERE D.id_talla=$t ";
-				$queryTC = mysql_query($sqlTC);
-				$TC = mysql_fetch_array($queryTC);
-        $tc = $TC[0];
-
-        $sqlTF = "SELECT D.pv_tfranela FROM pv_inscrip_ce I inner join pv_tallafranela D on I.pv_tfranela=D.id_talla WHERE D.id_talla=$t ";
-        $queryTF = mysql_query($sqlTF);
-        $TF = mysql_fetch_array($queryTF);
-        $tf = $TF[0];
-
-        $sqlTM = "SELECT D.pv_tmono FROM pv_inscrip_ce I inner join pv_tmono D on I.pv_tmono=D.id_talla WHERE D.id_talla=$t ";
-        $queryTM = mysql_query($sqlTM);
-        $TM = mysql_fetch_array($queryTM);
-        $tm = $TM[0];
-
-        $sqlTG = "SELECT D.pv_tgorra FROM pv_inscrip_ce I inner join pv_tgorra D on I.pv_tgorra=D.id_talla WHERE D.id_talla=$t ";
-        $queryTG = mysql_query($sqlTG);
-        $TG = mysql_fetch_array($queryTG);
-        $tg = $TG[0];
-
-				if($resN['h_sexo']=='F'){
+	
+				
+				if($pv_planilla['h_sexo']=='F'){
 					$genero="Femenino";
 					$ninho="DE LA NIÑA";
 					$confornin="de la niña";
 				}
-				/*if($pv_planilla['id_ninho_pv']==""){
+				if($pv_planilla['id_nino']==""){
 					header("location: BuscarPlanilla.php?error=1");
-				}*/
-				if($resN['h_sexo']=='M'){
+				}
+				if($pv_planilla['h_sexo']=='M'){
 					$genero="Masculino";
 					$ninho="DEL NIÑO";
 					$confornin="del niño";
 				}
+				$ctrb_sql = "SELECT codigo_trb FROM pv_inscrip_ce WHERE pv_planillanumero='$n_planilla'";
+				$ctrb_sql = mysql_query($ctrb_sql) or die ("No se halló el código");
+				$ctrb = mysql_fetch_array($ctrb_sql);
+				$c_trb = $ctrb['codigo_trb'];
+				$condicion = tipo_c($c_trb);
+
 
 			}
 ?>
@@ -118,16 +80,16 @@ include("../script_php/condicion.php");
 				<img src='../media/logo.png' width='75%' class='top_i'><img src='../media/consumo.png' width='50px'></td></tr>
 				<tr><td colspan=4 class='planilla titulo' align=center><b>Plan Vacacional $pv_planilla[pv_añoperiodo]</b></td></tr>
 				<tr><td colspan=4 class='planilla sub_titulo'><b><u>DATOS DEL TRABAJADOR</u></b></td></tr>
-				<tr><td colspan=4 class='planilla'><b>Cédula: </b>$trb[trb_cedula]</td></tr>
-				<tr><td colspan=4 class='planilla'><b>Nombres: </b>$trb[trb_nombres]</td></tr>
-				<tr><td colspan=4 class='planilla'><b>Apellidos: </b>$trb[trb_apellidos]</td></tr>
-				<tr><td colspan=3 class='planilla'><b>Dependencia: </b>$trb[trb_dependencia]</td><td class='planilla'><b>Estatus/Condición:</b><br>$condicion</td></tr>
+				<tr><td colspan=4 class='planilla'><b>Cédula: </b>$pv_planilla[trb_cedula]</td></tr>
+				<tr><td colspan=4 class='planilla'><b>Nombres: </b>$pv_planilla[trb_nombres]</td></tr>
+				<tr><td colspan=4 class='planilla'><b>Apellidos: </b>$pv_planilla[trb_apellidos]</td></tr>
+				<tr><td colspan=3 class='planilla'><b>Dependencia: </b>$pv_planilla[trb_dependencia]</td><td class='planilla'><b>Estatus/Condición:</b><br>$condicion</td></tr>
 				<tr><td colspan=4 class='planilla sub_titulo'><b><u>DATOS $ninho</u></b></td></tr>
-				<tr><td colspan=4 class='planilla'><b>Nombres: </b>$resN[h_nombre1] $resN[h_nombre2]</td></tr>
-				<tr><td colspan=4 class='planilla'><b>Apellidos: </b>$resN[h_apellido1] $resN[h_apellido2]</td></tr>
-				<tr><td class='planilla'><b>Cédula: </b>$resN[h_cedula]</td><td class='planilla'><b>Edad: </b>$pv_planilla[pv_edadmeses]</td><td class='planilla'><b>Grupo Sanguíneo: </b>$gs[nombre]</td><td class='planilla'><b>Género: </b>$genero</td></tr>
-				<tr><td colspan=2 class='planilla'><b>Fecha de nacimiento: </b>".a_fecha($resN['h_fecha_naci'])."</td><td colspan=2 class='planilla'><b>Plan Correspondiente: </b>$ds</td></tr>
-
+				<tr><td colspan=4 class='planilla'><b>Nombres: </b>$pv_planilla[h_nombre1] $pv_planilla[h_nombre2]</td></tr>
+				<tr><td colspan=4 class='planilla'><b>Apellidos: </b>$pv_planilla[h_apellido1] $pv_planilla[h_apellido2]</td></tr>
+				<tr><td class='planilla'><b>Cédula: </b>$pv_planilla[h_cedula]</td><td class='planilla'><b>Edad: </b>$pv_planilla[pv_edadmeses]</td><td class='planilla'><b>Grupo Sanguíneo: </b>$row[nombre];</td><td class='planilla'><b>Género: </b>$genero</td></tr>
+				<tr><td colspan=2 class='planilla'><b>Fecha de nacimiento: </b>".a_fecha($pv_planilla['h_fecha_naci'])."</td><td colspan=2 class='planilla'><b>Plan Correspondiente: </b>$pv_planilla[pv_destino]</td></tr>d
+				
 				<tr><td colspan=4 class='planilla sub_titulo'><b><u>CUIDADOS ESPECIALES</u></b></td></tr>
 				<tr><td colspan=2 class='planilla'><b>Alérgias: </b>$pv_planilla[pv_alergias]</td><td colspan=2 class='planilla'><b>Tratamiento en sumnistro: </b>$pv_planilla[pv_tratamiento]</td></tr>
 				<tr><td colspan=2 class='planilla'><b>Alimentos Prohibidos: </b>$pv_planilla[pv_alimentosp]</td><td colspan=2 class='planilla'><b>Medicamentos Prohibidos: </b>$pv_planilla[pv_medicamentosp]</td></tr>
@@ -138,17 +100,17 @@ include("../script_php/condicion.php");
 				Nombre y Apellidos: $pv_planilla[pv_contacto_nombre] $pv_planilla[pv_contacto_apellido]<br>
 				Cédula de Identidad: $pv_planilla[pv_contacto_cedula]<br>
 				Teléfono: $pv_planilla[pv_contacto_telefono]<br>
-				Parentesco:  $pv_planilla[pv_parentesco]
-
+				Parentesco:  $pv_planilla[pv_contacto_parentesco]
+				
 				</td></tr>
 				<tr><td colspan=4 class='planilla sub_titulo'><b><u>OBSERVACIONES GENERALES: </u></b></td></tr>
 				<tr><td colspan=2 class='planilla'><b>Habilidades: </b>$pv_planilla[pv_habilidades]</td><td colspan=2 class='planilla'><b>Actividades favoritas: </b>$pv_planilla[pv_gustos]</td></tr>
 				<tr><td colspan=4 class='planilla sub_titulo'><b><u>TALLAS PARA EL UNIFORME: </u></b></td></tr>
-				<tr><td colspan=4 class='planilla'><b>Franela: </b>$tf - <b>Chaqueta: </b>$tc - <b>Mono: </b>$tm - <b>Gorra: </b>$tg</td></tr>
+				<tr><td colspan=4 class='planilla'><b>Franela: </b>$pv_planilla[pv_tfranela] - <b>Chaqueta: </b>$pv_planilla[pv_tchaqueta] - <b>Mono: </b>$pv_planilla[pv_tmono] - <b>Gorra: </b>$pv_planilla[pv_tgorra]</td></tr>
 				<tr><td colspan=4 class='planilla sub_titulo'><b><center><u>DOCUMENTOS CONSIGNADOS</u></center></b></td></tr>
 				<tr><td colspan=2 class='planilla'><b>1.- Fotos $ninho: </b></td><td colspan=2 class='planilla'>$pv_planilla[pv_fotos]</td></tr>
 				<tr><td colspan=2 class='planilla'><b>2.- Certificado de Niño sano: </b></td><td colspan=2 class='planilla'>$pv_planilla[pv_certificado]</td></tr>
-
+				
 				";
 			?>
 		</table>
@@ -157,9 +119,9 @@ include("../script_php/condicion.php");
 			<tr>
 				<td class='info-planilla'>
 					<h4 align="center"><u>TRABAJADOR/REPRESENTANTE DEL EJECUTIVO REGIONAL</u></h4>
-					<p style="text-align:justify; margin:20px">&nbsp;&nbsp;&nbsp;&nbsp; Yo, <b><?php echo "$trb[trb_nombres] $trb[trb_apellidos]";?></b>,
-					portador de la Cédula de Identidad número: <b><?php echo "$trb[trb_cedula]";?></b>, funcionario adscrito a: <?php echo "$trb[trb_dependencia]";?>
-					y en calidad de representante de el (la) menor: <b><?php echo "$trb[h_nombre1] $trb[h_nombre2] $trb[h_apellido1] $trb[h_apellido2]";?></b>, declaro
+					<p style="text-align:justify; margin:20px">&nbsp;&nbsp;&nbsp;&nbsp; Yo, <b><?php echo "$pv_planilla[trb_nombres] $pv_planilla[trb_apellidos]";?></b>, 
+					portador de la Cédula de Identidad número: <b><?php echo "$pv_planilla[trb_cedula]";?></b>, funcionario adscrito a: <?php echo "$pv_planilla[trb_dependencia]";?>
+					y en calidad de representante de el (la) menor: <b><?php echo "$pv_planilla[h_nombre1] $pv_planilla[h_nombre2] $pv_planilla[h_apellido1] $pv_planilla[h_apellido2]";?></b>, declaro
 					que los datos suministrados por mi son fehacientes.<br>
 						<center><b>Así mismo, acepto la normativa que se menciona a continuación:</b></center>
 						<ol style="text-align:justify; margin:20px">
@@ -186,15 +148,38 @@ include("../script_php/condicion.php");
 				</td>
 			</tr>
 			<tr><td>&nbsp;</td></tr>
+			<td><hr></td>
+			<table tyle="width:100%;border" class="conforme-rep" align="center">
+				<tr>
+					<td colspan="2" align="center"><b>Planilla: </b> <?php echo "$pv_planilla[pv_planillanumero]";?></td>
+				</tr>
+				<tr>
+					<td style="padding:15px"><b>Datos del Trabajador:</b><br>
+						<b>Nombre: </b><?php echo "$pv_planilla[trb_nombres] $pv_planilla[trb_apellidos]";?><br>
+						<b>Cedula: </b><?php echo "$pv_planilla[trb_cedula]";?>
+					</td>
+					<td style="padding:15px"><b>Nombre <?php echo "$confornin";?>:</b><br /> </b><?php echo "$pv_planilla[h_nombre1] $pv_planilla[h_nombre2] $pv_planilla[h_apellido1] $pv_planilla[h_apellido2]";?><br><br />
+						<b>Talla Chaqueta: </b><?php echo "$pv_planilla[pv_tchaqueta]";?><br>
+						<b>Talla Mono: </b><?php echo "$pv_planilla[pv_tmono]";?><br>
+						<b>Talla Franela: </b><?php echo "$pv_planilla[pv_tfranela]";?><br>
+						<b>Talla Gorra: </b><?php echo "$pv_planilla[pv_tgorra]";?>
+					</td>
+					
+				</tr>
+
+				
+			</table>
 			<tr><td>&nbsp;</td></tr>
 			<tr><td>&nbsp;</td></tr>
 			<tr><td>&nbsp;</td></tr>
+
 			<tr>
 			<td><hr></td>
 			</tr>
 			<tr><td>&nbsp;</td></tr>
 			<tr>
 				<td>
+
 					<table style="width:100%;border" class="conforme-rep">
 						<tr>
 							<td colspan="2"><b>Código del trabajador: </b><?php echo "$c_trb";?></td><td colspan="2"><b>Número de Planilla: </b><?php echo "$pv_planilla[pv_planillanumero]";?></td>
@@ -208,28 +193,30 @@ include("../script_php/condicion.php");
 						<tr>
 							<td colspan="3" style="padding:15px">
 							<b>Datos del trabajador:</b><br>
-							<b>C.I. </b><?php echo "$trb[trb_cedula]";?><br>
-							<b>Nombres: </b><?php echo "$trb[trb_nombres] $trb[trb_apellidos]";?><br>
-							<b>Dependencia: </b><?php echo "$trb[trb_dependencia]";?>
+							<b>C.I. </b><?php echo "$pv_planilla[trb_cedula]";?><br>
+							<b>Nombres: </b><?php echo "$pv_planilla[trb_nombres] $pv_planilla[trb_apellidos]";?><br>
+							<b>Dependencia: </b><?php echo "$pv_planilla[trb_dependencia]";?>
 							</td>
+							<td>
 							<?php
-								$DataCJSQL01 = "select * from pv_cuaderno_ce where ced_tbr='".$trb["trb_cedula"]."' ORDER BY Periodo DESC LIMIT 1";
+								$DataCJSQL01 = "select * from pv_cuaderno_ce where ced_tbr='".$pv_planilla["trb_cedula"]."' ORDER BY Periodo DESC LIMIT 1";
 								$DataCJSQL01 = mysql_query($DataCJSQL01);
 								$DataCJROW01 = mysql_fetch_array($DataCJSQL01);
 							?>
-							<td>
-								<b>Cuaderno CE</b><br />
+								<b>Cuaderno c/e</b><br />
 								Pagina: <b><?php echo $DataCJROW01["Npagina"] ?></b><br />
 								Linea: <b><?php echo $DataCJROW01["Nlinea"] ?></b>
 							</td>
+
+
 						</tr>
 						<tr>
 							<td colspan="4"  style="padding:5px 5px 5px 15px">
-							<b>Datos <?php echo "$confornin";?>: </b><?php echo "$resN[h_nombre1] $resN[h_nombre2] $resN[h_apellido1] $resN[h_apellido2]";?>
+							<b>Datos <?php echo "$confornin";?>: </b><?php echo "$pv_planilla[h_nombre1] $pv_planilla[h_nombre2] $pv_planilla[h_apellido1] $pv_planilla[h_apellido2]";?>
 							</td>
 						</tr>
 						<tr>
-							<td>Talla Chaqueta: <?php echo "$tc";?></td><td>Talla Mono: <?php echo "$tm";?></td><td>Talla Franela: <?php echo "$tf";?></td><td>Talla Gorra: <?php echo "$tg";?></td>
+							<td>Talla Chaqueta: <?php echo "$pv_planilla[pv_tchaqueta]";?></td><td>Talla Mono: <?php echo "$pv_planilla[pv_tmono]";?></td><td>Talla Franela: <?php echo "$pv_planilla[pv_tfranela]";?></td><td>Talla Gorra: <?php echo "$pv_planilla[pv_tgorra]";?></td>
 						</tr>
 					</table>
 				</td>

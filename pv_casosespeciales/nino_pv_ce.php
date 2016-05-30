@@ -92,7 +92,7 @@ include("../sesion/sesion.php");
 			}
 			echo "</span><br>";
 			echo "<table class='nino'>";
-			echo "<tr><td>Cédula: ".$row_nino['hcedula']."</td><td>Registro: ".$row_nino['id_ninho']."</td></tr>";
+			echo "<tr><td>Cédula: ".$row_nino['h_cedula']."</td><td>Registro: ".$row_nino['id_ninho']."</td></tr>";
 			echo "<tr class='som'><td colspan='2'>Nombre(s): ".$row_nino['h_nombre1']." ".$row_nino['h_nombre2']."</td></tr>";
 			echo "<tr><td colspan='2'>Apellido(s): ".$row_nino['h_apellido1']." ".$row_nino['h_apellido2']."</td></tr>";
 			echo "<tr class='som'><td>Fecha de N.: ".$fecha_naci."</td><td>Sexo: $sexo</td></tr>";
@@ -112,6 +112,7 @@ include("../sesion/sesion.php");
 				$periodos_ni_consulta = mysql_query($periodos_ni_consulta);
 				$nino_per_consulta = mysql_fetch_array($periodos_ni_consulta);
 				echo "<li onclick=\"location.href='pv_planilla_ce.php?pn=$periodos_inscrito[pv_planillanumero]'\">$nino_per_consulta[pv_añoperiodo] - Ver planilla</li>";
+				
 			}
 
 			if($pv_periodo['pv_añoperiodo']==$anio_actual and $pv_periodo['cierre']==0){
@@ -149,7 +150,7 @@ include("../sesion/sesion.php");
 			";
 			echo "</table>";
 		echo "<br><span class='dll'><center><img src='../media/inicio.png' onclick=\"location.href='../'\" width='20px' style='cursor:pointer' title='Inicio'/>&nbsp;<img src='../media/buscar.png' onclick=\"location.href='b_nino.php'\" width='20px' style='cursor:pointer;border-radius:0' title='Buscar Niño'/></center></span>";
-		if($row_nino['cedula_repr']!=''){
+		if($row_nino['cedula_rep']!=''){
 		echo "<h3 class='n'style='color:black'>Representante legal</h3><br>";
 
 		if($row_nino['cedula_mp']!=""){
