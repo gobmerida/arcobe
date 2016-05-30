@@ -24,11 +24,11 @@
 	$cperiodo = mysql_fetch_array($cperido_sql);
 
 	//Consulta de los niños registrados
-	$consulta_reg = "SELECT * FROM pv_planilla_ce WHERE id_periodo='$periodo'";
-	$consulta_reg = mysql_query($consulta_reg) or die (mysql_error());
+	
 	// Consulta de los niños registrados (Otros)
-	$consulta_regOtro = "SELECT * FROM pv_planillace
-					WHERE id_periodo='$periodo' and token='1'";
+	$consulta_regOtro = "SELECT * FROM pv_inscrip_ce
+					JOIN pv_hijos_ce
+					ON pv_inscrip_ce.id_ninho_pv=pv_hijos_ce.id_ninho";
 	$consulta_regOtro = mysql_query($consulta_regOtro) or die (mysql_error());
 	//Inicialización de contadores
 	$contador=0;
@@ -146,7 +146,7 @@
 		$a_tallaGorrNino[$iterGorrNino]=0;
 	}
 	//Un repita para totalizar los estimados/reportes
-	while($registrados = mysql_fetch_array($consulta_reg)){
+	while($registrados = mysql_fetch_array($consulta_regOtro)){
 
 		if($registrados['pv_fotos']!="" and $registrados['pv_certificado']!="" and $registrados['pv_habilidades']!="" and $registrados['pv_gustos']!="" and $registrados['pv_vacunas']!="" and $registrados['pv_alergias']!="" and $registrados['pv_tratamiento']!="" and $registrados['pv_alimentosp']!="" and $registrados['pv_medicamentosp']!="" and $registrados['pv_tchaqueta']!="1" and $registrados['pv_tfranela']!="1" and $registrados['pv_tmono']!="1" and $registrados['pv_tgorra']!="1" and $registrados['pv_contacto_cedula']!="" and $registrados['pv_contacto_nombre']!="" and $registrados['pv_contacto_apellido']!="" and $registrados['pv_contacto_telefono']!="" and $registrados['pv_contacto_parentesco']!="1"){
 			$cond_t = tipo_c($registrados['codigo_trb']);
