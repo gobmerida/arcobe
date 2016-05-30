@@ -41,7 +41,7 @@ $DataSQL00 = "select *
 			  from pv_cuaderno_ce
 			  join pv_trabajadores_ce
 			  on pv_cuaderno_ce.ced_tbr=pv_trabajadores_ce.trb_cedula
-			  where Periodo='$data01'";
+			  where Periodo='$data01' order by pv_cuaderno_ce.Nlinea";
 $DataSQL00 = mysql_query($DataSQL00);
 
 $i=0;
@@ -52,7 +52,7 @@ while( $DataROW00 = mysql_fetch_array($DataSQL00) ){
 				  from pv_hijos_ce
 				  join pv_inscrip_ce
 				  on pv_hijos_ce.id_ninho = pv_inscrip_ce.id_ninho_pv
-				  where pv_inscrip_ce.id_periodo='$data01' and pv_inscrip_ce.id_mp='$DataROW00[trb_cedula]'";
+				  where pv_inscrip_ce.id_periodo='$data01' and pv_inscrip_ce.id_mp='$DataROW00[trb_cedula]' ";
 	$DataSQL01 = mysql_query($DataSQL01);
 	$KidsNumber=0;
 	while($DataROW01 = mysql_fetch_array($DataSQL01)){
