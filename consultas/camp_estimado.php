@@ -431,7 +431,7 @@
 			echo "
 			<a href='ConsultaNinosPV.php?tipo=CAMPAMENTO&anp=$anio_periodo'>Exportar</a>
 			<table class='estimados'>
-			<tr><td>Total Beneficiados:</td><td class='totales'>$total</td></tr>
+			<tr><td>Total Beneficiados:</td><td class='totales'>$contador</td></tr>
 			<tr><td>Total Beneficiados con recaudos pendientes:</td><td class='totales'>$recaudos</td></tr>
 			</table>
 			<br>
@@ -442,7 +442,7 @@
 			<tr><td>Total niños(as) de obreros fijos:</td><td class='totales'>$obrfijo</td></tr>
 			<tr><td>Total niños(as) de obreros contratados:</td><td class='totales'>$obrcont</td></tr>
 			<tr class='somb'><td>Total niños(as) de obreros:</td><td class='totales'>$total_obr</td></tr>
-			<tr><td style='text-align:right'>Total:</td><td class='totales'>$total</td></tr>
+			<tr><td style='text-align:right'>Total:</td><td class='totales'>$contador</td></tr>
 			</table>
 			<br>
 			$crear_tabla
