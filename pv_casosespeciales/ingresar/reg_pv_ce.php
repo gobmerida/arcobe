@@ -152,5 +152,5 @@ if($DataROW01["ced_tbr"]==""){
 	$DataSQL02 = "update pv_periodo_ce set contador_per='$aux03',ContadorAux='$aux02',Aux='$aux01' where id_pvperiodo='$peri'";
 	$DataSQL02 = mysql_query($DataSQL02);
 }
-header("location:../../consultas/pv_planillas_institutos.php?pn=$pv_planillanumero&&msj=1");
+header("location:../pv_planilla_ce.php?pn=$pv_planillanumero&&msj=1");
 ?>

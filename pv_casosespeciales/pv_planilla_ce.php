@@ -57,7 +57,7 @@ include("../script_php/a_fe.php");
 <body>
 	<div id='panel'>
 	<a href="../"><img src='../media/inicio.png' width='50px'></a><br>
-	<a href='./nino.php?nino=<?php echo $pv_planilla['id_ninho_pv'];?>'><img src="../media/nino.png" width="50px"></a><br>
+	<a href='./nino.php?nino=<?php echo $pv_planilla['id_nino'];?>'><img src="../media/nino.png" width="50px"></a><br>
 	<a href='javascript:window.print(); void 0;'><img src="../media/Printer.png" width="50px"></a><br>
 	<?php
 	if($_SESSION['rol_editor']=="1"){
