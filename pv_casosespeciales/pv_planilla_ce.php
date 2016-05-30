@@ -106,7 +106,7 @@ include("../script_php/a_fe.php");
 				<tr><td colspan=4 class='planilla sub_titulo'><b><u>OBSERVACIONES GENERALES: </u></b></td></tr>
 				<tr><td colspan=2 class='planilla'><b>Habilidades: </b>$pv_planilla[pv_habilidades]</td><td colspan=2 class='planilla'><b>Actividades favoritas: </b>$pv_planilla[pv_gustos]</td></tr>
 				<tr><td colspan=4 class='planilla sub_titulo'><b><u>TALLAS PARA EL UNIFORME: </u></b></td></tr>
-				<tr><td colspan=4 class='planilla'><b>Franela: </b>$pv_planilla[pv_tfranela] - <b>Chaqueta: </b>$pv_planilla[pv_tchaqueta] - <b>Mono: </b>$pv_planilla[pv_tmono] - <b>Gorra: </b>$pv_planilla[pv_tgorra]</td></tr>
+				<tr><td colspan=4 class='planilla'><b>Franela: </b>$pv_planilla[tfranela] - <b>Chaqueta: </b>$pv_planilla[tchaqueta] - <b>Mono: </b>$pv_planilla[tmono] - <b>Gorra: </b>$pv_planilla[tgorra]</td></tr>
 				<tr><td colspan=4 class='planilla sub_titulo'><b><center><u>DOCUMENTOS CONSIGNADOS</u></center></b></td></tr>
 				<tr><td colspan=2 class='planilla'><b>1.- Fotos $ninho: </b></td><td colspan=2 class='planilla'>$pv_planilla[pv_fotos]</td></tr>
 				<tr><td colspan=2 class='planilla'><b>2.- Certificado de Niño sano: </b></td><td colspan=2 class='planilla'>$pv_planilla[pv_certificado]</td></tr>
@@ -159,10 +159,10 @@ include("../script_php/a_fe.php");
 						<b>Cedula: </b><?php echo "$pv_planilla[trb_cedula]";?>
 					</td>
 					<td style="padding:15px"><b>Nombre <?php echo "$confornin";?>:</b><br /> </b><?php echo "$pv_planilla[h_nombre1] $pv_planilla[h_nombre2] $pv_planilla[h_apellido1] $pv_planilla[h_apellido2]";?><br><br />
-						<b>Talla Chaqueta: </b><?php echo "$pv_planilla[pv_tchaqueta]";?><br>
-						<b>Talla Mono: </b><?php echo "$pv_planilla[pv_tmono]";?><br>
-						<b>Talla Franela: </b><?php echo "$pv_planilla[pv_tfranela]";?><br>
-						<b>Talla Gorra: </b><?php echo "$pv_planilla[pv_tgorra]";?>
+						<b>Talla Chaqueta: </b><?php echo "$pv_planilla[tchaqueta]";?><br>
+						<b>Talla Mono: </b><?php echo "$pv_planilla[tmono]";?><br>
+						<b>Talla Franela: </b><?php echo "$pv_planilla[tfranela]";?><br>
+						<b>Talla Gorra: </b><?php echo "$pv_planilla[tgorra]";?>
 					</td>
 					
 				</tr>
@@ -216,7 +216,7 @@ include("../script_php/a_fe.php");
 							</td>
 						</tr>
 						<tr>
-							<td>Talla Chaqueta: <?php echo "$pv_planilla[pv_tchaqueta]";?></td><td>Talla Mono: <?php echo "$pv_planilla[pv_tmono]";?></td><td>Talla Franela: <?php echo "$pv_planilla[pv_tfranela]";?></td><td>Talla Gorra: <?php echo "$pv_planilla[pv_tgorra]";?></td>
+							<td>Talla Chaqueta: <?php echo "$pv_planilla[tchaqueta]";?></td><td>Talla Mono: <?php echo "$pv_planilla[tmono]";?></td><td>Talla Franela: <?php echo "$pv_planilla[tfranela]";?></td><td>Talla Gorra: <?php echo "$pv_planilla[tgorra]";?></td>
 						</tr>
 					</table>
 				</td>
