@@ -33,6 +33,7 @@ Correo: edg.sistemas@gmail.com
 			<ul class="secundario">
 				<li onclick="location.href='b_nino.php'">Beneficiario</li>
 				<li onclick="location.href='persona.php'">Persona</li>
+				<li onclick="location.href='BuscarPlanilla.php'">Buscra planilla</li>
 			</ul>
 		<?php
 			if($_SESSION['rol_ingreso']==1){

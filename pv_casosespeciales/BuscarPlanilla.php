@@ -46,7 +46,7 @@ if(!array_key_exists('cedula',$_GET)){
 	<div id="cabecera_ini"></div>
 	<div id="principal">
 		<h3 style="text-align:center">Consultar Planilla</h2>
-	<form action="pv_planilla.php" method="get">
+	<form action="pv_planilla_ce.php" method="get">
 		<table style="margin:0 auto;text-align:center;padding:5px;">
 		<tr><td>Número Planilla</td></tr>
 		<tr><td><input type="text" id="pn" name="pn" autocomplete="off" /></td></tr>

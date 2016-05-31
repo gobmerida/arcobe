@@ -68,7 +68,7 @@ $DataSQL00 = "select *
 			  from pv_cuaderno_ce
 			  join pv_trabajadores_ce
 			  on pv_cuaderno_ce.ced_tbr=pv_trabajadores_ce.trb_cedula
-			  where  Periodo='$data01'";
+			  where  Periodo='$data01' order by pv_cuaderno_ce.Nlinea";
 $DataSQL00 = mysql_query($DataSQL00);
 
 $i=0;

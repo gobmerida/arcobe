@@ -51,7 +51,7 @@ Correo: edg.sistemas@gmail.com
 				var dataString = 'pn='+mp;
 				$.ajax({
 					type: "POST",
-					url: "empleados_ce.php",
+					url: "empleados.php",
 					data: dataString,
 					success: function(data) {
 						$('#suggestions').fadeIn(0).html(data);
