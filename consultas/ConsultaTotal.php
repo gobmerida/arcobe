@@ -196,62 +196,14 @@ $objPHPExcel->getActiveSheet()->SetCellValue("AM$conta", "$pv_tmono");
 
 $conta++;
 }
-$cj_hijosSQL = "SELECT
-pv_planillace.`pv_planillanumero`,
-pv_planillace.`id_nino` as `id_ninho_pv`,
-pv_planillace.`h_cedula`,
-pv_planillace.`h_nombre1`,
-pv_planillace.`h_nombre2`,
-pv_planillace.`h_apellido1`,
-pv_planillace.`h_apellido2`,
-pv_planillace.`h_fecha_naci`,
-pv_planillace.`h_sexo`,
-cp_gsanguineos.nombre,
-pv_planillace.`fecha_ingreso`,
-pv_planillace.`pv_fotos`,
-pv_planillace.`pv_certificado`,
-pv_planillace.`pv_habilidades`,
-pv_planillace.`pv_gustos`,
-pv_planillace.`pv_vacunas`,
-pv_planillace.`pv_alergias`,
-pv_planillace.`pv_tratamiento`,
-pv_planillace.`pv_alimentosp`,
-pv_planillace.`pv_medicamentosp`,
-pv_planillace.`pv_contacto_cedula`,
-pv_planillace.`pv_contacto_nombre`,
-pv_planillace.`pv_contacto_apellido`,
-pv_planillace.`pv_contacto_telefono`,
-pv_parentesco.`pv_parentesco`,
-pv_planillace.`pv_observaciones`,
-pv_planillace.`fecha_ingreso` as `pv_fechainscri`,
-pv_planillace.`pv_edadmeses`,
-pv_planillace.`cedula_trb`,
-pv_destinos.`pv_destino`,
-`pv_tachaqueta`.`pv_tchaqueta`,
-`pv_tallafranela`.`pv_tfranela`,
-`pv_tmono`.`pv_tmono`,
-`pv_tgorra`.`pv_tgorra`
-FROM `pv_planillace`
-JOIN cp_gsanguineos
-ON pv_planillace.`h_gsanguineo`=cp_gsanguineos.id_grupo_sanguineo
-JOIN pv_parentesco
-ON pv_planillace.`pv_contacto_parentesco`=pv_parentesco.id_parentesco
-JOIN pv_destinos
-ON pv_planillace.`pv_destino`=pv_destinos.`id_destino`
-JOIN `pv_tachaqueta`
-ON pv_planillace.`pv_tchaqueta`=`pv_tachaqueta`.id_talla
-JOIN `pv_tallafranela`
-ON pv_planillace.`pv_tfranela`=`pv_tallafranela`.id_talla
-JOIN `pv_tmono`
-ON pv_planillace.`pv_tmono`=`pv_tmono`.id_talla
-JOIN `pv_tgorra`
-ON pv_planillace.`pv_tgorra`=`pv_tgorra`.id_talla
-WHERE pv_planillace.`id_periodo`='$peri'
-ORDER BY pv_fechainscri";
+$cj_hijosSQL = "SELECT * FROM pv_planilla_ce JOIN pv_inscrip_ce WHERE pv_planilla_ce.pv_añoperiodo='$anp' ORDER BY pv_fechainscri";
 $cj_hijosSQL = mysql_query($cj_hijosSQL);
 while($cj_hijos = mysql_fetch_array($cj_hijosSQL)){
+$sql= "SELECT nombre FROM cp_gsanguineos WHERE id_grupo_sanguineo= '".$cj_hijos['h_gsanguineo']."'";
+$rs= mysql_query($sql) or die(mysql_error());
+$row = mysql_fetch_array($rs);
 $pv_planillanumero = $cj_hijos['pv_planillanumero'];
-$id_ninho_pv = $cj_hijos['id_ninho_pv'];
+$id_ninho_pv = $cj_hijos['id_nino'];
 $h_cedula = $cj_hijos['h_cedula'];
 $h_nombre1 = $cj_hijos['h_nombre1'];
 $h_nombre2 = $cj_hijos['h_nombre2'];
@@ -259,7 +211,7 @@ $h_apellido1 = $cj_hijos['h_apellido1'];
 $h_apellido2 = $cj_hijos['h_apellido2'];
 $h_fecha_naci = a_fecha($cj_hijos['h_fecha_naci']);
 $h_sexo = $cj_hijos['h_sexo'];
-$nombre = $cj_hijos['nombre'];
+$nombre = $row["nombre"];
 $fecha_ingreso = funcion04($cj_hijos['fecha_ingreso']);
 $pv_fotos = $cj_hijos['pv_fotos'];
 $pv_certificado = $cj_hijos['pv_certificado'];
@@ -274,34 +226,16 @@ $pv_contacto_cedula = $cj_hijos['pv_contacto_cedula'];
 $pv_contacto_nombre = $cj_hijos['pv_contacto_nombre'];
 $pv_contacto_apellido = $cj_hijos['pv_contacto_apellido'];
 $pv_contacto_telefono = $cj_hijos['pv_contacto_telefono'];
-$pv_parentesco = $cj_hijos['pv_parentesco'];
+$pv_parentesco = $cj_hijos['pv_contacto_parentesco'];
 $pv_observaciones = $cj_hijos['pv_observaciones'];
 $pv_fechainscri = $cj_hijos['pv_fechainscri'];
 $pv_edadmeses = $cj_hijos['pv_edadmeses'];
-$cedula_trb = $cj_hijos['cedula_trb'];
-$sqltrb = "SELECT * FROM cj_trabajadores WHERE trb_cedula='$cedula_trb'";
-$sqltrb = mysql_query($sqltrb);
-$rowtrb = mysql_fetch_array($sqltrb);
-if($rowtrb['trb_cedula']!=""){
-$trb_codigo = $rowtrb['trb_codigo'];
-$trb_cedula = $rowtrb['trb_cedula'];
-$trb_apellidos = $rowtrb['trb_apellidos'];
-$trb_nombres = $rowtrb['trb_nombres'];
-$trb_cargo = $rowtrb['trb_cargo'];
-$trb_dependencia = $rowtrb['trb_dependencia'];
-}
-else{
-$sqlper = "SELECT * FROM pvce_mpr WHERE mpr_cedula='$cedula_trb'";
-$sqlper = mysql_query($sqlper);
-$rowper = mysql_fetch_array($sqlper);
-
-$trb_codigo = $rowper['id'];
-$trb_cedula = $rowper['mpr_cedula'];
-$trb_apellidos = $rowper['mpr_apellidos'];
-$trb_nombres = $rowper['mpr_nombres'];
-$trb_cargo = "NO ES TRABAJADOR";
-$trb_dependencia = "NINGUNA";
-}
+$trb_codigo = $cj_hijos['trb_codigo'];
+$trb_cedula = $cj_hijos['trb_cedula'];
+$trb_apellidos = $cj_hijos['trb_apellidos'];
+$trb_nombres = $cj_hijos['trb_nombres'];
+$trb_cargo = $cj_hijos['trb_cargo'];
+$trb_dependencia = $cj_hijos['trb_dependencia'];
 $pv_destino = $cj_hijos['pv_destino'];
 $pv_tchaqueta = $cj_hijos['pv_tchaqueta'];
 $pv_tfranela = $cj_hijos['pv_tfranela'];

@@ -641,7 +641,7 @@
 			<tr class='somb'><td>Total niños(as) de obreros:</td><td class='totales'>$total_obr</td></tr>
 			<tr class='somb'><td>Total (Casos Especiales):</td><td class='totales'>$contador_ce</td></tr>
 			<tr class='somb'><td>Institutos:</td><td class='totales'>$fundpe</td></tr>
-			<tr><td style='text-align:right'>Total:</td><td class='totales'>$total</td></tr>
+			<tr><td style='text-align:right'>Total:</td><td class='totales'>$contador</td></tr>
 			</table>
 			<br>
 			<h3 style='center'>Total tallas</h3>

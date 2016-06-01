@@ -31,7 +31,7 @@ include("../sesion/sesion.php");
 		<?php
 		if(array_key_exists("mp",$_GET)){
 			$mp=$_GET['mp'];
-			$madpad=mysql_query("SELECT * FROM cj_trabajadores_instituto WHERE trb_cedula='$mp'",$con) or die (mysql_error());
+			$madpad=mysql_query("SELECT * FROM cj_trabajadores_institutos WHERE trb_cedula='$mp'",$con) or die (mysql_error());
 			$row_madpad=mysql_fetch_array($madpad);
 			echo "<table><tr><td>V.- ".$row_madpad['trb_cedula']."</td><td> - ".$row_madpad['trb_nombres']."</td><td>".$row_madpad['trb_apellidos']."</td></tr></table>";
 			$c_hijos=mysql_query("SELECT * FROM cj_hijos_institutos WHERE cedula_mp='$mp'",$con) or die (mysql_error());
