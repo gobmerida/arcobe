@@ -49,16 +49,16 @@ include("../script_php/a_fe.php");
 <body>
 	<div id='panel'>
 	<a href="../"><img src='../media/inicio.png' width='50px'></a><br>
-	<a href='./nino.php?nino=<?php echo $pv_planilla['id_ninho_pv'];?>'><img src="../media/nino.png" width="50px"></a><br>
+	<a href='../institutos/nino.php?nino=<?php echo $pv_planilla['id_ninho_pv'];?>'><img src="../media/nino.png" width="50px"></a><br>
 	<a href='javascript:window.print(); void 0;'><img src="../media/Printer.png" width="50px"></a><br>
 	<?php
 	if($_SESSION['rol_editor']=="1"){
 	?>
-	<a href='e_pv.php?pn=<?php echo $_GET['pn']; ?>'><img src="../media/editar.png" width="50px"></a><br>
+	<a href='../institutos/e_pv.php?pn=<?php echo $_GET['pn']; ?>'><img src="../media/editar.png" width="50px"></a><br>
 	<?php
 	}
 	?>
-	<a href='BuscarPlanilla.php'><img src="../media/buscar.png" width="50px"></a><br>
+	<a href='../institutos/BuscarPlanilla.php'><img src="../media/buscar.png" width="50px"></a><br>
 	</div>
 	<div id="pv_planilla">
 		<table>

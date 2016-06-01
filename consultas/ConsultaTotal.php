@@ -202,6 +202,32 @@ while($cj_hijos = mysql_fetch_array($cj_hijosSQL)){
 $sql= "SELECT nombre FROM cp_gsanguineos WHERE id_grupo_sanguineo= '".$cj_hijos['h_gsanguineo']."'";
 $rs= mysql_query($sql) or die(mysql_error());
 $row = mysql_fetch_array($rs);
+$sql2= "SELECT pv_parentesco FROM pv_parentesco WHERE id_parentesco= '".$cj_hijos['pv_contacto_parentesco']."'";
+$rs2= mysql_query($sql2) or die(mysql_error());
+$row2 = mysql_fetch_array($rs2);
+$sql3= "SELECT pv_destino FROM pv_destinos WHERE id_destino= '".$cj_hijos['pv_destino']."'";
+$rs3= mysql_query($sql3) or die(mysql_error());
+$row3 = mysql_fetch_array($rs3);
+
+//consultar tallas
+
+$talla1= "SELECT pv_tchaqueta FROM pv_tachaqueta WHERE id_talla= '".$cj_hijos['pv_tchaqueta']."'";
+$rs_talla1= mysql_query($talla1) or die(mysql_error());
+$row_talla1 = mysql_fetch_array($rs_talla1);
+
+$talla2= "SELECT pv_tfranela FROM pv_tallafranela WHERE id_talla= '".$cj_hijos['pv_tfranela']."'";
+$rs_talla2= mysql_query($talla2) or die(mysql_error());
+$row_talla2 = mysql_fetch_array($rs_talla2);
+
+$talla3= "SELECT pv_tgorra FROM pv_tgorra WHERE id_talla= '".$cj_hijos['pv_tgorra']."'";
+$rs_talla3= mysql_query($talla3) or die(mysql_error());
+$row_talla3 = mysql_fetch_array($rs_talla3);
+
+$talla4= "SELECT pv_tmono FROM pv_tmono WHERE id_talla= '".$cj_hijos['pv_tmono']."'";
+$rs_talla4= mysql_query($talla4) or die(mysql_error());
+$row_talla4 = mysql_fetch_array($rs_talla4);
+
+//
 $pv_planillanumero = $cj_hijos['pv_planillanumero'];
 $id_ninho_pv = $cj_hijos['id_nino'];
 $h_cedula = $cj_hijos['h_cedula'];
@@ -226,7 +252,7 @@ $pv_contacto_cedula = $cj_hijos['pv_contacto_cedula'];
 $pv_contacto_nombre = $cj_hijos['pv_contacto_nombre'];
 $pv_contacto_apellido = $cj_hijos['pv_contacto_apellido'];
 $pv_contacto_telefono = $cj_hijos['pv_contacto_telefono'];
-$pv_parentesco = $cj_hijos['pv_contacto_parentesco'];
+$pv_parentesco = $row2["pv_parentesco"];
 $pv_observaciones = $cj_hijos['pv_observaciones'];
 $pv_fechainscri = $cj_hijos['pv_fechainscri'];
 $pv_edadmeses = $cj_hijos['pv_edadmeses'];
@@ -236,11 +262,11 @@ $trb_apellidos = $cj_hijos['trb_apellidos'];
 $trb_nombres = $cj_hijos['trb_nombres'];
 $trb_cargo = $cj_hijos['trb_cargo'];
 $trb_dependencia = $cj_hijos['trb_dependencia'];
-$pv_destino = $cj_hijos['pv_destino'];
-$pv_tchaqueta = $cj_hijos['pv_tchaqueta'];
-$pv_tfranela = $cj_hijos['pv_tfranela'];
-$pv_tgorra = $cj_hijos['pv_tgorra'];
-$pv_tmono = $cj_hijos['pv_tmono'];
+$pv_destino = $row3["pv_destino"];;
+$pv_tchaqueta = $row_talla1['pv_tchaqueta'];
+$pv_tfranela = $row_talla2['pv_tfranela'];
+$pv_tgorra = $row_talla3['pv_tgorra'];
+$pv_tmono = $row_talla4['pv_tmono'];
 
 $objPHPExcel->getActiveSheet()->SetCellValue("A$conta", "$pv_planillanumero");
 $objPHPExcel->getActiveSheet()->SetCellValue("B$conta", "$id_ninho_pv");
