@@ -57,12 +57,12 @@ include("../script_php/a_fe.php");
 <body>
 	<div id='panel'>
 	<a href="../"><img src='../media/inicio.png' width='50px'></a><br>
-	<a href='./nino.php?nino=<?php echo $pv_planilla['id_nino'];?>'><img src="../media/nino.png" width="50px"></a><br>
+	<a href='./pv_nino_ce.php?nino=<?php echo $pv_planilla['id_nino'];?>'><img src="../media/nino.png" width="50px"></a><br>
 	<a href='javascript:window.print(); void 0;'><img src="../media/Printer.png" width="50px"></a><br>
 	<?php
 	if($_SESSION['rol_editor']=="1"){
 	?>
-	<a href='e_pv.php?pn=<?php echo $_GET['pn']; ?>'><img src="../media/editar.png" width="50px"></a><br>
+	<a href='e_pv_ce.php?pn=<?php echo $_GET['pn']; ?>'><img src="../media/editar.png" width="50px"></a><br>
 	<?php
 	}
 	?>
@@ -88,7 +88,7 @@ include("../script_php/a_fe.php");
 				<tr><td colspan=4 class='planilla'><b>Nombres: </b>$pv_planilla[h_nombre1] $pv_planilla[h_nombre2]</td></tr>
 				<tr><td colspan=4 class='planilla'><b>Apellidos: </b>$pv_planilla[h_apellido1] $pv_planilla[h_apellido2]</td></tr>
 				<tr><td class='planilla'><b>Cédula: </b>$pv_planilla[h_cedula]</td><td class='planilla'><b>Edad: </b>$pv_planilla[pv_edadmeses]</td><td class='planilla'><b>Grupo Sanguíneo: </b>$row[nombre];</td><td class='planilla'><b>Género: </b>$genero</td></tr>
-				<tr><td colspan=2 class='planilla'><b>Fecha de nacimiento: </b>".a_fecha($pv_planilla['h_fecha_naci'])."</td><td colspan=2 class='planilla'><b>Plan Correspondiente: </b>$pv_planilla[pv_destino]</td></tr>d
+				<tr><td colspan=2 class='planilla'><b>Fecha de nacimiento: </b>".a_fecha($pv_planilla['h_fecha_naci'])."</td><td colspan=2 class='planilla'><b>Plan Correspondiente: </b>$pv_planilla[destino]</td></tr>
 				
 				<tr><td colspan=4 class='planilla sub_titulo'><b><u>CUIDADOS ESPECIALES</u></b></td></tr>
 				<tr><td colspan=2 class='planilla'><b>Alérgias: </b>$pv_planilla[pv_alergias]</td><td colspan=2 class='planilla'><b>Tratamiento en sumnistro: </b>$pv_planilla[pv_tratamiento]</td></tr>
