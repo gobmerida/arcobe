@@ -151,7 +151,10 @@ if(array_key_exists('cedula',$_GET)){
 	echo "<tr class='som'><td colspan='2' style='text-align:center'><b>Trabajador: </b>$activo</td></tr>";
 
 	echo "<tr id='Asistencia'></tr>";
-	$DataSQuery00 = "select * from cj_cuaderno_ce where ced_tbr='$row_trabajador[trb_cedula]' and Periodo='2'";
+	$sql="SELECT id FROM cj_cesta_juguete_periodo ORDER BY id DESC LIMIT 1";
+	$rs= mysql_query($sql) or die(mysql_error());
+	$row= mysql_fetch_array($rs);
+	$DataSQuery00 = "select * from cj_cuaderno_ce where ced_tbr='$row_trabajador[trb_cedula]' and Periodo='".$row["id"]."'";
 	$DataSQuery00 = mysql_query($DataSQuery00);
 	$DataROWQuery00 = mysql_fetch_array($DataSQuery00);
 	if($DataROWQuery00["ced_tbr"]!=""){
@@ -300,8 +303,11 @@ if(array_key_exists('cedula',$_GET)){
 			</script>
 		";
 	}
+	$sql="SELECT id FROM cj_cesta_juguete_periodo ORDER BY id DESC LIMIT 1";
+		$rs= mysql_query($sql) or die(mysql_error());
+		$row= mysql_fetch_array($rs);
 	if(array_key_exists('msj',$_GET) and $_GET["msj"]=="3"){
-		$DataCJSQL01 = "select * from cj_cuaderno where ced_tbr='$cedula'";
+		$DataCJSQL01 = "select * from cj_cuaderno where ced_tbr='$cedula' and Periodo='".$row["id"]."'";
 		$DataCJSQL01 = mysql_query($DataCJSQL01);
 		$DataCJROW01 = mysql_fetch_array($DataCJSQL01);
 		echo "<div id='carga' title='Notificación'>Datos de Cesta Juguete actualizado, estas en la <b>Página:</b> $DataCJROW01[Npagina] <b>Línea:</b> $DataCJROW01[Nlinea]</div>
@@ -310,7 +316,7 @@ if(array_key_exists('cedula',$_GET)){
 			</script>
 		";
 	}
-	$DataCJSQL02 = "select * from cj_cuaderno where ced_tbr='$cedula'";
+	$DataCJSQL02 = "select * from cj_cuaderno where ced_tbr='$cedula' and Periodo='".$row["id"]."'";
 	$DataCJSQL02 = mysql_query($DataCJSQL02);
 	$DataCJROW02 = mysql_fetch_array($DataCJSQL02);
 	echo "<div id='vcarga' title='Notificación' style='display:none'>Datos de Cesta Juguete<br> Estás en la <b>Página:</b> $DataCJROW02[Npagina] <b>Línea:</b> $DataCJROW02[Nlinea]</div>

@@ -13,6 +13,11 @@ function CalculaEdad($fecha){
 	$edad=($ano-$Y);
 	return $edad;
 }
+
+$sql="SELECT id FROM cj_cesta_juguete_periodo ORDER BY id DESC LIMIT 1";
+$rs= mysql_query($sql) or die(mysql_error());
+$row= mysql_fetch_array($rs);
+
 $Data01 = $_POST["data01"];
 $ActivoSQL00 = "select * from cj_trabajadores where trb_cedula='$Data01'";
 $ActivoSQL00 = mysql_query($ActivoSQL00);
@@ -32,23 +37,23 @@ if($inino>0){
 	while($DataROW01 = mysql_fetch_array($DataSQL01)){
 		$edad = CalculaEdad("$DataROW01[h_fecha_naci]");
 		if($edad<=12){
-		$DataSQL02 = "select * from cj_inscritos_periodo_aux where id_ninho='$DataROW01[id_ninho]'";
+		$DataSQL02 = "select * from cj_inscritos_periodo_aux where id_ninho='$DataROW01[id_ninho] and id_periodo='".$row["id"]."'";
 		$DataSQL02 = mysql_query($DataSQL02);
 		$DataROW02 = mysql_fetch_array($DataSQL02);
 		if(strlen($DataROW02["id_ninho"])!=0){
-			$DataSQL03 = "update cj_cuaderno set Confirmacion='1' where ced_tbr='$Data01'";
+			$DataSQL03 = "update cj_cuaderno set Confirmacion='1' where ced_tbr='$Data01'and Periodo='".$row["id"]."'";
 			$DataSQL03 = mysql_query($DataSQL03);
 			header("location:./trabajador.php?cedula=$Data01&&msj=3");
 		}
 		else{
-			$DataSQL04 = "insert into cj_inscritos_periodo_aux(id_ninho,id_periodo) values('$DataROW01[id_ninho]','2')";
+			$DataSQL04 = "insert into cj_inscritos_periodo_aux(id_ninho,id_periodo) values('$DataROW01[id_ninho]','".$row["id"]."')";
 			$DataSQL04 = mysql_query($DataSQL04);
-			$DataSQL08 = "select * from cj_cuaderno where ced_tbr='$Data01'";
+			$DataSQL08 = "select * from cj_cuaderno where ced_tbr='$Data01' and Periodo='".$row["id"]."'";
 			$DataSQL08 = mysql_query($DataSQL08);
 			$DataROW08 = mysql_fetch_array($DataSQL08);
 			
 			if($Data01!=$DataROW08["ced_tbr"]){
-				$DataSQL05 = "select * from cj_cesta_juguete_periodo where id='2'";
+				$DataSQL05 = "select * from cj_cesta_juguete_periodo where id='".$row["id"]."'";
 				$DataSQL05 = mysql_query($DataSQL05);
 				$DataROW05 = mysql_fetch_array($DataSQL05);
 				
@@ -61,9 +66,9 @@ if($inino>0){
 				}
 				$aux01++;
 				$contador++;
-				$DataSQL06 = "insert into cj_cuaderno(ced_tbr,Npagina,Nlinea,Confirmacion,Periodo) values('$Data01','$aux02','$contador','1','2')";
+				$DataSQL06 = "insert into cj_cuaderno(ced_tbr,Npagina,Nlinea,Confirmacion,Periodo) values('$Data01','$aux02','$contador','1','".$row["id"]."')";
 				$DataSQL06 = mysql_query($DataSQL06);
-				$DataSQL07 = "update cj_cesta_juguete_periodo set contador_per='$contador',ContadorAux='$aux02',Aux='$aux01' where id='2'";
+				$DataSQL07 = "update cj_cesta_juguete_periodo set contador_per='$contador',ContadorAux='$aux02',Aux='$aux01' where id='".$row["id"]."'";
 				$DataSQL07 = mysql_query($DataSQL07);
 			}
 			header("location:./trabajador.php?cedula=$Data01&&msj=3");
