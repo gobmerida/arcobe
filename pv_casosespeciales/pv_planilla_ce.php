@@ -30,6 +30,10 @@ include("../script_php/a_fe.php");
 				$rs_san = mysql_query($sql_san) or die ("No se halló el código");
 				$row = mysql_fetch_array($rs_san);
 
+
+				$sql_pare = "SELECT pv_parentesco FROM pv_parentesco WHERE id_parentesco='$pv_planilla[pv_contacto_parentesco]'";
+				$rs_pare = mysql_query($sql_pare) or die ("No se halló el código");
+				$row_pare = mysql_fetch_array($rs_pare);
 	
 				
 				if($pv_planilla['h_sexo']=='F'){
@@ -100,7 +104,7 @@ include("../script_php/a_fe.php");
 				Nombre y Apellidos: $pv_planilla[pv_contacto_nombre] $pv_planilla[pv_contacto_apellido]<br>
 				Cédula de Identidad: $pv_planilla[pv_contacto_cedula]<br>
 				Teléfono: $pv_planilla[pv_contacto_telefono]<br>
-				Parentesco:  $pv_planilla[pv_contacto_parentesco]
+				Parentesco:  $row_pare[pv_parentesco]
 				
 				</td></tr>
 				<tr><td colspan=4 class='planilla sub_titulo'><b><u>OBSERVACIONES GENERALES: </u></b></td></tr>
