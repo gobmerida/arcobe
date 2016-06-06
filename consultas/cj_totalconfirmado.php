@@ -35,7 +35,7 @@ while( $DataROW00 = mysql_fetch_array($DataSQL00) ){
 				  from cj_hijos
 				  join cj_inscritos_periodo_aux
 				  on cj_hijos.id_ninho = cj_inscritos_periodo_aux.id_ninho
-				  where cedula_mp='$DataROW00[trb_cedula]' or cedula_repr='$DataROW00[trb_cedula]'";
+				  where id_periodo='$data01' and cedula_mp='$DataROW00[trb_cedula]' or cedula_repr='$DataROW00[trb_cedula]'";
 	$DataSQL01 = mysql_query($DataSQL01);
 	$KidsNumber=0;
 	$uiconfirmado="";

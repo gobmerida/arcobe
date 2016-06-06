@@ -55,8 +55,6 @@ $objPHPExcel->getActiveSheet()->SetCellValue("C1", "Código de Trabajador");
 $objPHPExcel->getActiveSheet()->SetCellValue("D1", "Cédula");
 $objPHPExcel->getActiveSheet()->SetCellValue("E1", "Nombre y Apellido");
 $objPHPExcel->getActiveSheet()->SetCellValue("F1", "Beneficiarios/Tickeras");
-//$objPHPExcel->getActiveSheet()->SetCellValue("G1", "Condicion");
-$objPHPExcel->getActiveSheet()->SetCellValue("H1", "Dependencia");
 
 $objPHPExcel->getActiveSheet()->setSharedStyle($estilo1, "A1:AM1");
 $objPHPExcel->getActiveSheet()->getStyle("A1:AM1")->getFont()->getColor()->applyFromArray(
@@ -67,9 +65,9 @@ $objPHPExcel->getActiveSheet()->getStyle("A1:AM1")->getFont()->getColor()->apply
 
 $data01 = $_GET["periodo"];
 $DataSQL00 = "select *
-			  from cj_cuaderno
+			  from cj_cuaderno_ce
 			  join cj_trabajadores
-			  on cj_cuaderno.ced_tbr=cj_trabajadores.trb_cedula
+			  on cj_cuaderno_ce.ced_tbr=cj_trabajadores.trb_cedula
 			  where activo='1' and Periodo='$data01'";
 $DataSQL00 = mysql_query($DataSQL00);
 
@@ -77,38 +75,30 @@ $i=0;
 $conta=2;
 $KidsNumberTotal=0;
 while( $DataROW00 = mysql_fetch_array($DataSQL00) ){
-	$DataSQL01 = "select cj_hijos.*
-				  from cj_hijos
-				  join cj_inscritos_periodo_aux
-				  on cj_hijos.id_ninho = cj_inscritos_periodo_aux.id_ninho
+	$DataSQL01 = "select cj_hijos_ce.*
+				  from cj_hijos_ce
 				  where id_periodo='$data01' and cedula_mp='$DataROW00[trb_cedula]' or cedula_repr='$DataROW00[trb_cedula]'";
 	$DataSQL01 = mysql_query($DataSQL01);
 	$KidsNumber=0;
-	$uiconfirmado=$DataROW00["Confirmacion"];
-	$vardependenc=$DataROW00["trb_dependencia"];
-	//if($DataROW00["Confirmacion"]==1){
-	//	&uiconfirmado="CONFIRMADO";
-	//}
+	
 	while($DataROW01 = mysql_fetch_array($DataSQL01)){
 		$KidsNumber++;
 		$KidsNumberTotal++;
-	}	
+	}
 	$objPHPExcel->getActiveSheet()->SetCellValue("A$conta", "$DataROW00[Npagina]");
 	$objPHPExcel->getActiveSheet()->SetCellValue("B$conta", "$DataROW00[Nlinea]");
 	$objPHPExcel->getActiveSheet()->SetCellValue("C$conta", "$DataROW00[trb_codigo]");
 	$objPHPExcel->getActiveSheet()->SetCellValue("D$conta", "$DataROW00[trb_cedula]");
 	$objPHPExcel->getActiveSheet()->SetCellValue("E$conta", "$DataROW00[trb_apellidos] $DataROW00[trb_nombres]");
 	$objPHPExcel->getActiveSheet()->SetCellValue("F$conta", "$KidsNumber");
-	//$objPHPExcel->getActiveSheet()->SetCellValue("G$conta", "$uiconfirmado");
-	$objPHPExcel->getActiveSheet()->SetCellValue("H$conta", "$vardependenc");
 	$conta++;
 	$i++;
 }
-foreach (range('A', 'H') as $columnID) {
+foreach (range('A', 'F') as $columnID) {
 $objPHPExcel->getActiveSheet()->getColumnDimension($columnID)->setAutoSize(true);  
 }
 $objWriter = new PHPExcel_Writer_Excel2007($objPHPExcel); //Escribir archivo
 header('Content-type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-header('Content-Disposition: attachment; filename="CuadernoCestaJuguete.xlsx"');
+header('Content-Disposition: attachment; filename="CuadernoCestaJuguete(c/e).xlsx"');
 $objWriter->save('php://output');
 ?>

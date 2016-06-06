@@ -34,7 +34,7 @@
 </head>
 
 <body>
-<a href="../consultas/exportar_cuadernoCE.php?periodo=<?php echo $_GET["periodo"];?>" class="exportar">Exportar Cuaderno</a>
+<a href="../consultas/exportar_cj_ce.php?periodo=<?php echo $_GET["periodo"];?>" class="exportar">Exportar Cuaderno</a>
 <?php
 include("../connect/conexion.php");
 $data01 = $_GET["periodo"];

@@ -57,7 +57,7 @@ while($DataR01 = mysql_fetch_array($DataSQ01)){
 		<h3 align="center">Totales de Cesta Juguete</h3>
 		<ul id="nincj" class="periodo_insc">
 		<?php
-			echo "<li>Hay un total de ".$c." niños registrados</li>";
+			//echo "<li>Hay un total de ".$c." niños registrados</li>";
 			echo "<li>Total de ".$caux." niños registrados(ta)</li>";
 		?>
 		</ul>

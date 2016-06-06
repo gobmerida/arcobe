@@ -1,6 +1,6 @@
 <?php
 header( 'Content-type: text/html; charset=iso-8859-1' );
-$conexion=mysql_connect("localhost","root","infor123456") or die (mysql_error());
+$conexion=mysql_connect("localhost","root","infor1234") or die (mysql_error());
 mysql_select_db("cj_pv",$conexion) or die (mysql_error());
 
 $search = $_POST['cedula'];
